@@ -34,7 +34,7 @@ public class SignUp {
 	private JLabel lblUsernameError;
 	private JLabel lblPasswordError;
 	private JLabel lblConfirmPasswordError;
-	private JLabel lblSuccesOrError;
+	private JLabel lblSuccessOrError;
 	private JLabel lblSignUp;
 
 	/**
@@ -53,15 +53,16 @@ public class SignUp {
 		frame.setBounds(0, 0, 700, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		lblSignUp = new JLabel("<html><div style='text-align: center;'><html>Sign-Up for The Engineering<br>Program Finder</div></html>");
+
+		lblSignUp = new JLabel(
+				"<html><div style='text-align: center;'><html>Sign-Up for The Engineering<br>Program Finder</div></html>");
 		lblSignUp.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSignUp.setBounds(213, 40, 211, 100);
 
 		JLabel lblFirstName = new JLabel("First Name");
 		lblFirstName.setBounds(163, 141, 88, 16);
 		frame.getContentPane().add(lblFirstName);
-		
+
 		textField_FirstName = new JTextField();
 		textField_FirstName.setBounds(159, 159, 288, 26);
 		frame.getContentPane().add(textField_FirstName);
@@ -91,6 +92,11 @@ public class SignUp {
 		frame.getContentPane().add(lblUsernameReq);
 
 		JButton btnCheckAvailability = new JButton("Check Availability");
+		btnCheckAvailability.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 		btnCheckAvailability.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		btnCheckAvailability.setBounds(330, 290, 117, 29);
 		frame.getContentPane().add(btnCheckAvailability);
@@ -113,13 +119,24 @@ public class SignUp {
 		textField_ConfirmPassword.setBounds(159, 395, 288, 26);
 		frame.getContentPane().add(textField_ConfirmPassword);
 
-		lblPasswordRequirements = new JLabel(
-				"<html>Use 6 or more characters.<br>Must include:<br>1 UPPERCASE letter,<br>1 lowercase letter, and<br>1 number");
+		lblPasswordRequirements = new JLabel("<html>Use 6 or more characters." + "<br>Must include:"
+				+ "<br>1 UPPERCASE letter," + "<br>1 lowercase letter, and" + "<br>1 number");
 		lblPasswordRequirements.setVerticalAlignment(SwingConstants.TOP);
 		lblPasswordRequirements.setBounds(163, 433, 165, 97);
 		frame.getContentPane().add(lblPasswordRequirements);
 
 		btnCheckValidity = new JButton("Check Validity");
+		btnCheckValidity.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblPasswordError.setVisible(true);
+				if (validatePassword(textField_Password.getText())) {
+					
+					System.out.println("Password good");
+				} else {
+					lblPasswordError.setVisible(true);
+				}
+			}
+		});
 		btnCheckValidity.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		btnCheckValidity.setBounds(330, 428, 117, 29);
 		frame.getContentPane().add(btnCheckValidity);
@@ -130,7 +147,7 @@ public class SignUp {
 				LoginGUI login = new LoginGUI();
 				login.frame.setVisible(true);
 				frame.setVisible(false);
-				
+
 			}
 		});
 		btnLoginInstead.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
@@ -138,6 +155,15 @@ public class SignUp {
 		frame.getContentPane().add(btnLoginInstead);
 
 		btnCreateAccount = new JButton("Create Account");
+		btnCreateAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				isInfoEmpty(textField_FirstName.getText(),
+						textField_LastName.getText(),
+						textField_Username.getText(),
+						textField_Password.getText(),
+						textField_ConfirmPassword.getText());
+			}
+		});
 		btnCreateAccount.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		btnCreateAccount.setBounds(330, 541, 117, 29);
 		frame.getContentPane().add(btnCreateAccount);
@@ -155,33 +181,97 @@ public class SignUp {
 		lblFirstNameError = new JLabel("Please Enter Your First Name");
 		lblFirstNameError.setForeground(Color.RED);
 		lblFirstNameError.setBounds(474, 164, 188, 16);
+		lblFirstNameError.setVisible(false);
 		frame.getContentPane().add(lblFirstNameError);
 
 		lblLastNameError = new JLabel("Please Enter Your Last Name");
 		lblLastNameError.setForeground(Color.RED);
 		lblLastNameError.setBounds(474, 210, 188, 16);
+		lblLastNameError.setVisible(false);
 		frame.getContentPane().add(lblLastNameError);
 
 		lblUsernameError = new JLabel("Please Enter A Username");
 		lblUsernameError.setForeground(Color.RED);
 		lblUsernameError.setBounds(474, 266, 188, 16);
+		lblUsernameError.setVisible(false);
 		frame.getContentPane().add(lblUsernameError);
 
 		lblPasswordError = new JLabel("Please Enter A Password");
 		lblPasswordError.setForeground(Color.RED);
 		lblPasswordError.setBounds(474, 344, 188, 16);
+		lblPasswordError.setVisible(false);
 		frame.getContentPane().add(lblPasswordError);
 
 		lblConfirmPasswordError = new JLabel("Passwords do not match");
 		lblConfirmPasswordError.setForeground(Color.RED);
 		lblConfirmPasswordError.setBounds(474, 400, 188, 16);
+		lblConfirmPasswordError.setVisible(false);
 		frame.getContentPane().add(lblConfirmPasswordError);
 
-		lblSuccesOrError = new JLabel("SUCESS/ERROR");
-		lblSuccesOrError.setBounds(213, 583, 188, 16);
-		frame.getContentPane().add(lblSuccesOrError);
+		lblSuccessOrError = new JLabel("SUCESS/ERROR");
+		lblSuccessOrError.setBounds(213, 583, 188, 16);
+		lblSuccessOrError.setVisible(false);
+		frame.getContentPane().add(lblSuccessOrError);
 
 		frame.getContentPane().add(lblSignUp);
 		frame.setVisible(true);
 	}
+
+	private boolean isInfoEmpty(String first, String last, String user, String pswd, String pswdConfirm) {
+		boolean anyEmpty;
+		
+		if(first.isEmpty()) lblFirstNameError.setVisible(true);
+		else lblFirstNameError.setVisible(false);//System.out.println("Enter First name");
+		
+		if(last.isEmpty()) lblLastNameError.setVisible(true);//System.out.println("Enter Last name"); 
+		else lblLastNameError.setVisible(false);
+		
+		if(user.isEmpty())lblUsernameError.setVisible(true);//System.out.println("Enter Username"); 
+		else lblUsernameError.setVisible(false);
+		
+		if(pswd.isEmpty()) lblPasswordError.setVisible(true);//System.out.println("Enter Password");
+		else lblPasswordError.setVisible(false);
+		
+		if(pswdConfirm.isEmpty())lblConfirmPasswordError.setVisible(true);//System.out.println("Enter your Password again"); 
+		else lblConfirmPasswordError.setVisible(false);
+		
+		System.out.println();		
+		
+		return false;
+	}
+	
+	private boolean validateUsername() {
+		return true;
+	}
+
+	private boolean validatePassword(String pass) {
+		boolean isValid = true;
+		String upperCaseChars = "(.*[A-Z].*)";
+		String lowerCaseChars = "(.*[a-z].*)";
+		String numbers = "(.*[0-9].*)";
+
+		if (pass.isEmpty()) {
+			isValid = false;
+			lblPasswordError.setText("Please Enter a Password");
+		} else if (pass.length() < 6) {
+			isValid = false;
+		} else if (!pass.matches(upperCaseChars)) {
+			isValid = false;
+		} else if (!pass.matches(lowerCaseChars)) {
+			isValid = false;
+		} else if (!pass.matches(numbers)) {
+			isValid = false;
+		} else {
+			lblPasswordError.setText("Password valid");
+			lblPasswordError.setForeground(Color.GREEN);
+		}
+
+		if (!isValid && !pass.isEmpty()) {
+			lblPasswordError.setText("Password Invalid");
+			lblPasswordError.setForeground(Color.RED);
+		}
+
+		return isValid;
+	}
+
 }
