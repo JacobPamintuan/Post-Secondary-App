@@ -116,15 +116,16 @@ public class LoginGUI {
 
 		// JButton Login
 		// Validates username and password,
-		//		Displays error message or redirects to home page
+			//	Displays error message or redirects to home page
 		btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (isLoginEmpty(textUsername.getText(), passwordField.getText())) {
+				String pass = new String(passwordField.getPassword());
+				if (isLoginEmpty(textUsername.getText(), pass)) {
 					errorMessage.setText(emptyError);
 					errorMessage.setVisible(true);
-				} else if (validate(textUsername.getText(), passwordField.getText())) {
-					System.out.println(textUsername.getText() + "\n" + passwordField.getText());
+				} else if (validate(textUsername.getText(), passwordField.getPassword().toString())) {
+					System.out.println(textUsername.getText() + "\n" + pass);
 				} else {
 					errorMessage.setText(loginError);
 					errorMessage.setVisible(true);
@@ -161,7 +162,7 @@ public class LoginGUI {
 
 	// Validates if username exists, validates if password matches
 	private boolean validate(String user, String pswd) {
-		return false;
+		return true;
 
 	}
 }
