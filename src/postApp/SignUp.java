@@ -47,8 +47,6 @@ public class SignUp {
 
 	private JToggleButton tglbtnShowhide;
 
-	private JButton btnCheckAvailability;
-	private JButton btnCheckValidity;
 	private JButton btnLoginInstead;
 	private JButton btnCreateAccount;
 	private JButton btnHOME;
@@ -88,7 +86,7 @@ public class SignUp {
 		firstName_txt.setBounds(159, 159, 288, 26);
 		frame.getContentPane().add(firstName_txt);
 		firstName_txt.setColumns(10);
-		
+
 		// JLabel last name
 		lblLastName = new JLabel("Last Name");
 		lblLastName.setBounds(163, 187, 88, 16);
@@ -121,18 +119,6 @@ public class SignUp {
 		lblUsernameReq.setBounds(169, 295, 169, 16);
 		frame.getContentPane().add(lblUsernameReq);
 
-		// JButton - CheckAvailability
-		// Checks if the username is valid and available (at least 5 characters, and username not already taken)
-//		btnCheckAvailability = new JButton("Check Availability");
-//		btnCheckAvailability.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				validateUsername(textField_Username.getText());
-//			}
-//		});
-//		btnCheckAvailability.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-//		btnCheckAvailability.setBounds(330, 290, 117, 29);
-//		frame.getContentPane().add(btnCheckAvailability);
-
 		// JLabel Password
 		lblPassword = new JLabel("Password:");
 		lblPassword.setBounds(163, 321, 88, 16);
@@ -159,7 +145,7 @@ public class SignUp {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				isPasswordsSame(password_ptxt.getText(), confirmPassword_ptxt.getText());
-				
+
 			}
 		});
 		confirmPassword_ptxt.setColumns(10);
@@ -167,25 +153,11 @@ public class SignUp {
 		frame.getContentPane().add(confirmPassword_ptxt);
 
 		// JLabel Passowrd Requirements
-		lblPasswordReq = new JLabel("<html>Use 6 or more characters." + "<br>Must include:"
-				+ "<br>1 UPPERCASE letter," + "<br>1 lowercase letter, and" + "<br>1 number");
+		lblPasswordReq = new JLabel("<html>Use 6 or more characters." + "<br>Must include:" + "<br>1 UPPERCASE letter,"
+				+ "<br>1 lowercase letter, and" + "<br>1 number");
 		lblPasswordReq.setVerticalAlignment(SwingConstants.TOP);
 		lblPasswordReq.setBounds(163, 433, 165, 97);
 		frame.getContentPane().add(lblPasswordReq);
-
-		// JButton - Check Validity
-		// Checks validity of password
-//		btnCheckValidity = new JButton("Check Validity");
-//		btnCheckValidity.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//
-//				validatePassword(textField_Password.getText());
-//
-//			}
-//		});
-//		btnCheckValidity.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-//		btnCheckValidity.setBounds(330, 428, 117, 29);
-//		frame.getContentPane().add(btnCheckValidity);
 
 		// JButton Login Instead
 		// Exits Sign-up screen and returns to login screen
@@ -207,9 +179,8 @@ public class SignUp {
 		btnCreateAccount = new JButton("Create Account");
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (isAllVaild()) { // Create new user
-					
-					
+				if (isAllVaild()) { // Create new user object
+
 					btnHOME.setEnabled(true);
 					btnSetupProfile.setEnabled(true);
 				}
@@ -271,20 +242,20 @@ public class SignUp {
 		// Confirm Password Error
 		lblConfirmPasswordError = new JLabel("Passwords do not match");
 		lblConfirmPasswordError.setForeground(Color.RED);
-		lblConfirmPasswordError.setBounds(474, 400, 188, 16);
+		lblConfirmPasswordError.setBounds(474, 400, 220, 16);
 		lblConfirmPasswordError.setVisible(false);
 		frame.getContentPane().add(lblConfirmPasswordError);
 
-		// Success or Error Label 
+		// Success or Error Label
 		lblSuccessOrError = new JLabel("SUCESS/ERROR");
 		lblSuccessOrError.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSuccessOrError.setBounds(179, 583, 255, 16);
 		lblSuccessOrError.setVisible(false);
 		frame.getContentPane().add(lblSuccessOrError);
 
-		
 		// JToggleButton - Show/Hide
-		// Shows the password if button is selected, hides and replaces with '*' otherwise
+		// Shows the password if button is selected, hides and replaces with '*'
+		// otherwise
 		tglbtnShowhide = new JToggleButton("Show/Hide");
 		tglbtnShowhide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -303,14 +274,25 @@ public class SignUp {
 		tglbtnShowhide.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		tglbtnShowhide.setBounds(338, 373, 96, 29);
 		frame.getContentPane().add(tglbtnShowhide);
-		
-		
+
 		frame.setVisible(true);
 	}
 
 	private boolean isPasswordsSame(String pswd, String confirm) {
-		if (!pswd.equals(confirm)) {
+		if (pswd.isEmpty()) {
+			lblConfirmPasswordError.setText("Enter password above");
+			lblConfirmPasswordError.setForeground(Color.RED);
+			lblConfirmPasswordError.setVisible(true);
+			return false;
+
+		} else if (!validatePassword(pswd)) {
+			lblConfirmPasswordError.setText("Please enter valid password above");
+			lblConfirmPasswordError.setForeground(Color.RED);
+			lblConfirmPasswordError.setVisible(true);
+			return false;
+		} else if (!pswd.equals(confirm)) {
 			lblConfirmPasswordError.setText("Passwords Do not Match");
+			lblConfirmPasswordError.setForeground(Color.RED);
 			lblConfirmPasswordError.setVisible(true);
 			return false;
 		}
@@ -321,7 +303,8 @@ public class SignUp {
 	}
 
 	// Checks if any of the text fields are blank
-	// Displays an error message beside blank fields by enabling and/or setting JLabels
+	// Displays an error message beside blank fields by enabling and/or setting
+	// JLabels
 	// Returns boolean
 	private boolean isInfoEmpty(String first, String last, String user, String pswd, String pswdConfirm) {
 		boolean anyEmpty = false;
@@ -330,26 +313,26 @@ public class SignUp {
 			lblFirstNameError.setVisible(true);
 			anyEmpty = true;
 		} else
-			lblFirstNameError.setVisible(false);// System.out.println("Enter First name");
+			lblFirstNameError.setVisible(false);
 
 		if (last.isEmpty()) {
 			lblLastNameError.setVisible(true);
 			anyEmpty = true;
-		} // System.out.println("Enter Last name");
+		}
 		else
 			lblLastNameError.setVisible(false);
 
 		if (user.isEmpty()) {
 			lblUsernameError.setVisible(true);
 			anyEmpty = true;
-		} // System.out.println("Enter Username");
+		} 
 		else
 			lblUsernameError.setVisible(false);
 
 		if (pswd.isEmpty()) {
 			lblPasswordError.setVisible(true);
 			anyEmpty = true;
-		} // System.out.println("Enter Password");
+		} 
 		else
 			lblPasswordError.setVisible(false);
 
@@ -357,7 +340,7 @@ public class SignUp {
 			lblConfirmPasswordError.setText("Enter your Password again");
 			lblConfirmPasswordError.setVisible(true);
 			anyEmpty = true;
-		} // System.out.println("Enter your Password again");
+		} 
 		else
 			lblConfirmPasswordError.setVisible(false);
 
@@ -387,7 +370,8 @@ public class SignUp {
 		return true;
 	}
 
-	// Validates password (At least 6 characters, includes 1 lower, 1 upper, 1 number
+	// Validates password (At least 6 characters, includes 1 lower, 1 upper, 1
+	// number
 	// Displays message accordingly
 	// Returns boolean
 	private boolean validatePassword(String pass) {
@@ -471,7 +455,6 @@ public class SignUp {
 		return success;
 	}
 
-	
 	// Disables specified buttons
 	private void disableAll() {
 		firstName_txt.setEnabled(false);
@@ -479,8 +462,6 @@ public class SignUp {
 		username_txt.setEnabled(false);
 		password_ptxt.setEnabled(false);
 		confirmPassword_ptxt.setEnabled(false);
-	//	btnCheckAvailability.setEnabled(false);
-	//	btnCheckValidity.setEnabled(false);
 		btnCreateAccount.setEnabled(false);
 		btnLoginInstead.setEnabled(false);
 		tglbtnShowhide.setEnabled(false);
