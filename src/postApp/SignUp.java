@@ -22,12 +22,12 @@ public class SignUp {
 	// Fields
 
 	private JFrame frame;
-	private JTextField textField_FirstName;
-	private JTextField textField_LastName;
-	private JTextField textField_Username;
+	private JTextField firstName_txt;
+	private JTextField lastName_txt;
+	private JTextField username_txt;
 
-	private JPasswordField textField_Password;
-	private JPasswordField textField_ConfirmPassword;
+	private JPasswordField password_ptxt;
+	private JPasswordField confirmPassword_ptxt;
 
 	private JLabel lblSignUp;
 	private JLabel lblFirstName;
@@ -84,37 +84,36 @@ public class SignUp {
 		lblFirstName.setBounds(163, 141, 88, 16);
 		frame.getContentPane().add(lblFirstName);
 
-		textField_FirstName = new JTextField();
-		textField_FirstName.setBounds(159, 159, 288, 26);
-		frame.getContentPane().add(textField_FirstName);
-		textField_FirstName.setColumns(10);
+		firstName_txt = new JTextField();
+		firstName_txt.setBounds(159, 159, 288, 26);
+		frame.getContentPane().add(firstName_txt);
+		firstName_txt.setColumns(10);
 		
 		// JLabel last name
 		lblLastName = new JLabel("Last Name");
 		lblLastName.setBounds(163, 187, 88, 16);
 		frame.getContentPane().add(lblLastName);
 
-		textField_LastName = new JTextField();
-		textField_LastName.setColumns(10);
-		textField_LastName.setBounds(159, 205, 288, 26);
-		frame.getContentPane().add(textField_LastName);
+		lastName_txt = new JTextField();
+		lastName_txt.setColumns(10);
+		lastName_txt.setBounds(159, 205, 288, 26);
+		frame.getContentPane().add(lastName_txt);
 
 		// JLabel Username
 		lblUsername = new JLabel("Username:");
 		lblUsername.setBounds(163, 243, 88, 16);
 		frame.getContentPane().add(lblUsername);
 
-		textField_Username = new JTextField();
-		textField_Username.addKeyListener(new KeyAdapter() {
+		username_txt = new JTextField();
+		username_txt.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				System.out.println(textField_Username.getText());
-				validateUsername(textField_Username.getText());
+				validateUsername(username_txt.getText());
 			}
 		});
-		textField_Username.setColumns(10);
-		textField_Username.setBounds(159, 261, 288, 26);
-		frame.getContentPane().add(textField_Username);
+		username_txt.setColumns(10);
+		username_txt.setBounds(159, 261, 288, 26);
+		frame.getContentPane().add(username_txt);
 
 		// JLabel Username requirements
 		lblUsernameReq = new JLabel("At least 5 characters long");
@@ -124,35 +123,48 @@ public class SignUp {
 
 		// JButton - CheckAvailability
 		// Checks if the username is valid and available (at least 5 characters, and username not already taken)
-		btnCheckAvailability = new JButton("Check Availability");
-		btnCheckAvailability.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				validateUsername(textField_Username.getText());
-			}
-		});
-		btnCheckAvailability.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		btnCheckAvailability.setBounds(330, 290, 117, 29);
-		frame.getContentPane().add(btnCheckAvailability);
+//		btnCheckAvailability = new JButton("Check Availability");
+//		btnCheckAvailability.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				validateUsername(textField_Username.getText());
+//			}
+//		});
+//		btnCheckAvailability.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+//		btnCheckAvailability.setBounds(330, 290, 117, 29);
+//		frame.getContentPane().add(btnCheckAvailability);
 
 		// JLabel Password
 		lblPassword = new JLabel("Password:");
 		lblPassword.setBounds(163, 321, 88, 16);
 		frame.getContentPane().add(lblPassword);
 
-		textField_Password = new JPasswordField();
-		textField_Password.setColumns(10);
-		textField_Password.setBounds(159, 339, 288, 26);
-		frame.getContentPane().add(textField_Password);
+		password_ptxt = new JPasswordField();
+		password_ptxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				validatePassword(password_ptxt.getText());
+			}
+		});
+		password_ptxt.setColumns(10);
+		password_ptxt.setBounds(159, 339, 288, 26);
+		frame.getContentPane().add(password_ptxt);
 
 		// JLabel Confirm password
 		lblConfirmPassword = new JLabel("Confirm Password:");
 		lblConfirmPassword.setBounds(163, 377, 165, 16);
 		frame.getContentPane().add(lblConfirmPassword);
 
-		textField_ConfirmPassword = new JPasswordField();
-		textField_ConfirmPassword.setColumns(10);
-		textField_ConfirmPassword.setBounds(159, 395, 288, 26);
-		frame.getContentPane().add(textField_ConfirmPassword);
+		confirmPassword_ptxt = new JPasswordField();
+		confirmPassword_ptxt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				isPasswordsSame(password_ptxt.getText(), confirmPassword_ptxt.getText());
+				
+			}
+		});
+		confirmPassword_ptxt.setColumns(10);
+		confirmPassword_ptxt.setBounds(159, 395, 288, 26);
+		frame.getContentPane().add(confirmPassword_ptxt);
 
 		// JLabel Passowrd Requirements
 		lblPasswordReq = new JLabel("<html>Use 6 or more characters." + "<br>Must include:"
@@ -163,17 +175,17 @@ public class SignUp {
 
 		// JButton - Check Validity
 		// Checks validity of password
-		btnCheckValidity = new JButton("Check Validity");
-		btnCheckValidity.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				validatePassword(textField_Password.getText());
-
-			}
-		});
-		btnCheckValidity.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		btnCheckValidity.setBounds(330, 428, 117, 29);
-		frame.getContentPane().add(btnCheckValidity);
+//		btnCheckValidity = new JButton("Check Validity");
+//		btnCheckValidity.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//
+//				validatePassword(textField_Password.getText());
+//
+//			}
+//		});
+//		btnCheckValidity.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+//		btnCheckValidity.setBounds(330, 428, 117, 29);
+//		frame.getContentPane().add(btnCheckValidity);
 
 		// JButton Login Instead
 		// Exits Sign-up screen and returns to login screen
@@ -196,6 +208,8 @@ public class SignUp {
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (isAllVaild()) { // Create new user
+					
+					
 					btnHOME.setEnabled(true);
 					btnSetupProfile.setEnabled(true);
 				}
@@ -276,12 +290,12 @@ public class SignUp {
 			public void actionPerformed(ActionEvent e) {
 				// If state is selected, characters can be seen
 				if (tglbtnShowhide.isSelected()) {
-					textField_Password.setEchoChar((char) 0);
-					textField_ConfirmPassword.setEchoChar((char) 0);
+					password_ptxt.setEchoChar((char) 0);
+					confirmPassword_ptxt.setEchoChar((char) 0);
 					// If state is non-selected, characters hidden and replaced with '*'
 				} else {
-					textField_Password.setEchoChar('*');
-					textField_ConfirmPassword.setEchoChar('*');
+					password_ptxt.setEchoChar('*');
+					confirmPassword_ptxt.setEchoChar('*');
 
 				}
 			}
@@ -300,7 +314,9 @@ public class SignUp {
 			lblConfirmPasswordError.setVisible(true);
 			return false;
 		}
-
+		lblConfirmPasswordError.setText("Passwords Match");
+		lblConfirmPasswordError.setForeground(Color.GREEN);
+		lblConfirmPasswordError.setVisible(true);
 		return true;
 	}
 
@@ -414,26 +430,26 @@ public class SignUp {
 	// Returns boolean
 	private boolean isAllVaild() {
 		boolean success = true;
-		if ((isInfoEmpty(textField_FirstName.getText(), textField_LastName.getText(), textField_Username.getText(),
-				textField_Password.getText(), textField_ConfirmPassword.getText()))) {
+		if ((isInfoEmpty(firstName_txt.getText(), lastName_txt.getText(), username_txt.getText(),
+				password_ptxt.getText(), confirmPassword_ptxt.getText()))) {
 			lblSuccessOrError.setText("Please fill out the form properly");
 			lblSuccessOrError.setForeground(Color.RED);
 			lblSuccessOrError.setVisible(true);
 			success = false;
 		}
-		if (!validateUsername(textField_Username.getText())) {
+		if (!validateUsername(username_txt.getText())) {
 			lblSuccessOrError.setText("Please fill out the form properly");
 			lblSuccessOrError.setForeground(Color.RED);
 			lblSuccessOrError.setVisible(true);
 			success = false;
 		}
-		if (!validatePassword(textField_Password.getText())) {
+		if (!validatePassword(password_ptxt.getText())) {
 			lblSuccessOrError.setText("Please fill out the form properly");
 			lblSuccessOrError.setForeground(Color.RED);
 			lblSuccessOrError.setVisible(true);
 			success = false;
 		}
-		if (!isPasswordsSame(textField_Password.getText(), textField_ConfirmPassword.getText())) {
+		if (!isPasswordsSame(password_ptxt.getText(), confirmPassword_ptxt.getText())) {
 			lblSuccessOrError.setText("Please fill out the form properly");
 			lblSuccessOrError.setForeground(Color.RED);
 			lblSuccessOrError.setVisible(true);
@@ -444,22 +460,27 @@ public class SignUp {
 			lblSuccessOrError.setForeground(Color.GREEN);
 			lblSuccessOrError.setVisible(true);
 			disableAll();
+			System.out.println("Account Created: ");
+			System.out.println("First: " + firstName_txt.getText()); // user.toString();
+			System.out.println("Last: " + lastName_txt.getText());
+			System.out.println("User: " + username_txt.getText());
+			System.out.println("Pass: " + password_ptxt.getText());
 
 		}
-		System.out.println(success);
+
 		return success;
 	}
 
 	
 	// Disables specified buttons
 	private void disableAll() {
-		textField_FirstName.setEnabled(false);
-		textField_LastName.setEnabled(false);
-		textField_Username.setEnabled(false);
-		textField_Password.setEnabled(false);
-		textField_ConfirmPassword.setEnabled(false);
-		btnCheckAvailability.setEnabled(false);
-		btnCheckValidity.setEnabled(false);
+		firstName_txt.setEnabled(false);
+		lastName_txt.setEnabled(false);
+		username_txt.setEnabled(false);
+		password_ptxt.setEnabled(false);
+		confirmPassword_ptxt.setEnabled(false);
+	//	btnCheckAvailability.setEnabled(false);
+	//	btnCheckValidity.setEnabled(false);
 		btnCreateAccount.setEnabled(false);
 		btnLoginInstead.setEnabled(false);
 		tglbtnShowhide.setEnabled(false);
