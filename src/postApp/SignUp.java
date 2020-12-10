@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -11,6 +12,8 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
+import javax.swing.JToggleButton;
 
 public class SignUp {
 
@@ -20,9 +23,9 @@ public class SignUp {
 	private JLabel lblUsername;
 	private JTextField textField_Username;
 	private JLabel lblUsernameReq;
-	private JTextField textField_Password;
+	private JPasswordField textField_Password; //
 	private JLabel lblConfirmPassword;
-	private JTextField textField_ConfirmPassword;
+	private JPasswordField textField_ConfirmPassword;
 	private JLabel lblPasswordRequirements;
 	private JButton btnCheckAvailability;
 	private JButton btnCheckValidity;
@@ -37,6 +40,8 @@ public class SignUp {
 	private JLabel lblConfirmPasswordError;
 	private JLabel lblSuccessOrError;
 	private JLabel lblSignUp;
+	private JToggleButton tglbtnShowhide;
+	JLabel lblPassword;
 
 	/**
 	 * Create the application.
@@ -95,18 +100,18 @@ public class SignUp {
 		btnCheckAvailability = new JButton("Check Availability");
 		btnCheckAvailability.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				validateUsername(textField_Username.getText());
 			}
 		});
 		btnCheckAvailability.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		btnCheckAvailability.setBounds(330, 290, 117, 29);
 		frame.getContentPane().add(btnCheckAvailability);
 
-		JLabel lblPassword = new JLabel("Password:");
+		lblPassword = new JLabel("Password:");
 		lblPassword.setBounds(163, 321, 88, 16);
 		frame.getContentPane().add(lblPassword);
 
-		textField_Password = new JTextField();
+		textField_Password = new JPasswordField();
 		textField_Password.setColumns(10);
 		textField_Password.setBounds(159, 339, 288, 26);
 		frame.getContentPane().add(textField_Password);
@@ -115,7 +120,7 @@ public class SignUp {
 		lblConfirmPassword.setBounds(163, 377, 165, 16);
 		frame.getContentPane().add(lblConfirmPassword);
 
-		textField_ConfirmPassword = new JTextField();
+		textField_ConfirmPassword = new JPasswordField();
 		textField_ConfirmPassword.setColumns(10);
 		textField_ConfirmPassword.setBounds(159, 395, 288, 26);
 		frame.getContentPane().add(textField_ConfirmPassword);
@@ -154,7 +159,10 @@ public class SignUp {
 		btnCreateAccount = new JButton("Create Account");
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				isAllVaild();
+				if (isAllVaild()) {
+					btnHOME.setEnabled(true);
+					btnSetupProfile.setEnabled(true);
+				}
 			}
 		});
 		btnCreateAccount.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
@@ -210,6 +218,25 @@ public class SignUp {
 		frame.getContentPane().add(lblSuccessOrError);
 
 		frame.getContentPane().add(lblSignUp);
+		
+		tglbtnShowhide = new JToggleButton("Show/Hide");
+		tglbtnShowhide.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// If state is selected, characters can be seen
+				if(tglbtnShowhide.isSelected()) {
+					textField_Password.setEchoChar((char)0);
+					textField_ConfirmPassword.setEchoChar((char)0);
+				// If state is non-selected, characters hidden and replaced with '*'
+				} else {
+					textField_Password.setEchoChar('*');
+					textField_ConfirmPassword.setEchoChar('*');
+					
+				}
+			}
+		});
+		tglbtnShowhide.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		tglbtnShowhide.setBounds(338, 373, 96, 29);
+		frame.getContentPane().add(tglbtnShowhide);
 		frame.setVisible(true);
 	}
 
@@ -266,7 +293,19 @@ public class SignUp {
 		return anyEmpty;
 	}
 
-	private boolean validateUsername() {
+	private boolean validateUsername(String user) {
+		if (user.isEmpty()) {
+			lblUsernameError.setText("Please Enter a Username");
+			lblUsernameError.setVisible(true);
+
+			return false;
+
+		} else if (user.length() < 5) {
+			lblUsernameError.setText("Username too short");
+			lblUsernameError.setVisible(true);
+			return false;
+		}
+		lblUsernameError.setVisible(false);
 		return true;
 	}
 
@@ -298,14 +337,22 @@ public class SignUp {
 		}
 		lblPasswordError.setVisible(true);
 
+		if (!isValid)
+			lblPasswordRequirements.setForeground(Color.BLUE);
+
 		return isValid;
 	}
-	
+
 	private boolean isAllVaild() {
 		boolean success = true;
-		if ((isInfoEmpty(textField_FirstName.getText(), textField_LastName.getText(),
-				textField_Username.getText(), textField_Password.getText(),
-				textField_ConfirmPassword.getText()))) {
+		if ((isInfoEmpty(textField_FirstName.getText(), textField_LastName.getText(), textField_Username.getText(),
+				textField_Password.getText(), textField_ConfirmPassword.getText()))) {
+			lblSuccessOrError.setText("Please fill out the form properly");
+			lblSuccessOrError.setForeground(Color.RED);
+			lblSuccessOrError.setVisible(true);
+			success = false;
+		}
+		if (!validateUsername(textField_Username.getText())) {
 			lblSuccessOrError.setText("Please fill out the form properly");
 			lblSuccessOrError.setForeground(Color.RED);
 			lblSuccessOrError.setVisible(true);
@@ -328,9 +375,10 @@ public class SignUp {
 			lblSuccessOrError.setForeground(Color.GREEN);
 			lblSuccessOrError.setVisible(true);
 			disableAll();
-			
+
 		}
-		System.out.println(success);return success;
+		System.out.println(success);
+		return success;
 	}
 
 	private void disableAll() {
@@ -341,5 +389,8 @@ public class SignUp {
 		textField_ConfirmPassword.setEnabled(false);
 		btnCheckAvailability.setEnabled(false);
 		btnCheckValidity.setEnabled(false);
+		btnCreateAccount.setEnabled(false);
+		btnLoginInstead.setEnabled(false);
+		tglbtnShowhide.setEnabled(false);
 	}
 }
