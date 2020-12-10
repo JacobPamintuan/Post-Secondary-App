@@ -181,6 +181,14 @@ public class SignUp {
 			public void actionPerformed(ActionEvent e) {
 				if (isAllVaild()) { // Create new user object
 
+					Person person = new Person();
+					person.setFirstName(firstName_txt.getText());
+					person.setLastName(lastName_txt.getText());
+					person.setUsername(username_txt.getText().toLowerCase());
+					person.setPassword(password_ptxt.getText());
+					
+					System.out.println(person.displayBasicUser());
+					
 					btnHOME.setEnabled(true);
 					btnSetupProfile.setEnabled(true);
 				}
@@ -205,6 +213,13 @@ public class SignUp {
 		// JButton Set-up profile
 		// Takes user to profile setup screen
 		btnSetupProfile = new JButton("Setup Profile");
+		btnSetupProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//ProfileScreenGUIScreenOne setUp = new ProfileScreenGUIScreenOne();
+				System.out.println("\nGo to profile screen");
+				frame.setVisible(false);
+			}
+		});
 		btnSetupProfile.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		btnSetupProfile.setBounds(330, 610, 117, 29);
 		btnSetupProfile.setEnabled(false);
@@ -444,11 +459,11 @@ public class SignUp {
 			lblSuccessOrError.setForeground(Color.GREEN);
 			lblSuccessOrError.setVisible(true);
 			disableAll();
-			System.out.println("Account Created: ");
-			System.out.println("First: " + firstName_txt.getText()); // user.toString();
-			System.out.println("Last: " + lastName_txt.getText());
-			System.out.println("User: " + username_txt.getText());
-			System.out.println("Pass: " + password_ptxt.getText());
+//			System.out.println("Account Created: ");
+//			System.out.println("First: " + firstName_txt.getText()); // user.toString();
+//			System.out.println("Last: " + lastName_txt.getText());
+//			System.out.println("User: " + username_txt.getText());
+//			System.out.println("Pass: " + password_ptxt.getText());
 
 		}
 

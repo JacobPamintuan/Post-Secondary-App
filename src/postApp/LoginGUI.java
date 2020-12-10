@@ -162,6 +162,7 @@ public class LoginGUI {
 
 	// Validates if username exists, validates if password matches
 	private boolean validate(String user, String pswd) {
+		user.toLowerCase();
 		return true;
 
 	}

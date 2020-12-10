@@ -244,7 +244,11 @@ public class Person{
 	}
 	
 	
-	
+	public String displayBasicUser() {
+		String str = String.format( "First name: %s\nLast name: %s\nUsername: %s\nPassword: %s", firstName, lastName, username, password);
+		
+		return str;
+	}
 	
 	
 	
