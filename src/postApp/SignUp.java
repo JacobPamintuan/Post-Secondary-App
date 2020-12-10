@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import javax.swing.JToggleButton;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class SignUp {
 
@@ -103,6 +105,13 @@ public class SignUp {
 		frame.getContentPane().add(lblUsername);
 
 		textField_Username = new JTextField();
+		textField_Username.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				System.out.println(textField_Username.getText());
+				validateUsername(textField_Username.getText());
+			}
+		});
 		textField_Username.setColumns(10);
 		textField_Username.setBounds(159, 261, 288, 26);
 		frame.getContentPane().add(textField_Username);
@@ -345,12 +354,14 @@ public class SignUp {
 	private boolean validateUsername(String user) {
 		if (user.isEmpty()) {
 			lblUsernameError.setText("Please Enter a Username");
+			lblUsernameError.setForeground(Color.RED);
 			lblUsernameError.setVisible(true);
 
 			return false;
 
 		} else if (user.length() < 5) {
 			lblUsernameError.setText("Username too short");
+			lblUsernameError.setForeground(Color.RED);
 			lblUsernameError.setVisible(true);
 			return false;
 		}
