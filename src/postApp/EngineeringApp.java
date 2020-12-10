@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-public class EngineeringApp {
+public class EngineeringApp { // Main Class
 	
 	JFrame frame;
 
