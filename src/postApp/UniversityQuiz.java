@@ -1,8 +1,8 @@
 package postApp;
 
-public class ResultsGUI {
+public class UniversityQuiz {
 
-	public ResultsGUI() {
+	public UniversityQuiz() {
 		// TODO Auto-generated constructor stub
 	}
 

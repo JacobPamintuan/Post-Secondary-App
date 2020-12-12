@@ -178,16 +178,17 @@ public class SignUp {
 		// Creates a new user/account if all entered information is valid
 		btnCreateAccount = new JButton("Create Account");
 		btnCreateAccount.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				if (isAllVaild()) { // Create new user object
 
-					Person person = new Person();
-					person.setFirstName(firstName_txt.getText());
-					person.setLastName(lastName_txt.getText());
-					person.setUsername(username_txt.getText().toLowerCase());
-					person.setPassword(password_ptxt.getText());
+					//Person person = new Person();
+					EngineeringApp.user.setFirstName(firstName_txt.getText());
+					EngineeringApp.user.setLastName(lastName_txt.getText());
+					EngineeringApp.user.setUsername(username_txt.getText().toLowerCase());
+					EngineeringApp.user.setPassword(password_ptxt.getText());
 					
-					System.out.println(person.displayBasicUser());
+					System.out.println(EngineeringApp.user.displayBasicUser());
 					
 					btnHOME.setEnabled(true);
 					btnSetupProfile.setEnabled(true);
