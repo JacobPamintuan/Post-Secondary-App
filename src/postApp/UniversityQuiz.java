@@ -13,6 +13,7 @@ public class UniversityQuiz {
 	 */
 	public UniversityQuiz() {
 		initialize();
+	}
 
 	/**
 	 * Initialize the contents of the frame.
