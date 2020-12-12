@@ -217,6 +217,9 @@ public class SignUp {
 		btnSetupProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//ProfileScreenGUIScreenOne setUp = new ProfileScreenGUIScreenOne();
+				UniversityQuiz quiz = new UniversityQuiz();
+				quiz.frame.setVisible(true);
+				
 				System.out.println("\nGo to profile screen");
 				frame.setVisible(false);
 			}

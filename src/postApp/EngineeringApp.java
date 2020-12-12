@@ -13,9 +13,10 @@ public class EngineeringApp { // Main Class
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
-					LoginGUI window = new LoginGUI();
-					window.frame.setVisible(true);
+					UniversityQuiz quiz = new UniversityQuiz();
+					quiz.frame.setVisible(true);
+//					LoginGUI window = new LoginGUI();
+//					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
