@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 
 public class LoginGUI extends JFrame implements ActionListener, KeyListener{
 
-	private JFrame frame;
+	JFrame frame;
 	private JPanel screen;
 	
 	private JLabel welcomeLbl;
