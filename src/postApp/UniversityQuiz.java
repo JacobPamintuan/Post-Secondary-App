@@ -27,7 +27,8 @@ public class UniversityQuiz {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(0, 0, 400, 625);
-		// frame.setResizable(false);
+//		frame.setBounds(0,0,1920,1080);
+//		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -145,6 +146,7 @@ public class UniversityQuiz {
 		engType.add(rdbtnGeneral);
 		engType.add(rdbtnSpecialized);
 
+		
 		EngineeringApp.user.setAverage(99.3);		
 		
 		// Displays average based on calculation form profile setup
