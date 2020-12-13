@@ -7,13 +7,65 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class UniversityQuiz {
-	
+
 	JFrame frame;
 
+	JLabel[] less;
+	JLabel[] more;
+	JSlider[] factor;
+	
+	private JLabel lblFactorImportance;
+	private JLabel lblUniQuiz;
+	private JLabel lblTuitionCostQ;
+	private JLabel lblCoopQ;
+	private JLabel lblWhatClassSize;
+	private JLabel lblCampusType;
+	private JLabel lblDistance;
+	private JLabel lblEngType;
+	private JLabel lblAverage;
+	private JLabel lblExtracurriculars;
+	private JLabel lblNotAtAll;
+	private JLabel lblVery;
+
+	private JRadioButton rdbtnTuitonY;
+	private JRadioButton rdbtnTuitonN;
+	private JRadioButton rdbtnCoopY;
+	private JRadioButton rdbtnCoopN;
+	private JRadioButton rdbtnClassSizeS;
+	private JRadioButton rdbtnClassSizeL;
+	private JRadioButton rdbtnCampusT;
+	private JRadioButton rdbtnCampusC;
+	private JRadioButton rdbtnClose;
+	private JRadioButton rdbtnFar;
+	private JRadioButton rdbtnGeneral;
+	private JRadioButton rdbtnSpecialized;
+
+	private ButtonGroup tuition;
+	private ButtonGroup coop;
+	private ButtonGroup classSize;
+	private ButtonGroup campusType;
+	private ButtonGroup distance;
+	private ButtonGroup engType;
+
+	private AbstractButton aTuition;
+	private AbstractButton aCoop;
+	private AbstractButton aClass;
+	private AbstractButton aCampus;
+	private AbstractButton aDistance;
+	private AbstractButton aEngType;
+
+	JButton btnDoSomething;
+	
 	/**
 	 * Create the application.
 	 */
@@ -21,142 +73,251 @@ public class UniversityQuiz {
 		initialize();
 	}
 
+	public void sliderVisible(int i, boolean vis) {
+		less[i].setVisible(vis);
+		more[i].setVisible(vis);
+		factor[i].setVisible(vis);
+		factor[i].setEnabled(vis);
+	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(0, 0, 400, 625);
+		frame.setBounds(0, 0, 900, 625);
 //		frame.setBounds(0,0,1920,1080);
 //		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
+		less = new JLabel[6];
+		more = new JLabel[6];
+		factor = new JSlider[6];
+
+		for (int i = 0; i < 6; i++) {
+			less[i] = new JLabel("<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
+			more[i] = new JLabel("<html><div style='text-align: center;'><html>Very<br>important</div></html>");
+			factor[i] = new JSlider();
+
+			less[i].setBounds(445, (60 * i + 112), 60, 35);
+			more[i].setBounds(708, (60 * i + 112), 60, 35);
+			factor[i].setPaintTicks(true);
+			factor[i].setMajorTickSpacing(10);
+			factor[i].setMinorTickSpacing(5);
+			factor[i].setBounds(506, (60 * i + 120), 190, 30);
+			
+			int slide = i;
+			
+			factor[i].addChangeListener(new ChangeListener() {
+				public void stateChanged(ChangeEvent e) {
+					int val = factor[slide].getValue();
+				}
+			});
+
+			frame.getContentPane().add(less[i]);
+			frame.getContentPane().add(more[i]);
+			frame.getContentPane().add(factor[i]);
+
+			sliderVisible(i, false);
+
+		}
+
+		lblFactorImportance = new JLabel("How important is this factor?");
+		lblFactorImportance.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblFactorImportance.setBounds(492, 89, 235, 16);
+		frame.getContentPane().add(lblFactorImportance);
+		
 		// Title
-		JLabel lblUniiQuiz = new JLabel("University Quiz");
-		lblUniiQuiz.setFont(new Font("Lucida Grande", Font.PLAIN, 41));
-		lblUniiQuiz.setBounds(45, 25, 325, 49);
-		frame.getContentPane().add(lblUniiQuiz);
+		lblUniQuiz = new JLabel("University Quiz");
+		lblUniQuiz.setFont(new Font("Lucida Grande", Font.PLAIN, 41));
+		lblUniQuiz.setBounds(45, 25, 325, 49);
+		frame.getContentPane().add(lblUniQuiz);
 
 		// Tuition Cost
-		JLabel lblTuitionCostQ = new JLabel("Is cost of tuition an important factor?");
+		lblTuitionCostQ = new JLabel("Is cost of tuition an important factor?");
 		lblTuitionCostQ.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblTuitionCostQ.setBounds(45, 100, 325, 25);
 		frame.getContentPane().add(lblTuitionCostQ);
 		// RadioButtons - Yes/No
-		JRadioButton rdbtnTuitonY = new JRadioButton("Yes");
+		rdbtnTuitonY = new JRadioButton("Yes");
 		rdbtnTuitonY.setBounds(45, 125, 62, 23);
 		frame.getContentPane().add(rdbtnTuitonY);
 
-		JRadioButton rdbtnTuitonN = new JRadioButton("No");
+		rdbtnTuitonN = new JRadioButton("No");
 		rdbtnTuitonN.setBounds(145, 125, 62, 23);
 		frame.getContentPane().add(rdbtnTuitonN);
 		// Group Radio Buttons
-		ButtonGroup tuition = new ButtonGroup();
+		tuition = new ButtonGroup();
 		tuition.add(rdbtnTuitonY);
 		tuition.add(rdbtnTuitonN);
 
+		ActionListener tuitionAction = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				aTuition = (AbstractButton) actionEvent.getSource();
+				if (aTuition.equals(rdbtnTuitonY))
+					sliderVisible(0, true);
+				else
+					sliderVisible(0, false);
+			}
+		};
+
+		rdbtnTuitonN.addActionListener(tuitionAction);
+		rdbtnTuitonY.addActionListener(tuitionAction);
+
 		// Coop
-		JLabel lblCoopQ = new JLabel("Are you interested in co-op?");
+		lblCoopQ = new JLabel("Are you interested in co-op?");
 		lblCoopQ.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblCoopQ.setBounds(45, 160, 325, 25);
 		frame.getContentPane().add(lblCoopQ);
 		// RadioButtons - Yes/No
-		JRadioButton rdbtnCoopY = new JRadioButton("Yes");
+		rdbtnCoopY = new JRadioButton("Yes");
 		rdbtnCoopY.setBounds(45, 185, 62, 23);
 		frame.getContentPane().add(rdbtnCoopY);
 
-		JRadioButton rdbtnCoopN = new JRadioButton("No");
+		rdbtnCoopN = new JRadioButton("No");
 		rdbtnCoopN.setBounds(145, 185, 62, 23);
 		frame.getContentPane().add(rdbtnCoopN);
 		// Group Radio Buttons
-		ButtonGroup coop = new ButtonGroup();
+		coop = new ButtonGroup();
 		coop.add(rdbtnCoopY);
 		coop.add(rdbtnCoopN);
 
+		ActionListener coopAction = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				aCoop = (AbstractButton) actionEvent.getSource();
+				if (aCoop.equals(rdbtnCoopY))
+					sliderVisible(1, true);
+				else
+					sliderVisible(1, false);
+			}
+		};
+
+		rdbtnCoopY.addActionListener(coopAction);
+		rdbtnCoopN.addActionListener(coopAction);
+
 		// Class sizes
-		JLabel lblWhatClassSize = new JLabel("What class size do you prefer?");
+		lblWhatClassSize = new JLabel("What class size do you prefer?");
 		lblWhatClassSize.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblWhatClassSize.setBounds(45, 220, 325, 25);
 		frame.getContentPane().add(lblWhatClassSize);
 		// Radio Buttons - Smaller/Larger
-		JRadioButton rdbtnClassSizeS = new JRadioButton("Smaller");
+		rdbtnClassSizeS = new JRadioButton("Smaller");
 		rdbtnClassSizeS.setBounds(45, 245, 88, 23);
 		frame.getContentPane().add(rdbtnClassSizeS);
 
-		JRadioButton rdbtnClassSizeL = new JRadioButton("Larger");
+		rdbtnClassSizeL = new JRadioButton("Larger");
 		rdbtnClassSizeL.setBounds(145, 245, 99, 23);
 		frame.getContentPane().add(rdbtnClassSizeL);
 		// Group Radio Buttons
-		ButtonGroup classSize = new ButtonGroup();
+		classSize = new ButtonGroup();
 		classSize.add(rdbtnClassSizeS);
 		classSize.add(rdbtnClassSizeL);
 
+		ActionListener classAction = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				aClass = (AbstractButton) actionEvent.getSource();
+				sliderVisible(2, true);
+			}
+		};
+
+		rdbtnClassSizeS.addActionListener(classAction);
+		rdbtnClassSizeL.addActionListener(classAction);
+
 		// Campus Type
-		JLabel lblCampusType = new JLabel("Which type of campus do you prefer?");
+		lblCampusType = new JLabel("Which type of campus do you prefer?");
 		lblCampusType.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblCampusType.setBounds(45, 280, 325, 25);
 		frame.getContentPane().add(lblCampusType);
 		// RadioButtons - Town/City
-		JRadioButton rdbtnCampusT = new JRadioButton("Town");
+		rdbtnCampusT = new JRadioButton("Town");
 		rdbtnCampusT.setBounds(45, 305, 88, 23);
 		frame.getContentPane().add(rdbtnCampusT);
 
-		JRadioButton rdbtnCampusC = new JRadioButton("City");
+		rdbtnCampusC = new JRadioButton("City");
 		rdbtnCampusC.setBounds(145, 305, 99, 23);
 		frame.getContentPane().add(rdbtnCampusC);
 		// Group Radio Buttons
-		ButtonGroup campusType = new ButtonGroup();
+		campusType = new ButtonGroup();
 		campusType.add(rdbtnCampusT);
 		campusType.add(rdbtnCampusC);
 
+		ActionListener campusAction = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				aCampus = (AbstractButton) actionEvent.getSource();
+				sliderVisible(3, true);
+			}
+		};
+
+		rdbtnCampusT.addActionListener(campusAction);
+		rdbtnCampusC.addActionListener(campusAction);
+
 		// Distance
-		JLabel lblDistance = new JLabel("How close to home do you want to live?");
+		lblDistance = new JLabel("How close to home do you want to live?");
 		lblDistance.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblDistance.setBounds(45, 340, 325, 25);
 		frame.getContentPane().add(lblDistance);
 		// RadioButtons - Close/Far
-		JRadioButton rdbtnClose = new JRadioButton("Close");
-		rdbtnClose.setBounds(45, 365, 88, 23);
+		rdbtnClose = new JRadioButton("Close");
+		rdbtnClose.setBounds(45, 355, 88, 23);
 		frame.getContentPane().add(rdbtnClose);
 
-		JRadioButton rdbtnFar = new JRadioButton("Far");
-		rdbtnFar.setBounds(145, 365, 99, 23);
+		rdbtnFar = new JRadioButton("Far");
+		rdbtnFar.setBounds(145, 355, 99, 23);
 		frame.getContentPane().add(rdbtnFar);
 		// Group Radio Buttons
-		ButtonGroup distance = new ButtonGroup();
+		distance = new ButtonGroup();
 		distance.add(rdbtnClose);
 		distance.add(rdbtnFar);
 
+		ActionListener distanceAction = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				aDistance = (AbstractButton) actionEvent.getSource();
+				sliderVisible(4, true);
+			}
+		};
+
+		rdbtnClose.addActionListener(distanceAction);
+		rdbtnFar.addActionListener(distanceAction);
+
 		// First Year Eng Type
-		JLabel lblEngType = new JLabel("Which type of engineering first year?");
+		lblEngType = new JLabel("Which type of engineering first year?");
 		lblEngType.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblEngType.setBounds(45, 400, 325, 25);
 		frame.getContentPane().add(lblEngType);
 		// RadioButtons - General/Specialized
-		JRadioButton rdbtnGeneral = new JRadioButton("General");
+		rdbtnGeneral = new JRadioButton("General");
 		rdbtnGeneral.setBounds(45, 425, 88, 23);
 		frame.getContentPane().add(rdbtnGeneral);
 
-		JRadioButton rdbtnSpecialized = new JRadioButton("Specialized");
+		rdbtnSpecialized = new JRadioButton("Specialized");
 		rdbtnSpecialized.setBounds(145, 425, 113, 23);
 		frame.getContentPane().add(rdbtnSpecialized);
 		// Group Radio Buttons
-		ButtonGroup engType = new ButtonGroup();
+		engType = new ButtonGroup();
 		engType.add(rdbtnGeneral);
 		engType.add(rdbtnSpecialized);
 
-		
-		EngineeringApp.user.setAverage(99.3);		
-		
+		ActionListener engAction = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				aEngType = (AbstractButton) actionEvent.getSource();
+				sliderVisible(5, true);
+			}
+		};
+
+		rdbtnGeneral.addActionListener(engAction);
+		rdbtnSpecialized.addActionListener(engAction);
+
+		EngineeringApp.user.setAverage(99.3);
+
 		// Displays average based on calculation form profile setup
-		JLabel lblAverage = new JLabel("Your average: " + EngineeringApp.user.getAverage());
+		lblAverage = new JLabel("Your average: " + EngineeringApp.user.getAverage());
 		lblAverage.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblAverage.setBounds(45, 460, 162, 25);
 		frame.getContentPane().add(lblAverage);
 
 		// Involvment in EC's - slider
-		JLabel lblExtracurriculars = new JLabel("How involved are you with extracurriculars?");
+		lblExtracurriculars = new JLabel("How involved are you with extracurriculars?");
 		lblExtracurriculars.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblExtracurriculars.setBounds(45, 497, 325, 25);
 		frame.getContentPane().add(lblExtracurriculars);
@@ -167,15 +328,141 @@ public class UniversityQuiz {
 		sliderECs.setMajorTickSpacing(10);
 		frame.getContentPane().add(sliderECs);
 
-		JLabel lblNotAtAll = new JLabel(
-				"<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
+		lblNotAtAll = new JLabel("<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
 		lblNotAtAll.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNotAtAll.setBounds(25, 527, 61, 36);
+		lblNotAtAll.setBounds(25, 527, 60, 35);
 		frame.getContentPane().add(lblNotAtAll);
 
-		JLabel lblVery = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
+		lblVery = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
 		lblVery.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVery.setBounds(289, 527, 61, 36);
+		lblVery.setBounds(289, 527, 60, 35);
 		frame.getContentPane().add(lblVery);
+
+		btnDoSomething = new JButton("Do Something");
+		btnDoSomething.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(int i=0;i<6;i++) {
+					if(factor[i].isEnabled())
+						System.out.println(factor[i].getValue());
+					else
+						System.out.println(0);
+				}
+			}
+		});
+		btnDoSomething.setBounds(428, 534, 117, 29);
+		frame.getContentPane().add(btnDoSomething);
+
+//		JSlider sliderECs_1 = new JSlider();
+//		sliderECs_1.setPaintTicks(true);
+//		sliderECs_1.setMajorTickSpacing(10);
+//		sliderECs_1.setMinorTickSpacing(5);
+//		sliderECs_1.setBounds(506, 119, 190, 29);
+//		frame.getContentPane().add(sliderECs_1);
+//
+//		JLabel lblNotAtAll_1 = new JLabel(
+//				"<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
+//		lblNotAtAll_1.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblNotAtAll_1.setBounds(444, 112, 60, 35);
+//		frame.getContentPane().add(lblNotAtAll_1);
+//
+//		JLabel lblVery_1 = new JLabel("<html><div style='text-align: center;'><html>Very<br>important</div></html>");
+//		lblVery_1.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblVery_1.setBounds(708, 112, 60, 35);
+//		frame.getContentPane().add(lblVery_1);
+//
+//		JSlider sliderECs_1_1_1 = new JSlider();
+//		sliderECs_1_1_1.setPaintTicks(true);
+//		sliderECs_1_1_1.setMinorTickSpacing(5);
+//		sliderECs_1_1_1.setMajorTickSpacing(10);
+//		sliderECs_1_1_1.setBounds(506, 299, 190, 29);
+//		frame.getContentPane().add(sliderECs_1_1_1);
+//
+//		JLabel lblNotAtAll_1_1_1 = new JLabel(
+//				"<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
+//		lblNotAtAll_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblNotAtAll_1_1_1.setBounds(444, 292, 60, 35);
+//		frame.getContentPane().add(lblNotAtAll_1_1_1);
+//
+//		JLabel lblVery_1_1_1 = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
+//		lblVery_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblVery_1_1_1.setBounds(708, 292, 60, 35);
+//		frame.getContentPane().add(lblVery_1_1_1);
+//
+//		JSlider sliderECs_1_1 = new JSlider();
+//		sliderECs_1_1.setPaintTicks(true);
+//		sliderECs_1_1.setMinorTickSpacing(5);
+//		sliderECs_1_1.setMajorTickSpacing(10);
+//		sliderECs_1_1.setBounds(506, 179, 190, 29);
+//		frame.getContentPane().add(sliderECs_1_1);
+//
+//		JLabel lblNotAtAll_1_1 = new JLabel(
+//				"<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
+//		lblNotAtAll_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblNotAtAll_1_1.setBounds(444, 172, 60, 35);
+//		frame.getContentPane().add(lblNotAtAll_1_1);
+//
+//		JLabel lblVery_1_1 = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
+//		lblVery_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblVery_1_1.setBounds(708, 172, 60, 35);
+//		frame.getContentPane().add(lblVery_1_1);
+//
+//		JLabel lblNotAtAll_1_2 = new JLabel(
+//				"<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
+//		lblNotAtAll_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblNotAtAll_1_2.setBounds(444, 232, 60, 35);
+//		frame.getContentPane().add(lblNotAtAll_1_2);
+//
+//		JSlider sliderECs_1_2 = new JSlider();
+//		sliderECs_1_2.setPaintTicks(true);
+//		sliderECs_1_2.setMinorTickSpacing(5);
+//		sliderECs_1_2.setMajorTickSpacing(10);
+//		sliderECs_1_2.setBounds(506, 239, 190, 29);
+//		frame.getContentPane().add(sliderECs_1_2);
+//
+//		JLabel lblVery_1_2 = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
+//		lblVery_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblVery_1_2.setBounds(708, 232, 60, 35);
+//		frame.getContentPane().add(lblVery_1_2);
+//
+//		JLabel lblNotAtAll_1_1_2 = new JLabel(
+//				"<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
+//		lblNotAtAll_1_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblNotAtAll_1_1_2.setBounds(444, 412, 60, 35);
+//		frame.getContentPane().add(lblNotAtAll_1_1_2);
+//
+//		JSlider sliderECs_1_1_2 = new JSlider();
+//		sliderECs_1_1_2.setPaintTicks(true);
+//		sliderECs_1_1_2.setMinorTickSpacing(5);
+//		sliderECs_1_1_2.setMajorTickSpacing(10);
+//		sliderECs_1_1_2.setBounds(506, 419, 190, 29);
+//		frame.getContentPane().add(sliderECs_1_1_2);
+//
+//		JLabel lblVery_1_1_2 = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
+//		lblVery_1_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblVery_1_1_2.setBounds(708, 412, 60, 35);
+//		frame.getContentPane().add(lblVery_1_1_2);
+//
+//		JLabel lblNotAtAll_1_3 = new JLabel(
+//				"<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
+//		lblNotAtAll_1_3.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblNotAtAll_1_3.setBounds(444, 352, 60, 35);
+//		frame.getContentPane().add(lblNotAtAll_1_3);
+//
+//		JSlider sliderECs_1_3 = new JSlider();
+//		sliderECs_1_3.addChangeListener(new ChangeListener() {
+//			public void stateChanged(ChangeEvent e) {
+//			}
+//		});
+//		sliderECs_1_3.setPaintTicks(true);
+//		sliderECs_1_3.setMinorTickSpacing(5);
+//		sliderECs_1_3.setMajorTickSpacing(10);
+//		sliderECs_1_3.setBounds(506, 359, 190, 29);
+//		frame.getContentPane().add(sliderECs_1_3);
+//
+//		JLabel lblVery_1_3 = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
+//		lblVery_1_3.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblVery_1_3.setBounds(708, 352, 60, 35);
+//		frame.getContentPane().add(lblVery_1_3);
+//	
 	}
 }
