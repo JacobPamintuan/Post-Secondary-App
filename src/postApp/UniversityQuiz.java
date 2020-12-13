@@ -16,7 +16,7 @@ import javax.swing.JButton;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
-public class UniversityQuiz {
+public class UniversityQuiz implements ActionListener{
 
 	JFrame frame;
 
@@ -52,6 +52,7 @@ public class UniversityQuiz {
 
 	private ButtonGroup tuition;
 	private ButtonGroup coop;
+	private ButtonGroup gradReview;
 	private ButtonGroup classSize;
 	private ButtonGroup campusType;
 	private ButtonGroup distance;
@@ -59,12 +60,17 @@ public class UniversityQuiz {
 
 	private AbstractButton aTuition;
 	private AbstractButton aCoop;
+	private AbstractButton aGraduate;
 	private AbstractButton aClass;
 	private AbstractButton aCampus;
 	private AbstractButton aDistance;
 	private AbstractButton aEngType;
 
 	JButton btnDoSomething;
+
+	private JLabel lblGraduateReviews;
+	private JRadioButton rdbtnGraduateY;
+	private JRadioButton rdbtnGraduateN;
 	
 	/**
 	 * Create the application.
@@ -85,17 +91,17 @@ public class UniversityQuiz {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(0, 0, 900, 625);
+		frame.setBounds(0, 0, 900, 725);
 //		frame.setBounds(0,0,1920,1080);
 //		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.setLayout(null);
 
-		less = new JLabel[6];
-		more = new JLabel[6];
-		factor = new JSlider[6];
+		less = new JLabel[7];
+		more = new JLabel[7];
+		factor = new JSlider[7];
 
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < less.length; i++) {
 			less[i] = new JLabel("<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
 			more[i] = new JLabel("<html><div style='text-align: center;'><html>Very<br>important</div></html>");
 			factor[i] = new JSlider();
@@ -115,9 +121,9 @@ public class UniversityQuiz {
 				}
 			});
 
-			frame.getContentPane().add(less[i]);
-			frame.getContentPane().add(more[i]);
-			frame.getContentPane().add(factor[i]);
+			frame.add(less[i]);
+			frame.add(more[i]);
+			frame.add(factor[i]);
 
 			sliderVisible(i, false);
 
@@ -126,27 +132,27 @@ public class UniversityQuiz {
 		lblFactorImportance = new JLabel("How important is this factor?");
 		lblFactorImportance.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		lblFactorImportance.setBounds(492, 89, 235, 16);
-		frame.getContentPane().add(lblFactorImportance);
+		frame.add(lblFactorImportance);
 		
 		// Title
 		lblUniQuiz = new JLabel("University Quiz");
 		lblUniQuiz.setFont(new Font("Lucida Grande", Font.PLAIN, 41));
 		lblUniQuiz.setBounds(45, 25, 325, 49);
-		frame.getContentPane().add(lblUniQuiz);
+		frame.add(lblUniQuiz);
 
 		// Tuition Cost
 		lblTuitionCostQ = new JLabel("Is cost of tuition an important factor?");
 		lblTuitionCostQ.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblTuitionCostQ.setBounds(45, 100, 325, 25);
-		frame.getContentPane().add(lblTuitionCostQ);
+		frame.add(lblTuitionCostQ);
 		// RadioButtons - Yes/No
 		rdbtnTuitonY = new JRadioButton("Yes");
 		rdbtnTuitonY.setBounds(45, 125, 62, 23);
-		frame.getContentPane().add(rdbtnTuitonY);
+		frame.add(rdbtnTuitonY);
 
 		rdbtnTuitonN = new JRadioButton("No");
 		rdbtnTuitonN.setBounds(145, 125, 62, 23);
-		frame.getContentPane().add(rdbtnTuitonN);
+		frame.add(rdbtnTuitonN);
 		// Group Radio Buttons
 		tuition = new ButtonGroup();
 		tuition.add(rdbtnTuitonY);
@@ -169,15 +175,15 @@ public class UniversityQuiz {
 		lblCoopQ = new JLabel("Are you interested in co-op?");
 		lblCoopQ.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblCoopQ.setBounds(45, 160, 325, 25);
-		frame.getContentPane().add(lblCoopQ);
+		frame.add(lblCoopQ);
 		// RadioButtons - Yes/No
 		rdbtnCoopY = new JRadioButton("Yes");
 		rdbtnCoopY.setBounds(45, 185, 62, 23);
-		frame.getContentPane().add(rdbtnCoopY);
+		frame.add(rdbtnCoopY);
 
 		rdbtnCoopN = new JRadioButton("No");
 		rdbtnCoopN.setBounds(145, 185, 62, 23);
-		frame.getContentPane().add(rdbtnCoopN);
+		frame.add(rdbtnCoopN);
 		// Group Radio Buttons
 		coop = new ButtonGroup();
 		coop.add(rdbtnCoopY);
@@ -195,20 +201,50 @@ public class UniversityQuiz {
 
 		rdbtnCoopY.addActionListener(coopAction);
 		rdbtnCoopN.addActionListener(coopAction);
+		
+		lblGraduateReviews = new JLabel("Do graduate reviews matter to you");
+		lblGraduateReviews.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblGraduateReviews.setBounds(45, 220, 325, 25);
+		frame.add(lblGraduateReviews);
+		
+		rdbtnGraduateY = new JRadioButton("Yes");
+		rdbtnGraduateY.setBounds(45, 245, 88, 23);
+		frame.add(rdbtnGraduateY);
+		
+		rdbtnGraduateN = new JRadioButton("No");
+		rdbtnGraduateN.setBounds(145, 245, 113, 23);
+		frame.add(rdbtnGraduateN);
+		
+		gradReview = new ButtonGroup();
+		gradReview.add(rdbtnGraduateY);
+		gradReview.add(rdbtnGraduateN);
+		
+		ActionListener gradAction = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				aGraduate = (AbstractButton) actionEvent.getSource();
+				if (aGraduate.equals(rdbtnGraduateY))
+					sliderVisible(2, true);
+				else
+					sliderVisible(2, false);
+			}
+		};
+
+		rdbtnGraduateY.addActionListener(gradAction);
+		rdbtnGraduateN.addActionListener(gradAction);
 
 		// Class sizes
 		lblWhatClassSize = new JLabel("What class size do you prefer?");
 		lblWhatClassSize.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblWhatClassSize.setBounds(45, 220, 325, 25);
-		frame.getContentPane().add(lblWhatClassSize);
+		lblWhatClassSize.setBounds(45, 280, 325, 25);
+		frame.add(lblWhatClassSize);
 		// Radio Buttons - Smaller/Larger
 		rdbtnClassSizeS = new JRadioButton("Smaller");
-		rdbtnClassSizeS.setBounds(45, 245, 88, 23);
-		frame.getContentPane().add(rdbtnClassSizeS);
+		rdbtnClassSizeS.setBounds(45, 305, 88, 23);
+		frame.add(rdbtnClassSizeS);
 
 		rdbtnClassSizeL = new JRadioButton("Larger");
-		rdbtnClassSizeL.setBounds(145, 245, 99, 23);
-		frame.getContentPane().add(rdbtnClassSizeL);
+		rdbtnClassSizeL.setBounds(145, 305, 99, 23);
+		frame.add(rdbtnClassSizeL);
 		// Group Radio Buttons
 		classSize = new ButtonGroup();
 		classSize.add(rdbtnClassSizeS);
@@ -217,7 +253,7 @@ public class UniversityQuiz {
 		ActionListener classAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aClass = (AbstractButton) actionEvent.getSource();
-				sliderVisible(2, true);
+				sliderVisible(3, true);
 			}
 		};
 
@@ -227,16 +263,16 @@ public class UniversityQuiz {
 		// Campus Type
 		lblCampusType = new JLabel("Which type of campus do you prefer?");
 		lblCampusType.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblCampusType.setBounds(45, 280, 325, 25);
-		frame.getContentPane().add(lblCampusType);
+		lblCampusType.setBounds(45, 340, 325, 25);
+		frame.add(lblCampusType);
 		// RadioButtons - Town/City
 		rdbtnCampusT = new JRadioButton("Town");
-		rdbtnCampusT.setBounds(45, 305, 88, 23);
-		frame.getContentPane().add(rdbtnCampusT);
+		rdbtnCampusT.setBounds(45, 365, 88, 23);
+		frame.add(rdbtnCampusT);
 
 		rdbtnCampusC = new JRadioButton("City");
-		rdbtnCampusC.setBounds(145, 305, 99, 23);
-		frame.getContentPane().add(rdbtnCampusC);
+		rdbtnCampusC.setBounds(145, 365, 99, 23);
+		frame.add(rdbtnCampusC);
 		// Group Radio Buttons
 		campusType = new ButtonGroup();
 		campusType.add(rdbtnCampusT);
@@ -245,7 +281,7 @@ public class UniversityQuiz {
 		ActionListener campusAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aCampus = (AbstractButton) actionEvent.getSource();
-				sliderVisible(3, true);
+				sliderVisible(4, true);
 			}
 		};
 
@@ -255,16 +291,16 @@ public class UniversityQuiz {
 		// Distance
 		lblDistance = new JLabel("How close to home do you want to live?");
 		lblDistance.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblDistance.setBounds(45, 340, 325, 25);
-		frame.getContentPane().add(lblDistance);
+		lblDistance.setBounds(45, 400, 325, 25);
+		frame.add(lblDistance);
 		// RadioButtons - Close/Far
 		rdbtnClose = new JRadioButton("Close");
-		rdbtnClose.setBounds(45, 355, 88, 23);
-		frame.getContentPane().add(rdbtnClose);
+		rdbtnClose.setBounds(45, 425, 88, 23);
+		frame.add(rdbtnClose);
 
 		rdbtnFar = new JRadioButton("Far");
-		rdbtnFar.setBounds(145, 355, 99, 23);
-		frame.getContentPane().add(rdbtnFar);
+		rdbtnFar.setBounds(145, 425, 99, 23);
+		frame.add(rdbtnFar);
 		// Group Radio Buttons
 		distance = new ButtonGroup();
 		distance.add(rdbtnClose);
@@ -273,7 +309,7 @@ public class UniversityQuiz {
 		ActionListener distanceAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aDistance = (AbstractButton) actionEvent.getSource();
-				sliderVisible(4, true);
+				sliderVisible(5, true);
 			}
 		};
 
@@ -283,16 +319,16 @@ public class UniversityQuiz {
 		// First Year Eng Type
 		lblEngType = new JLabel("Which type of engineering first year?");
 		lblEngType.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblEngType.setBounds(45, 400, 325, 25);
-		frame.getContentPane().add(lblEngType);
+		lblEngType.setBounds(45, 460, 325, 25);
+		frame.add(lblEngType);
 		// RadioButtons - General/Specialized
 		rdbtnGeneral = new JRadioButton("General");
-		rdbtnGeneral.setBounds(45, 425, 88, 23);
-		frame.getContentPane().add(rdbtnGeneral);
+		rdbtnGeneral.setBounds(45, 485, 88, 23);
+		frame.add(rdbtnGeneral);
 
 		rdbtnSpecialized = new JRadioButton("Specialized");
-		rdbtnSpecialized.setBounds(145, 425, 113, 23);
-		frame.getContentPane().add(rdbtnSpecialized);
+		rdbtnSpecialized.setBounds(145, 485, 113, 23);
+		frame.add(rdbtnSpecialized);
 		// Group Radio Buttons
 		engType = new ButtonGroup();
 		engType.add(rdbtnGeneral);
@@ -301,7 +337,7 @@ public class UniversityQuiz {
 		ActionListener engAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aEngType = (AbstractButton) actionEvent.getSource();
-				sliderVisible(5, true);
+				sliderVisible(6, true);
 			}
 		};
 
@@ -313,156 +349,52 @@ public class UniversityQuiz {
 		// Displays average based on calculation form profile setup
 		lblAverage = new JLabel("Your average: " + EngineeringApp.user.getAverage());
 		lblAverage.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblAverage.setBounds(45, 460, 162, 25);
-		frame.getContentPane().add(lblAverage);
+		lblAverage.setBounds(45, 561, 162, 25);
+		frame.add(lblAverage);
 
 		// Involvment in EC's - slider
 		lblExtracurriculars = new JLabel("How involved are you with extracurriculars?");
 		lblExtracurriculars.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblExtracurriculars.setBounds(45, 497, 325, 25);
-		frame.getContentPane().add(lblExtracurriculars);
+		lblExtracurriculars.setBounds(45, 598, 325, 25);
+		frame.add(lblExtracurriculars);
 
 		JSlider sliderECs = new JSlider();
 		sliderECs.setPaintTicks(true);
-		sliderECs.setBounds(87, 534, 190, 29);
+		sliderECs.setBounds(87, 635, 190, 29);
 		sliderECs.setMajorTickSpacing(10);
-		frame.getContentPane().add(sliderECs);
+		frame.add(sliderECs);
 
 		lblNotAtAll = new JLabel("<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
 		lblNotAtAll.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNotAtAll.setBounds(25, 527, 60, 35);
-		frame.getContentPane().add(lblNotAtAll);
+		lblNotAtAll.setBounds(25, 628, 60, 35);
+		frame.add(lblNotAtAll);
 
 		lblVery = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
 		lblVery.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVery.setBounds(289, 527, 60, 35);
-		frame.getContentPane().add(lblVery);
+		lblVery.setBounds(289, 628, 60, 35);
+		frame.add(lblVery);
 
 		btnDoSomething = new JButton("Do Something");
-		btnDoSomething.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				for(int i=0;i<6;i++) {
-					if(factor[i].isEnabled())
-						System.out.println(factor[i].getValue());
-					else
-						System.out.println(0);
-				}
-			}
-		});
-		btnDoSomething.setBounds(428, 534, 117, 29);
-		frame.getContentPane().add(btnDoSomething);
+		btnDoSomething.addActionListener(this);//
+		btnDoSomething.setBounds(428, 635, 117, 29);
+		frame.add(btnDoSomething);
 
-//		JSlider sliderECs_1 = new JSlider();
-//		sliderECs_1.setPaintTicks(true);
-//		sliderECs_1.setMajorTickSpacing(10);
-//		sliderECs_1.setMinorTickSpacing(5);
-//		sliderECs_1.setBounds(506, 119, 190, 29);
-//		frame.getContentPane().add(sliderECs_1);
-//
-//		JLabel lblNotAtAll_1 = new JLabel(
-//				"<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
-//		lblNotAtAll_1.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblNotAtAll_1.setBounds(444, 112, 60, 35);
-//		frame.getContentPane().add(lblNotAtAll_1);
-//
-//		JLabel lblVery_1 = new JLabel("<html><div style='text-align: center;'><html>Very<br>important</div></html>");
-//		lblVery_1.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblVery_1.setBounds(708, 112, 60, 35);
-//		frame.getContentPane().add(lblVery_1);
-//
-//		JSlider sliderECs_1_1_1 = new JSlider();
-//		sliderECs_1_1_1.setPaintTicks(true);
-//		sliderECs_1_1_1.setMinorTickSpacing(5);
-//		sliderECs_1_1_1.setMajorTickSpacing(10);
-//		sliderECs_1_1_1.setBounds(506, 299, 190, 29);
-//		frame.getContentPane().add(sliderECs_1_1_1);
-//
-//		JLabel lblNotAtAll_1_1_1 = new JLabel(
-//				"<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
-//		lblNotAtAll_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblNotAtAll_1_1_1.setBounds(444, 292, 60, 35);
-//		frame.getContentPane().add(lblNotAtAll_1_1_1);
-//
-//		JLabel lblVery_1_1_1 = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
-//		lblVery_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblVery_1_1_1.setBounds(708, 292, 60, 35);
-//		frame.getContentPane().add(lblVery_1_1_1);
-//
-//		JSlider sliderECs_1_1 = new JSlider();
-//		sliderECs_1_1.setPaintTicks(true);
-//		sliderECs_1_1.setMinorTickSpacing(5);
-//		sliderECs_1_1.setMajorTickSpacing(10);
-//		sliderECs_1_1.setBounds(506, 179, 190, 29);
-//		frame.getContentPane().add(sliderECs_1_1);
-//
-//		JLabel lblNotAtAll_1_1 = new JLabel(
-//				"<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
-//		lblNotAtAll_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblNotAtAll_1_1.setBounds(444, 172, 60, 35);
-//		frame.getContentPane().add(lblNotAtAll_1_1);
-//
-//		JLabel lblVery_1_1 = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
-//		lblVery_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblVery_1_1.setBounds(708, 172, 60, 35);
-//		frame.getContentPane().add(lblVery_1_1);
-//
-//		JLabel lblNotAtAll_1_2 = new JLabel(
-//				"<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
-//		lblNotAtAll_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblNotAtAll_1_2.setBounds(444, 232, 60, 35);
-//		frame.getContentPane().add(lblNotAtAll_1_2);
-//
-//		JSlider sliderECs_1_2 = new JSlider();
-//		sliderECs_1_2.setPaintTicks(true);
-//		sliderECs_1_2.setMinorTickSpacing(5);
-//		sliderECs_1_2.setMajorTickSpacing(10);
-//		sliderECs_1_2.setBounds(506, 239, 190, 29);
-//		frame.getContentPane().add(sliderECs_1_2);
-//
-//		JLabel lblVery_1_2 = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
-//		lblVery_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblVery_1_2.setBounds(708, 232, 60, 35);
-//		frame.getContentPane().add(lblVery_1_2);
-//
-//		JLabel lblNotAtAll_1_1_2 = new JLabel(
-//				"<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
-//		lblNotAtAll_1_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblNotAtAll_1_1_2.setBounds(444, 412, 60, 35);
-//		frame.getContentPane().add(lblNotAtAll_1_1_2);
-//
-//		JSlider sliderECs_1_1_2 = new JSlider();
-//		sliderECs_1_1_2.setPaintTicks(true);
-//		sliderECs_1_1_2.setMinorTickSpacing(5);
-//		sliderECs_1_1_2.setMajorTickSpacing(10);
-//		sliderECs_1_1_2.setBounds(506, 419, 190, 29);
-//		frame.getContentPane().add(sliderECs_1_1_2);
-//
-//		JLabel lblVery_1_1_2 = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
-//		lblVery_1_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblVery_1_1_2.setBounds(708, 412, 60, 35);
-//		frame.getContentPane().add(lblVery_1_1_2);
-//
-//		JLabel lblNotAtAll_1_3 = new JLabel(
-//				"<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
-//		lblNotAtAll_1_3.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblNotAtAll_1_3.setBounds(444, 352, 60, 35);
-//		frame.getContentPane().add(lblNotAtAll_1_3);
-//
-//		JSlider sliderECs_1_3 = new JSlider();
-//		sliderECs_1_3.addChangeListener(new ChangeListener() {
-//			public void stateChanged(ChangeEvent e) {
-//			}
-//		});
-//		sliderECs_1_3.setPaintTicks(true);
-//		sliderECs_1_3.setMinorTickSpacing(5);
-//		sliderECs_1_3.setMajorTickSpacing(10);
-//		sliderECs_1_3.setBounds(506, 359, 190, 29);
-//		frame.getContentPane().add(sliderECs_1_3);
-//
-//		JLabel lblVery_1_3 = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
-//		lblVery_1_3.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblVery_1_3.setBounds(708, 352, 60, 35);
-//		frame.getContentPane().add(lblVery_1_3);
-//	
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==btnDoSomething) {
+			for(int i=0;i<less.length;i++) {
+				if(factor[i].isEnabled())
+					System.out.println(factor[i].getValue());
+				else
+					System.out.println(0);
+			}
+			System.out.println();
+		}
+		
+		
+	}
+	
+	
 }
