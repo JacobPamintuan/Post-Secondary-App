@@ -1,20 +1,21 @@
 import java.io.*;
 import java.util.*;
 
-public class LoadUserKeys {
+public class UserKeys {
 	static PrintWriter pr = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 	static StringTokenizer st;
 	
 	public static Map<String, Value> users = new HashMap();
 	public static int numUsers=0;
 	
-	public LoadUserKeys() throws Exception{
+	public UserKeys() throws Exception{
 		loadUsers();
 	}
 	
 	private void loadUsers() throws IOException {
 		BufferedReader br = new BufferedReader(new java.io.FileReader(new File("Files/UsernameAndPasswords.txt")));
 		
+		if(!checkLoad())return;
 		String line; //file formatting:   User Number:Username:Password (hashed)
 		while((line=br.readLine())!=null) {
 			String str[] = line.trim().split(":");
@@ -69,6 +70,12 @@ public class LoadUserKeys {
 		}
 		return hexString.toString().toUpperCase();
     }
+    
+    private boolean checkLoad() {
+		File newFile = new File("Files/UsernameAndPasswords.txt");
+	    if (newFile.length() == 0) return false;
+		return true;
+	}
 	
 	
 }
