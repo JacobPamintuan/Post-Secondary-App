@@ -1,0 +1,29 @@
+University,Excellent,Good,Fair,Poor
+Algoma,0.00%,0.00%,0.00%,0.00%
+Algoma » Brampton,0.00%,0.00%,0.00%,0.00%
+Brock University,29.00%,54.00%,15.00%,2.00%
+Carleton University,28.00%,51.00%,18.00%,3.00%
+University of Guelph,47.00%,41.00%,9.00%,2.00%
+Lakehead University,17.30%,49.80%,24.80%,8.10%
+Laurentian University,20.00%,52.00%,22.00%,6.00%
+McMaster University,36.00%,47.00%,13.00%,4.00%
+Nipissing University,32.00%,51.50%,14.20%,2.40%
+OCAD University,15.00%,53.00%,26.00%,6.00%
+University of Ottawa,16.80%,56.90%,21.60%,4.70%
+Ottawa » Saint Paul University,53.20%,42.40%,1.80%,2.60%
+Ontario Tech University,24.00%,51.00%,20.00%,5.00%
+Queen's University,44.00%,41.00%,12.00%,3.00%
+Ryerson University,21.30%,51.10%,21.70%,5.80%
+Toronto » All Campuses,24.40%,49.30%,21.10%,5.20%
+Toronto » St George,25.30%,49.00%,20.60%,5.00%
+Toronto » Mississauga,23.80%,50.40%,20.50%,5.30%
+Toronto » Scarborough,21.10%,49.00%,24.40%,5.60%
+Trent University,36.20%,38.10%,7.70%,1.10%
+University of Waterloo,30.60%,52.30%,13.70%,3.40%
+Western » Main Campus,34.00%,48.00%,13.00%,4.00%
+Western » Brescia University College,40.00%,51.00%,6.00%,3.00%
+Western » Huron University College,43.00%,38.00%,16.00%,3.00%
+Western » King's University College,0.00%,0.00%,0.00%,0.00%
+Wilfrid Laurier University,43.70%,42.70%,10.10%,3.50%
+University of Windsor,18.00%,53.00%,23.00%,6.00%
+York University,19.10%,53.90%,22.00%,4.90%
