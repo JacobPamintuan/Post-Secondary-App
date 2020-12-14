@@ -2,16 +2,16 @@ package postApp;
 
 import javax.swing.*;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 
-public class LoginGUI extends JFrame implements ActionListener, KeyListener {
+public class LoginGUI {
 
 	JFrame frame;
-	private JPanel screen;
 
 	private JLabel welcomeLbl;
 	private JLabel loginLbl;
@@ -28,164 +28,140 @@ public class LoginGUI extends JFrame implements ActionListener, KeyListener {
 	private String loginError = "The username or password you entered is incorrect.";
 	private JToggleButton tglbtnShowhide;
 	private JPasswordField passwordField;
-
-	private String username = "";
-	private String password = "";
-
 	/**
 	 * Launch the application.
 	 */
+//	public static void main(String[] args) { 
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					LoginGUI window = new LoginGUI();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
 	public LoginGUI() {
-		frameSetup();
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-
-	private void frameSetup() {
-		frame = new JFrame();
-		screen = new JPanel();
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // program will end when exited
-		frame.setSize(700, 700); // sets the size of the frame
-		frame.setTitle("Login");
-		frame.setBounds(0, 0, 700, 700);
-		frame.setLayout(null);
-		frame.setResizable(false); // can't resize
-		frame.add(screen); // add panel to the frame
-		frame.validate();
-		frame.repaint();
-		frame.setVisible(true);
-		frame.addKeyListener(this);
-
-	}
-
 	private void initialize() {
+		frame = new JFrame("Login");
+		frame.setBounds(0, 0, 700, 700);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 
-		screen.setBorder(null);
-		screen.setBounds(0, 0, 700, 700);
-		screen.setLayout(null);
-
-		// Creates welcome label
+		//Creates welcome label
 		welcomeLbl = new JLabel("<html><div style='text-align: center;'>"
 				+ "<html>Welcome To the <br>Engineering Program Finder" + "</div></html>");
 		welcomeLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		welcomeLbl.setBounds(269, 32, 167, 100);
-		screen.add(welcomeLbl);
+		frame.getContentPane().add(welcomeLbl);
 
 		// Login Label
 		loginLbl = new JLabel("Log into Program Finder");
 		loginLbl.setBounds(177, 136, 205, 16);
-		screen.add(loginLbl);
+		frame.getContentPane().add(loginLbl);
 
 		// Username label
 		lblUsername = new JLabel("Username:");
 		lblUsername.setBounds(177, 164, 205, 16);
-		screen.add(lblUsername);
+		frame.getContentPane().add(lblUsername);
 
 		// Username textfield - where user inputs username
 		textUsername = new JTextField();
 		textUsername.setBounds(177, 192, 189, 26);
-		screen.add(textUsername);
-		textUsername.addKeyListener(this);
+		frame.getContentPane().add(textUsername);
 		textUsername.setColumns(10);
 
 		// Password label
 		lblPassword = new JLabel("Password:");
 		lblPassword.setBounds(177, 236, 205, 16);
-		screen.add(lblPassword);
-
+		frame.getContentPane().add(lblPassword);
+		 
 		// Password passwordField - where user inputs Password
 		// Text can be hidden or displayed
 		passwordField = new JPasswordField();
 		passwordField.setBounds(177, 264, 189, 26);
-		passwordField.addKeyListener(this);
-		screen.add(passwordField);
+		frame.getContentPane().add(passwordField);
 
 		// Error message - invisible unless error occurs
 		errorMessage = new JLabel();
 		errorMessage.setForeground(Color.RED);
 		errorMessage.setBounds(177, 331, 336, 16);
-		screen.add(errorMessage);
+		frame.getContentPane().add(errorMessage);
 		errorMessage.setVisible(false);
 
 		// JButton new user/signup - takes user to signup page
 		btnNewUsersignUp = new JButton("New User/Sign Up");
-		btnNewUsersignUp.addActionListener(this);
+		btnNewUsersignUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SignUp signUp = new SignUp();
+				frame.setVisible(false);
+			}
+		});
 		btnNewUsersignUp.setBounds(155, 380, 174, 29);
-		screen.add(btnNewUsersignUp);
+		frame.getContentPane().add(btnNewUsersignUp);
 
 		// JButton Login
 		// Validates username and password,
-		// Displays error message or redirects to home page
+			//	Displays error message or redirects to home page
 		btnLogIn = new JButton("Log In");
-		btnLogIn.addActionListener(this);
-		btnLogIn.setBounds(416, 380, 117, 29);
-		screen.add(btnLogIn);
-
-		// JToggleButton - hides and shows password
-		tglbtnShowhide = new JToggleButton("Show/Hide");
-		tglbtnShowhide.addActionListener(this);
-		tglbtnShowhide.setBounds(372, 264, 161, 29);
-		screen.add(tglbtnShowhide);
-		frame.repaint();
-	}
-
-	public void actionPerformed(ActionEvent event) {
-		if (event.getSource() == btnNewUsersignUp) {
-//			SignUp signUp = new SignUp();
-			frame.setVisible(false);
-		} else if (event.getSource() == btnLogIn) {
-			try {
-				if (UserKeys.checkUsername(username) && UserKeys.checkPassword(username, password)) {
-					System.out.println("Welcome");
-//					new MainScreen();
-					frame.setVisible(false);
-				} else if (username.length() == 0 || password.length() == 0) {
+		btnLogIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String pass = new String(passwordField.getPassword());
+				if (isLoginEmpty(textUsername.getText(), pass)) {
 					errorMessage.setText(emptyError);
 					errorMessage.setVisible(true);
+				} else if (validate(textUsername.getText(), passwordField.getPassword().toString())) {
+					System.out.println(textUsername.getText() + "\n" + pass);
 				} else {
 					errorMessage.setText(loginError);
 					errorMessage.setVisible(true);
 				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
 			}
-
-		} else if (event.getSource() == tglbtnShowhide) {
-			// If state is selected, characters can be seen
-			if (tglbtnShowhide.isSelected())
-				passwordField.setEchoChar((char) 0);
-			// If state is non-selected, characters hidden and replaced with '*'
-			else
-				passwordField.setEchoChar('*');
-
-		}
-
+		});
+		btnLogIn.setBounds(416, 380, 117, 29);
+		frame.getContentPane().add(btnLogIn);
+		
+		// JToggleButton - hides and shows password		
+		tglbtnShowhide = new JToggleButton("Show/Hide");
+		tglbtnShowhide.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// If state is selected, characters can be seen
+				if(tglbtnShowhide.isSelected()) {
+					passwordField.setEchoChar((char)0);
+				// If state is non-selected, characters hidden and replaced with '*'
+				} else {
+					passwordField.setEchoChar('*');
+				}
+			}
+		});
+		tglbtnShowhide.setBounds(372, 264, 161, 29);
+		frame.getContentPane().add(tglbtnShowhide);
 	}
 
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-
+	// Checks if either user or password is empty
+	private boolean isLoginEmpty(String user, String pswd) {
+		if (user.isEmpty() || pswd.isEmpty())
+			return true;
+		return false;
 	}
 
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		username = textUsername.getText();
-		password = passwordField.getText();
-		System.out.println(username + " " + password);
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+	// Validates if username exists, validates if password matches
+	private boolean validate(String user, String pswd) {
+		user.toLowerCase();
+		return true;
 
 	}
 }

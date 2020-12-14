@@ -1,7 +1,6 @@
 package postApp;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -71,6 +70,23 @@ public class UniversityQuiz implements ActionListener{
 	private JLabel lblGraduateReviews;
 	private JRadioButton rdbtnGraduateY;
 	private JRadioButton rdbtnGraduateN;
+
+	private ActionListener tuitionAction;
+
+	private ActionListener coopAction;
+
+	private ActionListener gradAction;
+
+	private ActionListener classAction;
+
+	private ActionListener campusAction;
+
+	private ActionListener distanceAction;
+
+	private ActionListener engAction;
+
+	private JSlider sliderECs;
+	
 	
 	/**
 	 * Create the application.
@@ -158,7 +174,7 @@ public class UniversityQuiz implements ActionListener{
 		tuition.add(rdbtnTuitonY);
 		tuition.add(rdbtnTuitonN);
 
-		ActionListener tuitionAction = new ActionListener() {
+		tuitionAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aTuition = (AbstractButton) actionEvent.getSource();
 				if (aTuition.equals(rdbtnTuitonY))
@@ -189,7 +205,7 @@ public class UniversityQuiz implements ActionListener{
 		coop.add(rdbtnCoopY);
 		coop.add(rdbtnCoopN);
 
-		ActionListener coopAction = new ActionListener() {
+		coopAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aCoop = (AbstractButton) actionEvent.getSource();
 				if (aCoop.equals(rdbtnCoopY))
@@ -219,7 +235,7 @@ public class UniversityQuiz implements ActionListener{
 		gradReview.add(rdbtnGraduateY);
 		gradReview.add(rdbtnGraduateN);
 		
-		ActionListener gradAction = new ActionListener() {
+		gradAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aGraduate = (AbstractButton) actionEvent.getSource();
 				if (aGraduate.equals(rdbtnGraduateY))
@@ -250,7 +266,7 @@ public class UniversityQuiz implements ActionListener{
 		classSize.add(rdbtnClassSizeS);
 		classSize.add(rdbtnClassSizeL);
 
-		ActionListener classAction = new ActionListener() {
+		classAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aClass = (AbstractButton) actionEvent.getSource();
 				sliderVisible(3, true);
@@ -278,7 +294,7 @@ public class UniversityQuiz implements ActionListener{
 		campusType.add(rdbtnCampusT);
 		campusType.add(rdbtnCampusC);
 
-		ActionListener campusAction = new ActionListener() {
+		campusAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aCampus = (AbstractButton) actionEvent.getSource();
 				sliderVisible(4, true);
@@ -306,7 +322,7 @@ public class UniversityQuiz implements ActionListener{
 		distance.add(rdbtnClose);
 		distance.add(rdbtnFar);
 
-		ActionListener distanceAction = new ActionListener() {
+		distanceAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aDistance = (AbstractButton) actionEvent.getSource();
 				sliderVisible(5, true);
@@ -334,7 +350,7 @@ public class UniversityQuiz implements ActionListener{
 		engType.add(rdbtnGeneral);
 		engType.add(rdbtnSpecialized);
 
-		ActionListener engAction = new ActionListener() {
+		engAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aEngType = (AbstractButton) actionEvent.getSource();
 				sliderVisible(6, true);
@@ -358,7 +374,7 @@ public class UniversityQuiz implements ActionListener{
 		lblExtracurriculars.setBounds(45, 598, 325, 25);
 		frame.add(lblExtracurriculars);
 
-		JSlider sliderECs = new JSlider();
+		sliderECs = new JSlider();
 		sliderECs.setPaintTicks(true);
 		sliderECs.setBounds(87, 635, 190, 29);
 		sliderECs.setMajorTickSpacing(10);
@@ -384,12 +400,14 @@ public class UniversityQuiz implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnDoSomething) {
-			for(int i=0;i<less.length;i++) {
-				if(factor[i].isEnabled())
-					System.out.println(factor[i].getValue());
-				else
-					System.out.println(0);
-			}
+			System.out.printf("Tuition: %s, %d\n",aTuition.getText(),factor[0].getValue());
+			System.out.printf("Coop: %s, %d\n",aCoop.getText(),factor[1].getValue());
+			System.out.printf("GradRev: %s, %d\n",aGraduate.getText(),factor[2].getValue());
+			System.out.printf("Size: %s, %d\n",aClass.getText(),factor[3].getValue());
+			System.out.printf("Campus: %s, %d\n",aCampus.getText(),factor[4].getValue());
+			System.out.printf("Distance: %s, %d\n",aDistance.getText(),factor[5].getValue());
+			System.out.printf("Engineering: %s, %d\n",aEngType.getText(),factor[6].getValue());
+		
 			System.out.println();
 		}
 		
