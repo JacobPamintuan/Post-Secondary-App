@@ -36,6 +36,8 @@ public class Person{
 	
 	Map<String, Integer> marks;
 	
+	double average;
+
 	int startYear;
 	int startMonth;
 	int startDay;
@@ -181,6 +183,12 @@ public class Person{
 	}
 	public void setMarks(Map<String, Integer> marks) {
 		this.marks = marks;
+	}
+	public double getAverage() {
+		return average;
+	}
+	public void setAverage(double average) {
+		this.average = average;
 	}
 	public int getStartYear() {
 		return startYear;
