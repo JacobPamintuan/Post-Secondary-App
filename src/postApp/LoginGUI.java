@@ -138,7 +138,7 @@ public class LoginGUI extends JFrame implements ActionListener, KeyListener{
 	
 	public void actionPerformed(ActionEvent event){
 		if(event.getSource()==btnNewUsersignUp) {
-//			SignUp signUp = new SignUp();
+			SignUp signUp = new SignUp();
 			frame.setVisible(false);
 		}
 		else if(event.getSource()==btnLogIn) {
