@@ -56,7 +56,7 @@ public class LoginGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame("Login");
-		frame.setBounds(0, 0, 700, 700);
+		frame.setBounds(0, 0, 960, 540);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
