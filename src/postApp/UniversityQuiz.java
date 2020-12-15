@@ -102,7 +102,6 @@ public class UniversityQuiz implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		// logos.setIcon(new ImageIcon("images/UniLogos.png"));
 		logos.setBounds(790, 0, 500, 725);
 		frame.getContentPane().add(logos);
 
@@ -110,6 +109,8 @@ public class UniversityQuiz implements ActionListener {
 		more = new JLabel[7];
 		factor = new JSlider[7];
 
+		// Creates sliders for all question
+		// Sets them to visible false until user selects a radiobutton
 		for (int i = 0; i < less.length; i++) {
 			less[i] = new JLabel("<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
 			more[i] = new JLabel("<html><div style='text-align: center;'><html>Very<br>important</div></html>");
@@ -122,15 +123,7 @@ public class UniversityQuiz implements ActionListener {
 			factor[i].setMinorTickSpacing(5);
 			factor[i].setBounds(456, (60 * i + 120), 190, 30);
 
-//			int slide = i;
-
 			factor[i].setValue(0);
-
-//			factor[i].addChangeListener(new ChangeListener() {
-//				public void stateChanged(ChangeEvent e) {
-//					int val = factor[slide].getValue();
-//				}
-//			});
 
 			frame.getContentPane().add(less[i]);
 			frame.getContentPane().add(more[i]);
@@ -169,7 +162,7 @@ public class UniversityQuiz implements ActionListener {
 		tuition = new ButtonGroup();
 		tuition.add(rdbtnTuitonY);
 		tuition.add(rdbtnTuitonN);
-
+		// ActionListener for radiobuttons
 		tuitionAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aTuition = (AbstractButton) actionEvent.getSource();
@@ -179,7 +172,7 @@ public class UniversityQuiz implements ActionListener {
 					sliderVisible(0, false);
 			}
 		};
-
+		// Add actionlistener to radiobuttons
 		rdbtnTuitonN.addActionListener(tuitionAction);
 		rdbtnTuitonY.addActionListener(tuitionAction);
 
@@ -200,7 +193,7 @@ public class UniversityQuiz implements ActionListener {
 		coop = new ButtonGroup();
 		coop.add(rdbtnCoopY);
 		coop.add(rdbtnCoopN);
-
+		// ActionListener for radiobuttons
 		coopAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aCoop = (AbstractButton) actionEvent.getSource();
@@ -210,15 +203,16 @@ public class UniversityQuiz implements ActionListener {
 					sliderVisible(1, false);
 			}
 		};
-
+		// Add actionlistener to radiobuttons
 		rdbtnCoopY.addActionListener(coopAction);
 		rdbtnCoopN.addActionListener(coopAction);
 
+		// Graduate Reviews
 		lblGraduateReviews = new JLabel("Do graduate reviews matter to you?*");
 		lblGraduateReviews.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblGraduateReviews.setBounds(45, 220, 325, 25);
 		frame.getContentPane().add(lblGraduateReviews);
-
+		// RadioButtons - Yes/No
 		rdbtnGraduateY = new JRadioButton("Yes");
 		rdbtnGraduateY.setBounds(45, 245, 88, 23);
 		frame.getContentPane().add(rdbtnGraduateY);
@@ -226,11 +220,11 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnGraduateN = new JRadioButton("No");
 		rdbtnGraduateN.setBounds(145, 245, 113, 23);
 		frame.getContentPane().add(rdbtnGraduateN);
-
+		// Group Radio Buttons
 		gradReview = new ButtonGroup();
 		gradReview.add(rdbtnGraduateY);
 		gradReview.add(rdbtnGraduateN);
-
+		// ActionListener for radiobuttons
 		gradAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aGraduate = (AbstractButton) actionEvent.getSource();
@@ -240,7 +234,7 @@ public class UniversityQuiz implements ActionListener {
 					sliderVisible(2, false);
 			}
 		};
-
+		// Add actionlistener to radiobuttons
 		rdbtnGraduateY.addActionListener(gradAction);
 		rdbtnGraduateN.addActionListener(gradAction);
 
@@ -261,14 +255,14 @@ public class UniversityQuiz implements ActionListener {
 		classSize = new ButtonGroup();
 		classSize.add(rdbtnClassSizeS);
 		classSize.add(rdbtnClassSizeL);
-
+		// ActionListener for radiobuttons
 		classAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aClass = (AbstractButton) actionEvent.getSource();
 				sliderVisible(3, true);
 			}
 		};
-
+		// Add actionlistener to radiobuttons
 		rdbtnClassSizeS.addActionListener(classAction);
 		rdbtnClassSizeL.addActionListener(classAction);
 
@@ -289,14 +283,14 @@ public class UniversityQuiz implements ActionListener {
 		campusType = new ButtonGroup();
 		campusType.add(rdbtnCampusT);
 		campusType.add(rdbtnCampusC);
-
+		// ActionListener for radiobuttons
 		campusAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aCampus = (AbstractButton) actionEvent.getSource();
 				sliderVisible(4, true);
 			}
 		};
-
+		// Add actionlistener to radiobuttons
 		rdbtnCampusT.addActionListener(campusAction);
 		rdbtnCampusC.addActionListener(campusAction);
 
@@ -317,14 +311,14 @@ public class UniversityQuiz implements ActionListener {
 		distance = new ButtonGroup();
 		distance.add(rdbtnClose);
 		distance.add(rdbtnFar);
-
+		// ActionListener for radiobuttons
 		distanceAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aDistance = (AbstractButton) actionEvent.getSource();
 				sliderVisible(5, true);
 			}
 		};
-
+		// Add actionlistener to radiobuttons
 		rdbtnClose.addActionListener(distanceAction);
 		rdbtnFar.addActionListener(distanceAction);
 
@@ -345,14 +339,14 @@ public class UniversityQuiz implements ActionListener {
 		engType = new ButtonGroup();
 		engType.add(rdbtnGeneral);
 		engType.add(rdbtnSpecialized);
-
+		// ActionListener for radiobuttons
 		engAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aEngType = (AbstractButton) actionEvent.getSource();
 				sliderVisible(6, true);
 			}
 		};
-
+		// Add actionlistener to radiobuttons
 		rdbtnGeneral.addActionListener(engAction);
 		rdbtnSpecialized.addActionListener(engAction);
 
@@ -364,24 +358,21 @@ public class UniversityQuiz implements ActionListener {
 		lblAverage.setBounds(45, 561, 162, 25);
 		frame.getContentPane().add(lblAverage);
 
-		// Involvment in EC's - slider
+		// Involvement in EC's - slider
 		lblExtracurriculars = new JLabel("How involved are you with extracurriculars?*");
 		lblExtracurriculars.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblExtracurriculars.setBounds(45, 598, 325, 25);
 		frame.getContentPane().add(lblExtracurriculars);
 
+		// EC slider
 		sliderECs = new JSlider();
 		sliderECs.setPaintTicks(true);
 		sliderECs.setBounds(87, 635, 190, 29);
 		sliderECs.setMajorTickSpacing(10);
 		frame.getContentPane().add(sliderECs);
-
-//		sliderECs.addChangeListener(new ChangeListener() {
-//			public void stateChanged(ChangeEvent e) {
-//				int val = sliderECs.getValue();
-//			}
-//		});
-
+		
+		
+		// Labels for EC slider
 		lblNotAtAll = new JLabel("<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
 		lblNotAtAll.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNotAtAll.setBounds(25, 628, 60, 35);
@@ -391,12 +382,14 @@ public class UniversityQuiz implements ActionListener {
 		lblVery.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVery.setBounds(289, 628, 60, 35);
 		frame.getContentPane().add(lblVery);
-
+	
+		// Button that does something
 		btnDoSomething = new JButton("Do Something");
 		btnDoSomething.addActionListener(this);//
 		btnDoSomething.setBounds(502, 635, 117, 29);
 		frame.getContentPane().add(btnDoSomething);
 
+		// Error if user does not fill out quiz
 		lblError = new JLabel("*Please answer all questions.*");
 		lblError.setForeground(Color.RED);
 		lblError.setBounds(471, 676, 190, 16);
