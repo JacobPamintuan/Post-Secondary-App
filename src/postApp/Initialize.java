@@ -8,6 +8,9 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.*;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 public class Initialize {
 
 	public static ArrayList<String> universityList = new ArrayList<String>();
@@ -18,13 +21,15 @@ public class Initialize {
 	public Initialize() throws Exception {
 		user = new Person();
 //		loadUniversityList();
-		new UserKeys();
+		new LoadUserKeys();
 //		user.setStreetNumber("622");
 		user.setStreetName("Fred McLaren blvd.");
 		user.setCity("Markham");
 		user.setProvince("ON");
 		user.setCountry("Canada");
 		new LoginGUI();
+		UniversityQuiz quiz = new UniversityQuiz();
+		quiz.frame.setVisible(true);
 
 	}
 

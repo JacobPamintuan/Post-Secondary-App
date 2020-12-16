@@ -1,3 +1,5 @@
+package postApp;
+
 import java.io.*; 
 import java.util.*;  
 import java.net.*;
@@ -6,10 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-
-
-  
+ 
 public class DistanceBetweenAddresses {
 	
 	public static ArrayList<String> origins = new ArrayList<String>();
@@ -35,9 +34,9 @@ public class DistanceBetweenAddresses {
     	
     	//adds users's address (there is only one).
     	url+="origins=";
-    	url+=String.format("%s+%s+%s+%s+%s", Initialize.user.getStreetNumber().replace(' ','+'),Initialize.user.getStreetName().replace(' ','+'),
-    										  Initialize.user.getCity().replace(' ','+'),Initialize.user.getProvince().replace(' ','+'),
-    										  Initialize.user.getCountry().replace(' ','+'));
+//    	url+=String.format("%s+%s+%s+%s+%s", Initialize.user.getStreetNumber().replace(' ','+'),Initialize.user.getStreetName().replace(' ','+'),
+//    										  Initialize.user.getCity().replace(' ','+'),Initialize.user.getProvince().replace(' ','+'),
+//    										  Initialize.user.getCountry().replace(' ','+'));
     	//add the names of the available universities
     	url+="&destinations=";
     	url+=Initialize.universityList.get(0).replace(' ','+');

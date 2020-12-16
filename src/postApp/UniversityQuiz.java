@@ -1,5 +1,6 @@
 package postApp;
 
+import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -83,9 +84,11 @@ public class UniversityQuiz implements ActionListener {
 
 	private JSlider sliderECs;
 
-	private JLabel logos = new JLabel(new ImageIcon("images/UniLogos.png"));
-	
-	private Map<String,Integer> importance;
+	private JLabel logos = new JLabel(new ImageIcon(
+			"/Users/jacobpamintuan/Desktop/ICS4U1/Post-Secondary-App/Post-Secondary-App/images/UniLogos.png"));
+//	private JLabel logos = new JLabel(new ImageIcon("images/UniLogos.png"));
+
+	private Map<String, Integer> importance;
 
 	/**
 	 * Create the application.
@@ -143,9 +146,12 @@ public class UniversityQuiz implements ActionListener {
 		frame.getContentPane().add(lblFactorImportance);
 
 		// Title
-		lblUniQuiz = new JLabel("University Quiz");
-		lblUniQuiz.setFont(new Font("Lucida Grande", Font.PLAIN, 41));
-		lblUniQuiz.setBounds(45, 25, 325, 49);
+		lblUniQuiz = new JLabel(new ImageIcon(
+				"/Users/jacobpamintuan/Desktop/ICS4U1/Post-Secondary-App/Post-Secondary-App/images/UniQuizTitle.png"));// ("University
+																														// Quiz");
+//		lblUniQuiz = new JLabel(new ImageIcon("images/UniQuizTitle.png"));//("University Quiz");
+//		lblUniQuiz.setFont(new Font("Lucida Grande", Font.PLAIN, 41));
+		lblUniQuiz.setBounds(45, 25, 325, 50);
 		frame.getContentPane().add(lblUniQuiz);
 
 		// Tuition Cost
@@ -373,8 +379,7 @@ public class UniversityQuiz implements ActionListener {
 		sliderECs.setBounds(87, 635, 190, 29);
 		sliderECs.setMajorTickSpacing(10);
 		frame.getContentPane().add(sliderECs);
-		
-		
+
 		// Labels for EC slider
 		lblNotAtAll = new JLabel("<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
 		lblNotAtAll.setHorizontalAlignment(SwingConstants.CENTER);
@@ -385,7 +390,7 @@ public class UniversityQuiz implements ActionListener {
 		lblVery.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVery.setBounds(289, 628, 60, 35);
 		frame.getContentPane().add(lblVery);
-	
+
 		// Button that does something
 		btnDoSomething = new JButton("Do Something");
 		btnDoSomething.addActionListener(this);//
@@ -398,6 +403,8 @@ public class UniversityQuiz implements ActionListener {
 		lblError.setBounds(471, 676, 190, 16);
 		frame.getContentPane().add(lblError);
 		lblError.setVisible(false);
+
+		frame.getContentPane().setBackground(Color.lightGray);
 
 	}
 
@@ -418,12 +425,28 @@ public class UniversityQuiz implements ActionListener {
 		factor[i].setEnabled(vis);
 	}
 
+	public void chooseUni(int[] arr) {
+		int tuition=arr[0],coop=arr[1],gradRev=arr[2],size=arr[3],campus=arr[4],distance=arr[5],eng=arr[6],ec=arr[7];
+		
+		int waterloo, uoft, western, carleton, windsor, queens, ryerson, guelph, lakehead, york, ontarioTech, mcmaster,
+				laurier, uOttawa;
+
+//		waterloo=tuition+coop+gradRev
+
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnDoSomething) {
 			if (isComplete()) {
-				
-				importance = new HashMap<String,Integer>();
+
+				int[] vals = new int[8];
+				for (int i = 0; i < 8; i++) {
+					vals[i] = factor[i].getValue();
+				}
+				vals[7]=sliderECs.getValue();
+
+				importance = new HashMap<String, Integer>();
 
 				importance.put("Tuition", factor[0].getValue());
 				importance.put("Coop", factor[1].getValue());
@@ -432,11 +455,13 @@ public class UniversityQuiz implements ActionListener {
 				importance.put("Campus", factor[4].getValue());
 				importance.put("Distance", factor[5].getValue());
 				importance.put("Engineering", factor[6].getValue());
-				
+
 				importance.put("Extracurriculars", sliderECs.getValue());
-				
+
+				chooseUni(vals);
 				Initialize.user.setImportance(importance);
-				
+				System.out.println(importance.toString());
+
 //				System.out.printf("Tuition: %s, %d\n", aTuition.getText(), factor[0].getValue());
 //				System.out.printf("Coop: %s, %d\n", aCoop.getText(), factor[1].getValue());
 //				System.out.printf("GradRev: %s, %d\n", aGraduate.getText(), factor[2].getValue());
@@ -446,7 +471,7 @@ public class UniversityQuiz implements ActionListener {
 //				System.out.printf("Engineering: %s, %d\n", aEngType.getText(), factor[6].getValue());
 //				System.out.printf("Extracurriculars: %d\n", sliderECs.getValue());
 
-				System.out.println();
+				// System.out.println();
 				lblError.setVisible(false);
 			} else
 				lblError.setVisible(true);

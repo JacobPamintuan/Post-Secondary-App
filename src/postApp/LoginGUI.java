@@ -6,11 +6,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class LoginGUI extends JFrame implements ActionListener, KeyListener{
 
 	JFrame frame;
 	private JPanel screen;
+	
 	
 	private JLabel welcomeLbl;
 	private JLabel loginLbl;
@@ -55,9 +57,9 @@ public class LoginGUI extends JFrame implements ActionListener, KeyListener{
 		frame.setSize(700,700); // sets the size of the frame
 		frame.setTitle("Login");
 		frame.setBounds(0,0,700,700);
-		frame.setLayout(null);
+		frame.getContentPane().setLayout(null);
 		frame.setResizable(false); // can't resize
-		frame.add(screen); // add panel to the frame
+		frame.getContentPane().add(screen); // add panel to the frame
 		frame.validate();
 		frame.repaint();
 		frame.setVisible(true); 
@@ -71,52 +73,56 @@ public class LoginGUI extends JFrame implements ActionListener, KeyListener{
 		screen.setLayout(null);
 
 		//Creates welcome label
-		welcomeLbl = new JLabel("<html><div style='text-align: center;'>"
-				+ "<html>Welcome To the <br>Engineering Program Finder" + "</div></html>");
-		welcomeLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		welcomeLbl.setBounds(269, 32, 167, 100);
+//		welcomeLbl = new JLabel("<html><div style='text-align: center;'>"
+//				+ "<html>Welcome To the <br>Engineering Program Finder" + "</div></html>");
+		
+		
+		welcomeLbl = new JLabel(new ImageIcon("images/WelcomeLogin.png"));
+		
+		welcomeLbl.setBounds(0, 0, 700, 200);
 		screen.add(welcomeLbl);
 
 		// Login Label
 		loginLbl = new JLabel("Log into Program Finder");
-		loginLbl.setBounds(177, 136, 205, 16);
+		loginLbl.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		loginLbl.setBounds(170, 229, 205, 16);
 		screen.add(loginLbl);
 
 		// Username label
 		lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(177, 164, 205, 16);
+		lblUsername.setBounds(170, 257, 205, 16);
 		screen.add(lblUsername);
 
 		// Username textfield - where user inputs username
 		textUsername = new JTextField();
-		textUsername.setBounds(177, 192, 189, 26);
+		textUsername.setBounds(170, 285, 189, 26);
 		screen.add(textUsername);
 		textUsername.addKeyListener(this);
 		textUsername.setColumns(10);
 
 		// Password label
 		lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(177, 236, 205, 16);
+		lblPassword.setBounds(170, 329, 205, 16);
 		screen.add(lblPassword);
 		 
 		// Password passwordField - where user inputs Password
 		// Text can be hidden or displayed
 		passwordField = new JPasswordField();
-		passwordField.setBounds(177, 264, 189, 26);
+		passwordField.setBounds(170, 357, 189, 26);
 		passwordField.addKeyListener(this);
 		screen.add(passwordField);
 
 		// Error message - invisible unless error occurs
 		errorMessage = new JLabel();
-		errorMessage.setForeground(Color.RED);
-		errorMessage.setBounds(177, 331, 336, 16);
+		errorMessage.setForeground(new Color(153, 0, 255));
+		errorMessage.setBounds(170, 419, 336, 16);
 		screen.add(errorMessage);
 		errorMessage.setVisible(false);
 
 		// JButton new user/signup - takes user to signup page
 		btnNewUsersignUp = new JButton("New User/Sign Up");
 		btnNewUsersignUp.addActionListener(this);
-		btnNewUsersignUp.setBounds(155, 380, 174, 29);
+		btnNewUsersignUp.setBounds(148, 473, 174, 29);
 		screen.add(btnNewUsersignUp);
 
 		// JButton Login
@@ -124,14 +130,17 @@ public class LoginGUI extends JFrame implements ActionListener, KeyListener{
 			//	Displays error message or redirects to home page
 		btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(this);
-		btnLogIn.setBounds(416, 380, 117, 29);
+		btnLogIn.setBounds(409, 473, 117, 29);
 		screen.add(btnLogIn);
 		
 		// JToggleButton - hides and shows password		
 		tglbtnShowhide = new JToggleButton("Show/Hide");
 		tglbtnShowhide.addActionListener(this);
-		tglbtnShowhide.setBounds(372, 264, 161, 29);
+		tglbtnShowhide.setBounds(365, 357, 161, 29);
 		screen.add(tglbtnShowhide);
+		
+		screen.setBackground(Color.lightGray);
+				
 		frame.repaint();
 	}
 	
@@ -143,7 +152,7 @@ public class LoginGUI extends JFrame implements ActionListener, KeyListener{
 		}
 		else if(event.getSource()==btnLogIn) {
 			try {
-				if(UserKeys.checkUsername(username)&&UserKeys.checkPassword(username, password)) {
+				if(LoadUserKeys.checkUsername(username)&&LoadUserKeys.checkPassword(username, password)) {
 					System.out.println("Welcome");
 //					new MainScreen();
 					frame.setVisible(false);

@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -66,41 +67,42 @@ public class SignUp implements ActionListener {
 		// JFrame
 		frame = new JFrame();
 		frame.setForeground(Color.RED);
-		frame.setBounds(0, 0, 700, 1000);
+		frame.setBounds(0, 0, 700, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(null);
+		frame.getContentPane().setLayout(null);
 
 		// JLabel Signup - Title
-		lblSignUp = new JLabel(
-				"<html><div style='text-align: center;'><html>Sign-Up for The Engineering<br>Program Finder</div></html>");
+//		lblSignUp = new JLabel("<html><div style='text-align: center;'><html>Sign-Up for The Engineering<br>Program Finder</div></html>");
+		lblSignUp = new JLabel(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Post-Secondary-App/Post-Secondary-App/images/SignUpTitle.png"));
+//		lblSignUp = new JLabel(new ImageIcon("images/SignUpTitle.png"));
 		lblSignUp.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSignUp.setBounds(213, 40, 211, 100);
-		frame.add(lblSignUp);
+		lblSignUp.setBounds(0, 0, 700, 200);
+		frame.getContentPane().add(lblSignUp);
 
 		// JLabel First name
 		lblFirstName = new JLabel("First Name");
-		lblFirstName.setBounds(163, 141, 88, 16);
-		frame.add(lblFirstName);
+		lblFirstName.setBounds(184, 212, 88, 16);
+		frame.getContentPane().add(lblFirstName);
 
 		firstName_txt = new JTextField();
-		firstName_txt.setBounds(159, 159, 288, 26);
-		frame.add(firstName_txt);
+		firstName_txt.setBounds(180, 230, 288, 26);
+		frame.getContentPane().add(firstName_txt);
 		firstName_txt.setColumns(10);
 
 		// JLabel last name
 		lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(163, 187, 88, 16);
-		frame.add(lblLastName);
+		lblLastName.setBounds(184, 258, 88, 16);
+		frame.getContentPane().add(lblLastName);
 
 		lastName_txt = new JTextField();
 		lastName_txt.setColumns(10);
-		lastName_txt.setBounds(159, 205, 288, 26);
-		frame.add(lastName_txt);
+		lastName_txt.setBounds(180, 276, 288, 26);
+		frame.getContentPane().add(lastName_txt);
 
 		// JLabel Username
 		lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(163, 243, 88, 16);
-		frame.add(lblUsername);
+		lblUsername.setBounds(184, 314, 88, 16);
+		frame.getContentPane().add(lblUsername);
 
 		username_txt = new JTextField();
 		username_txt.addKeyListener(new KeyAdapter() {
@@ -110,19 +112,19 @@ public class SignUp implements ActionListener {
 			}
 		});
 		username_txt.setColumns(10);
-		username_txt.setBounds(159, 261, 288, 26);
-		frame.add(username_txt);
+		username_txt.setBounds(180, 332, 288, 26);
+		frame.getContentPane().add(username_txt);
 
 		// JLabel Username requirements
 		lblUsernameReq = new JLabel("At least 5 characters long");
 		lblUsernameReq.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		lblUsernameReq.setBounds(169, 295, 169, 16);
-		frame.add(lblUsernameReq);
+		lblUsernameReq.setBounds(190, 366, 169, 16);
+		frame.getContentPane().add(lblUsernameReq);
 
 		// JLabel Password
 		lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(163, 321, 88, 16);
-		frame.add(lblPassword);
+		lblPassword.setBounds(184, 392, 88, 16);
+		frame.getContentPane().add(lblPassword);
 
 		password_ptxt = new JPasswordField();
 		password_ptxt.addKeyListener(new KeyAdapter() {
@@ -132,13 +134,13 @@ public class SignUp implements ActionListener {
 			}
 		});
 		password_ptxt.setColumns(10);
-		password_ptxt.setBounds(159, 339, 288, 26);
-		frame.add(password_ptxt);
+		password_ptxt.setBounds(180, 410, 288, 26);
+		frame.getContentPane().add(password_ptxt);
 
 		// JLabel Confirm password
 		lblConfirmPassword = new JLabel("Confirm Password:");
-		lblConfirmPassword.setBounds(163, 377, 165, 16);
-		frame.add(lblConfirmPassword);
+		lblConfirmPassword.setBounds(184, 448, 165, 16);
+		frame.getContentPane().add(lblConfirmPassword);
 
 		confirmPassword_ptxt = new JPasswordField();
 		confirmPassword_ptxt.addKeyListener(new KeyAdapter() {
@@ -149,92 +151,92 @@ public class SignUp implements ActionListener {
 			}
 		});
 		confirmPassword_ptxt.setColumns(10);
-		confirmPassword_ptxt.setBounds(159, 395, 288, 26);
-		frame.add(confirmPassword_ptxt);
+		confirmPassword_ptxt.setBounds(180, 466, 288, 26);
+		frame.getContentPane().add(confirmPassword_ptxt);
 
 		// JLabel Passowrd Requirements
 		lblPasswordReq = new JLabel("<html>Use 6 or more characters." + "<br>Must include:" + "<br>1 UPPERCASE letter,"
 				+ "<br>1 lowercase letter, and" + "<br>1 number");
 		lblPasswordReq.setVerticalAlignment(SwingConstants.TOP);
-		lblPasswordReq.setBounds(163, 433, 165, 97);
-		frame.add(lblPasswordReq);
+		lblPasswordReq.setBounds(184, 504, 165, 97);
+		frame.getContentPane().add(lblPasswordReq);
 
 		// JButton Login Instead
 		// Exits Sign-up screen and returns to login screen
 		btnLoginInstead = new JButton("Login Instead");
 		btnLoginInstead.addActionListener(this); // ActionListener
 		btnLoginInstead.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		btnLoginInstead.setBounds(159, 542, 117, 29);
-		frame.add(btnLoginInstead);
+		btnLoginInstead.setBounds(180, 613, 117, 29);
+		frame.getContentPane().add(btnLoginInstead);
 
 		// JButton Create Account
 		// Creates a new user/account if all entered information is valid
 		btnCreateAccount = new JButton("Create Account");
 		btnCreateAccount.addActionListener(this); // ActionListener
 		btnCreateAccount.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		btnCreateAccount.setBounds(330, 541, 117, 29);
-		frame.add(btnCreateAccount);
+		btnCreateAccount.setBounds(351, 612, 117, 29);
+		frame.getContentPane().add(btnCreateAccount);
 
 		// JButton HOME
 		// Takes user to Home page (only enabled after account creation)
 		btnHOME = new JButton("HOME");
 		btnHOME.addActionListener(this); // ActionListener
 		btnHOME.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnHOME.setBounds(159, 611, 117, 29);
+		btnHOME.setBounds(180, 682, 117, 29);
 		btnHOME.setEnabled(false);
-		frame.add(btnHOME);
+		frame.getContentPane().add(btnHOME);
 
 		// JButton Set-up profile
 		// Takes user to profile setup screen
 		btnSetupProfile = new JButton("Setup Profile");
 		btnSetupProfile.addActionListener(this); // ActionListener
 		btnSetupProfile.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnSetupProfile.setBounds(330, 610, 117, 29);
+		btnSetupProfile.setBounds(351, 681, 117, 29);
 		btnSetupProfile.setEnabled(false);
-		frame.add(btnSetupProfile);
+		frame.getContentPane().add(btnSetupProfile);
 
 		// JLabel - Error Messages
 		// First Name Error
 		lblFirstNameError = new JLabel("Please Enter Your First Name");
 		lblFirstNameError.setForeground(Color.RED);
-		lblFirstNameError.setBounds(474, 164, 188, 16);
+		lblFirstNameError.setBounds(495, 235, 188, 16);
 		lblFirstNameError.setVisible(false);
-		frame.add(lblFirstNameError);
+		frame.getContentPane().add(lblFirstNameError);
 
 		// Last Name Error
 		lblLastNameError = new JLabel("Please Enter Your Last Name");
 		lblLastNameError.setForeground(Color.RED);
-		lblLastNameError.setBounds(474, 210, 188, 16);
+		lblLastNameError.setBounds(495, 281, 188, 16);
 		lblLastNameError.setVisible(false);
-		frame.add(lblLastNameError);
+		frame.getContentPane().add(lblLastNameError);
 
 		// Username Error
 		lblUsernameError = new JLabel("Please Enter A Username");
 		lblUsernameError.setForeground(Color.RED);
-		lblUsernameError.setBounds(474, 266, 188, 16);
+		lblUsernameError.setBounds(495, 337, 188, 16);
 		lblUsernameError.setVisible(false);
-		frame.add(lblUsernameError);
+		frame.getContentPane().add(lblUsernameError);
 
 		// Password Error
 		lblPasswordError = new JLabel("Please Enter A Password");
 		lblPasswordError.setForeground(Color.RED);
-		lblPasswordError.setBounds(474, 344, 188, 16);
+		lblPasswordError.setBounds(495, 415, 188, 16);
 		lblPasswordError.setVisible(false);
-		frame.add(lblPasswordError);
+		frame.getContentPane().add(lblPasswordError);
 
 		// Confirm Password Error
 		lblConfirmPasswordError = new JLabel("Passwords do not match");
 		lblConfirmPasswordError.setForeground(Color.RED);
-		lblConfirmPasswordError.setBounds(474, 400, 220, 16);
+		lblConfirmPasswordError.setBounds(495, 471, 220, 32);
 		lblConfirmPasswordError.setVisible(false);
-		frame.add(lblConfirmPasswordError);
+		frame.getContentPane().add(lblConfirmPasswordError);
 
 		// Success or Error Label
 		lblSuccessOrError = new JLabel("SUCESS/ERROR");
 		lblSuccessOrError.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSuccessOrError.setBounds(179, 583, 255, 16);
+		lblSuccessOrError.setBounds(200, 654, 255, 16);
 		lblSuccessOrError.setVisible(false);
-		frame.add(lblSuccessOrError);
+		frame.getContentPane().add(lblSuccessOrError);
 
 		// JToggleButton - Show/Hide
 		// Shows the password if button is selected, hides and replaces with '*'
@@ -242,8 +244,10 @@ public class SignUp implements ActionListener {
 		tglbtnShowhide = new JToggleButton("Show/Hide");
 		tglbtnShowhide.addActionListener(this); // ActionListener
 		tglbtnShowhide.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		tglbtnShowhide.setBounds(338, 373, 96, 29);
-		frame.add(tglbtnShowhide);
+		tglbtnShowhide.setBounds(359, 444, 96, 29);
+		frame.getContentPane().add(tglbtnShowhide);
+		
+		frame.getContentPane().setBackground(Color.lightGray);
 
 		frame.setVisible(true);
 	}
@@ -263,7 +267,7 @@ public class SignUp implements ActionListener {
 				Initialize.user.setPassword(password_ptxt.getText());
 				
 				try {
-					UserKeys.addUser(username_txt.getText(), password_ptxt.getText());
+					LoadUserKeys.addUser(username_txt.getText(), password_ptxt.getText());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -275,7 +279,7 @@ public class SignUp implements ActionListener {
 				btnSetupProfile.setEnabled(true);
 			}
 		} else if (e.getSource() == btnHOME) {
-
+//			frame.setVisible(false);
 		} else if (e.getSource() == btnSetupProfile) {
 			// ProfileScreenGUIScreenOne setUp = new ProfileScreenGUIScreenOne();
 			UniversityQuiz quiz = new UniversityQuiz();
@@ -306,7 +310,7 @@ public class SignUp implements ActionListener {
 			return false;
 
 		} else if (!validatePassword(pswd)) {
-			lblConfirmPasswordError.setText("Please enter valid password above");
+			lblConfirmPasswordError.setText("<html>Please enter a valid <br>password above<html>");
 			lblConfirmPasswordError.setForeground(Color.RED);
 			lblConfirmPasswordError.setVisible(true);
 			return false;
@@ -367,7 +371,7 @@ public class SignUp implements ActionListener {
 	// Displays message accordingly
 	// Returns boolean
 	private boolean validateUsername(String user) {
-		if (UserKeys.checkUsername(user)) {
+		if (LoadUserKeys.checkUsername(user)) {
 			lblUsernameError.setText("Username already taken");
 			lblUsernameError.setForeground(Color.RED);
 			lblUsernameError.setVisible(true);
@@ -463,7 +467,7 @@ public class SignUp implements ActionListener {
 		}
 		if (success) {
 			lblSuccessOrError.setText("SUCCESS! ACCOUNT CREATED");
-			lblSuccessOrError.setForeground(Color.GREEN);
+			lblSuccessOrError.setForeground(new Color(153, 0, 255));
 			lblSuccessOrError.setVisible(true);
 			disableAll();
 			
