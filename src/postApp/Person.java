@@ -1,3 +1,4 @@
+
 package postApp;
 import java.util.*;
 
@@ -33,8 +34,6 @@ public class Person{
 	String studentNumber;
 	String diploma;
 	String school;
-	
-	Map<String, Integer> marks;
 
 	double average;
 
@@ -51,6 +50,24 @@ public class Person{
 	ArrayList<String> viewedPrograms;
 	ArrayList<String> usedSearchTerms;
 	ArrayList<String> starredPrograms;
+	
+	//profile information
+	Boolean EarlyAcceptance;
+	ArrayList<String> ExtracurricularActionType;	
+	ArrayList<String> ExtracurricularDescription= new ArrayList<String>();
+	ArrayList<String> ExtracurricularStarDate= new ArrayList<String>();
+	ArrayList<String> ExtracurricularEndDate= new ArrayList<String>();
+	Boolean Citzenship;
+	Boolean Coop;
+	Boolean volunteer;
+	ArrayList<String> AwardActionType= new ArrayList<String>();
+	ArrayList<String> AwardDescription= new ArrayList<String>();
+	ArrayList<String> AwardDate= new ArrayList<String>();
+	Double AverageMark;
+	Map<String, Integer> marks;
+	
+	
+	
 	
 	// UNi Quiz
 	Map<String, Integer> importance;
@@ -260,6 +277,127 @@ public class Person{
 		this.importance = importance;
 	}
 
+	public Boolean getEarlyAcceptance() {
+		return EarlyAcceptance;
+	}
+
+
+	public void setEarlyAcceptance(Boolean earlyAcceptance) {
+		EarlyAcceptance = earlyAcceptance;
+	}
+
+
+	public ArrayList<String> getExtracurricularActionType() {
+		return ExtracurricularActionType;
+	}
+
+
+	public void setExtracurricularActionType(ArrayList<String> extracurricularActionType) {
+		ExtracurricularActionType = extracurricularActionType;
+	}
+
+
+	public ArrayList<String> getExtracurricularDescription() {
+		return ExtracurricularDescription;
+	}
+
+
+	public void setExtracurricularDescription(ArrayList<String> extracurricularDescription) {
+		ExtracurricularDescription = extracurricularDescription;
+	}
+
+
+	public ArrayList<String> getExtracurricularStarDate() {
+		return ExtracurricularStarDate;
+	}
+
+
+	public void setExtracurricularStarDate(ArrayList<String> extracurricularStarDate) {
+		ExtracurricularStarDate = extracurricularStarDate;
+	}
+
+
+	public ArrayList<String> getExtracurricularEndDate() {
+		return ExtracurricularEndDate;
+	}
+
+
+	public void setExtracurricularEndDate(ArrayList<String> extracurricularEndDate) {
+		ExtracurricularEndDate = extracurricularEndDate;
+	}
+
+
+	public Boolean getCitzenship() {
+		return Citzenship;
+	}
+
+
+	public void setCitzenship(Boolean citzenship) {
+		Citzenship = citzenship;
+	}
+
+
+	public Boolean getCoop() {
+		return Coop;
+	}
+
+
+	public void setCoop(Boolean coop) {
+		Coop = coop;
+	}
+
+
+	public Boolean getVolunteer() {
+		return volunteer;
+	}
+
+
+	public void setVolunteer(Boolean volunteer) {
+		this.volunteer = volunteer;
+	}
+
+
+	public ArrayList<String> getAwardActionType() {
+		return AwardActionType;
+	}
+
+
+	public void setAwardActionType(ArrayList<String> awardActionType) {
+		AwardActionType = awardActionType;
+	}
+
+
+	public ArrayList<String> getAwardDescription() {
+		return AwardDescription;
+	}
+
+
+	public void setAwardDescription(ArrayList<String> awardDescription) {
+		AwardDescription = awardDescription;
+	}
+
+
+	public ArrayList<String> getAwardDate() {
+		return AwardDate;
+	}
+
+
+	public void setAwardDate(ArrayList<String> awardDate) {
+		AwardDate = awardDate;
+	}
+
+
+	public Double getAverageMark() {
+		return AverageMark;
+	}
+
+
+	public void setAverageMark(Double averageMark) {
+		AverageMark = averageMark;
+	}
+
+
+	
 	
 	public String displayBasicUser() {
 		String str = String.format( "First name: %s\nLast name: %s\nUsername: %s\nPassword: %s", firstName, lastName, username, password);
