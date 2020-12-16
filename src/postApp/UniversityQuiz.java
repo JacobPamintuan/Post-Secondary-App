@@ -1,6 +1,5 @@
 package postApp;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -10,6 +9,8 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -83,6 +84,8 @@ public class UniversityQuiz implements ActionListener {
 	private JSlider sliderECs;
 
 	private JLabel logos = new JLabel(new ImageIcon("images/UniLogos.png"));
+	
+	private Map<String,Integer> importance;
 
 	/**
 	 * Create the application.
@@ -350,10 +353,10 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnGeneral.addActionListener(engAction);
 		rdbtnSpecialized.addActionListener(engAction);
 
-		EngineeringApp.user.setAverage(99.3);
+		Initialize.user.setAverage(99.3);
 
 		// Displays average based on calculation form profile setup
-		lblAverage = new JLabel("Your average: " + EngineeringApp.user.getAverage());
+		lblAverage = new JLabel("Your average: " + Initialize.user.getAverage());
 		lblAverage.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblAverage.setBounds(45, 561, 162, 25);
 		frame.getContentPane().add(lblAverage);
@@ -419,14 +422,29 @@ public class UniversityQuiz implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnDoSomething) {
 			if (isComplete()) {
-				System.out.printf("Tuition: %s, %d\n", aTuition.getText(), factor[0].getValue());
-				System.out.printf("Coop: %s, %d\n", aCoop.getText(), factor[1].getValue());
-				System.out.printf("GradRev: %s, %d\n", aGraduate.getText(), factor[2].getValue());
-				System.out.printf("Size: %s, %d\n", aClass.getText(), factor[3].getValue());
-				System.out.printf("Campus: %s, %d\n", aCampus.getText(), factor[4].getValue());
-				System.out.printf("Distance: %s, %d\n", aDistance.getText(), factor[5].getValue());
-				System.out.printf("Engineering: %s, %d\n", aEngType.getText(), factor[6].getValue());
-				System.out.printf("Extracurriculars: %d\n", sliderECs.getValue());
+				
+				importance = new HashMap<String,Integer>();
+
+				importance.put("Tuition", factor[0].getValue());
+				importance.put("Coop", factor[1].getValue());
+				importance.put("GradRev", factor[2].getValue());
+				importance.put("Size", factor[3].getValue());
+				importance.put("Campus", factor[4].getValue());
+				importance.put("Distance", factor[5].getValue());
+				importance.put("Engineering", factor[6].getValue());
+				
+				importance.put("Extracurriculars", sliderECs.getValue());
+				
+				Initialize.user.setImportance(importance);
+				
+//				System.out.printf("Tuition: %s, %d\n", aTuition.getText(), factor[0].getValue());
+//				System.out.printf("Coop: %s, %d\n", aCoop.getText(), factor[1].getValue());
+//				System.out.printf("GradRev: %s, %d\n", aGraduate.getText(), factor[2].getValue());
+//				System.out.printf("Size: %s, %d\n", aClass.getText(), factor[3].getValue());
+//				System.out.printf("Campus: %s, %d\n", aCampus.getText(), factor[4].getValue());
+//				System.out.printf("Distance: %s, %d\n", aDistance.getText(), factor[5].getValue());
+//				System.out.printf("Engineering: %s, %d\n", aEngType.getText(), factor[6].getValue());
+//				System.out.printf("Extracurriculars: %d\n", sliderECs.getValue());
 
 				System.out.println();
 				lblError.setVisible(false);

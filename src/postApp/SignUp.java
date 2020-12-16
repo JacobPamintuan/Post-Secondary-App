@@ -254,15 +254,22 @@ public class SignUp implements ActionListener {
 			login.frame.setVisible(true);
 			frame.setVisible(false);
 		} else if (e.getSource() == btnCreateAccount) {
-			if (isAllVaild()) { 
+			if (isAllVaild()) {
 				// Create new user object
 				// Person person = new Person();
-				EngineeringApp.user.setFirstName(firstName_txt.getText());
-				EngineeringApp.user.setLastName(lastName_txt.getText());
-				EngineeringApp.user.setUsername(username_txt.getText().toLowerCase());
-				EngineeringApp.user.setPassword(password_ptxt.getText());
+				Initialize.user.setFirstName(firstName_txt.getText());
+				Initialize.user.setLastName(lastName_txt.getText());
+				Initialize.user.setUsername(username_txt.getText().toLowerCase());
+				Initialize.user.setPassword(password_ptxt.getText());
+				
+				try {
+					UserKeys.addUser(username_txt.getText(), password_ptxt.getText());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
-				System.out.println(EngineeringApp.user.displayBasicUser());
+				System.out.println(Initialize.user.displayBasicUser());
 
 				btnHOME.setEnabled(true);
 				btnSetupProfile.setEnabled(true);
@@ -360,7 +367,13 @@ public class SignUp implements ActionListener {
 	// Displays message accordingly
 	// Returns boolean
 	private boolean validateUsername(String user) {
-		if (user.isEmpty()) {
+		if (UserKeys.checkUsername(user)) {
+			lblUsernameError.setText("Username already taken");
+			lblUsernameError.setForeground(Color.RED);
+			lblUsernameError.setVisible(true);
+
+			return false;
+		} else if (user.isEmpty()) {
 			lblUsernameError.setText("Please Enter a Username");
 			lblUsernameError.setForeground(Color.RED);
 			lblUsernameError.setVisible(true);
@@ -453,6 +466,8 @@ public class SignUp implements ActionListener {
 			lblSuccessOrError.setForeground(Color.GREEN);
 			lblSuccessOrError.setVisible(true);
 			disableAll();
+			
+			
 //			System.out.println("Account Created: ");
 //			System.out.println("First: " + firstName_txt.getText()); // user.toString();
 //			System.out.println("Last: " + lastName_txt.getText());

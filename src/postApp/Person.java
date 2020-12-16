@@ -35,7 +35,7 @@ public class Person{
 	String school;
 	
 	Map<String, Integer> marks;
-	
+
 	double average;
 
 	int startYear;
@@ -51,6 +51,9 @@ public class Person{
 	ArrayList<String> viewedPrograms;
 	ArrayList<String> usedSearchTerms;
 	ArrayList<String> starredPrograms;
+	
+	// UNi Quiz
+	Map<String, Integer> importance;
 	
 	public Person() {
 	
@@ -250,7 +253,13 @@ public class Person{
 	public void setStarredPrograms(ArrayList<String> starredPrograms) {
 		this.starredPrograms = starredPrograms;
 	}
-	
+	public Map<String, Integer> getImportance() {
+		return importance;
+	}
+	public void setImportance(Map<String, Integer> importance) {
+		this.importance = importance;
+	}
+
 	
 	public String displayBasicUser() {
 		String str = String.format( "First name: %s\nLast name: %s\nUsername: %s\nPassword: %s", firstName, lastName, username, password);
