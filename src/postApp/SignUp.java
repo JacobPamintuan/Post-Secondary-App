@@ -46,7 +46,7 @@ public class SignUp implements ActionListener {
 	private JLabel lblConfirmPasswordError;
 	private JLabel lblSuccessOrError;
 
-	private JToggleButton tglbtnShowhide;
+	private JToggleButton tglbtnShowHide;
 
 	private JButton btnLoginInstead;
 	private JButton btnCreateAccount;
@@ -68,13 +68,14 @@ public class SignUp implements ActionListener {
 		frame = new JFrame();
 		frame.setForeground(Color.RED);
 		frame.setBounds(0, 0, 700, 800);
+		frame.getContentPane().setBackground(Color.lightGray); // Sets background color
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		// JLabel Signup - Title
 //		lblSignUp = new JLabel("<html><div style='text-align: center;'><html>Sign-Up for The Engineering<br>Program Finder</div></html>");
-		lblSignUp = new JLabel(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Post-Secondary-App/Post-Secondary-App/images/SignUpTitle.png"));
-//		lblSignUp = new JLabel(new ImageIcon("images/SignUpTitle.png"));
+//		lblSignUp = new JLabel(new ImageIcon("/Users/jacobpamintuan/Desktop/ICS4U1/Post-Secondary-App/Post-Secondary-App/images/SignUpTitle.png"));
+		lblSignUp = new JLabel(new ImageIcon("images/SignUpTitle.png"));
 		lblSignUp.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSignUp.setBounds(0, 0, 700, 200);
 		frame.getContentPane().add(lblSignUp);
@@ -84,6 +85,7 @@ public class SignUp implements ActionListener {
 		lblFirstName.setBounds(184, 212, 88, 16);
 		frame.getContentPane().add(lblFirstName);
 
+		// JTextField First name - user enters first name
 		firstName_txt = new JTextField();
 		firstName_txt.setBounds(180, 230, 288, 26);
 		frame.getContentPane().add(firstName_txt);
@@ -94,6 +96,7 @@ public class SignUp implements ActionListener {
 		lblLastName.setBounds(184, 258, 88, 16);
 		frame.getContentPane().add(lblLastName);
 
+		// JTextField last name - user enters last name
 		lastName_txt = new JTextField();
 		lastName_txt.setColumns(10);
 		lastName_txt.setBounds(180, 276, 288, 26);
@@ -104,11 +107,12 @@ public class SignUp implements ActionListener {
 		lblUsername.setBounds(184, 314, 88, 16);
 		frame.getContentPane().add(lblUsername);
 
+		// JTextField username - user enters username
 		username_txt = new JTextField();
-		username_txt.addKeyListener(new KeyAdapter() {
+		username_txt.addKeyListener(new KeyAdapter() { // KeyLister that validates username as user types
 			@Override
 			public void keyReleased(KeyEvent e) {
-				validateUsername(username_txt.getText());
+				validateUsername(username_txt.getText()); // Calls validate method
 			}
 		});
 		username_txt.setColumns(10);
@@ -126,11 +130,12 @@ public class SignUp implements ActionListener {
 		lblPassword.setBounds(184, 392, 88, 16);
 		frame.getContentPane().add(lblPassword);
 
+		// JPasswordField password- user enters password
 		password_ptxt = new JPasswordField();
-		password_ptxt.addKeyListener(new KeyAdapter() {
+		password_ptxt.addKeyListener(new KeyAdapter() { // KeyLister that validates password as user types
 			@Override
 			public void keyReleased(KeyEvent e) {
-				validatePassword(password_ptxt.getText());
+				validatePassword(password_ptxt.getText()); // Calls validate method
 			}
 		});
 		password_ptxt.setColumns(10);
@@ -143,10 +148,10 @@ public class SignUp implements ActionListener {
 		frame.getContentPane().add(lblConfirmPassword);
 
 		confirmPassword_ptxt = new JPasswordField();
-		confirmPassword_ptxt.addKeyListener(new KeyAdapter() {
+		confirmPassword_ptxt.addKeyListener(new KeyAdapter() { // KeyLister that validates password confirmation as user types
 			@Override
 			public void keyReleased(KeyEvent e) {
-				isPasswordsSame(password_ptxt.getText(), confirmPassword_ptxt.getText());
+				isPasswordsSame(password_ptxt.getText(), confirmPassword_ptxt.getText()); // Calls validate method
 
 			}
 		});
@@ -160,6 +165,16 @@ public class SignUp implements ActionListener {
 		lblPasswordReq.setVerticalAlignment(SwingConstants.TOP);
 		lblPasswordReq.setBounds(184, 504, 165, 97);
 		frame.getContentPane().add(lblPasswordReq);
+		
+
+		// JToggleButton - Show/Hide
+		// Shows the password if button is selected, hides and replaces with '*'
+		// otherwise
+		tglbtnShowHide = new JToggleButton("Show/Hide");
+		tglbtnShowHide.addActionListener(this); // ActionListener
+		tglbtnShowHide.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		tglbtnShowHide.setBounds(359, 444, 96, 29);
+		frame.getContentPane().add(tglbtnShowHide);
 
 		// JButton Login Instead
 		// Exits Sign-up screen and returns to login screen
@@ -238,62 +253,52 @@ public class SignUp implements ActionListener {
 		lblSuccessOrError.setVisible(false);
 		frame.getContentPane().add(lblSuccessOrError);
 
-		// JToggleButton - Show/Hide
-		// Shows the password if button is selected, hides and replaces with '*'
-		// otherwise
-		tglbtnShowhide = new JToggleButton("Show/Hide");
-		tglbtnShowhide.addActionListener(this); // ActionListener
-		tglbtnShowhide.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		tglbtnShowhide.setBounds(359, 444, 96, 29);
-		frame.getContentPane().add(tglbtnShowhide);
-		
-		frame.getContentPane().setBackground(Color.lightGray);
-
 		frame.setVisible(true);
 	}
 
+	// ActionPerformed - when user clicks any button
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnLoginInstead) {
-			LoginGUI login = new LoginGUI();
-			login.frame.setVisible(true);
-			frame.setVisible(false);
-		} else if (e.getSource() == btnCreateAccount) {
-			if (isAllVaild()) {
-				// Create new user object
-				// Person person = new Person();
+		if (e.getSource() == btnLoginInstead) { // If user clicked btnLoginInstead
+			LoginGUI login = new LoginGUI(); // Create new login screen (redirect back to login)
+			login.frame.setVisible(true); // Set new login screen to visible
+			frame.setVisible(false); // Make current screen (signup) invisible
+		} else if (e.getSource() == btnCreateAccount) { // if user clicked btnCreateAccount
+			if (isAllVaild()) { // Calls validation method to check if all information entered is valid
+
+				// Disable old buttons and all input fields
+				disableAll();
+				
+				// Saves information to user
 				Initialize.user.setFirstName(firstName_txt.getText());
 				Initialize.user.setLastName(lastName_txt.getText());
 				Initialize.user.setUsername(username_txt.getText().toLowerCase());
 				Initialize.user.setPassword(password_ptxt.getText());
 				
+				// Saves username and password to textfile
 				try {
 					LoadUserKeys.addUser(username_txt.getText(), password_ptxt.getText());
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
-				System.out.println(Initialize.user.displayBasicUser());
+				System.out.println(Initialize.user.displayBasicUser()); // Delete
 
+				// Enables Home and Setup Profile buttons
 				btnHOME.setEnabled(true);
 				btnSetupProfile.setEnabled(true);
 			}
-		} else if (e.getSource() == btnHOME) {
-//			frame.setVisible(false);
-		} else if (e.getSource() == btnSetupProfile) {
-			new ProfileScreenGUIScreenOne("Profile Setup");
-			
-//			UniversityQuiz quiz = new UniversityQuiz();
-//			quiz.frame.setVisible(true);
-
-			System.out.println("\nGo to profile screen");
-			frame.setVisible(false);
-		} else if (e.getSource() == tglbtnShowhide) {
+		} else if (e.getSource() == btnHOME) { // If user clicked btnHOME
+			// Create new Home screen (redirect)
+//			frame.setVisible(false);  // Set signup to invisible
+		} else if (e.getSource() == btnSetupProfile) { // If user clicked btnSetupProfile
+			new ProfileScreenGUIScreenOne("Profile Setup"); // Create new screen (redirect)
+			frame.setVisible(false); //Set current screen to invisible
+		} else if (e.getSource() == tglbtnShowHide) { // If user clicked tglbtnShowHide
 			// If state is selected, characters can be seen
-			if (tglbtnShowhide.isSelected()) {
+			if (tglbtnShowHide.isSelected()) {
 				password_ptxt.setEchoChar((char) 0);
 				confirmPassword_ptxt.setEchoChar((char) 0);
-				// If state is non-selected, characters hidden and replaced with '*'
+			// If state is non-selected, characters hidden and replaced with '*'
 			} else {
 				password_ptxt.setEchoChar('*');
 				confirmPassword_ptxt.setEchoChar('*');
@@ -303,24 +308,31 @@ public class SignUp implements ActionListener {
 
 	}
 
+	// Validation method - checks if the password and confirm password are the same
+	// Returns false if password filed is empty or they do not match
 	private boolean isPasswordsSame(String pswd, String confirm) {
-		if (pswd.isEmpty()) {
+		// Checks if password text field is empty, displays appropriate error message, returns false
+		if (pswd.isEmpty()) { 
 			lblConfirmPasswordError.setText("Enter password above");
 			lblConfirmPasswordError.setForeground(Color.RED);
 			lblConfirmPasswordError.setVisible(true);
 			return false;
-
+		// Checks if the password entered is valid, displays appropriate error message, returns false
 		} else if (!validatePassword(pswd)) {
 			lblConfirmPasswordError.setText("<html>Please enter a valid <br>password above<html>");
 			lblConfirmPasswordError.setForeground(Color.RED);
 			lblConfirmPasswordError.setVisible(true);
 			return false;
+		// Checks if the two passwords are not the same, displays appropriate error message, returns false
 		} else if (!pswd.equals(confirm)) {
 			lblConfirmPasswordError.setText("Passwords Do not Match");
 			lblConfirmPasswordError.setForeground(Color.RED);
 			lblConfirmPasswordError.setVisible(true);
 			return false;
 		}
+		// If all the above is false, passwords match
+		// Displays success message
+		// Returns true
 		lblConfirmPasswordError.setText("Passwords Match");
 		lblConfirmPasswordError.setForeground(Color.GREEN);
 		lblConfirmPasswordError.setVisible(true);
@@ -328,36 +340,44 @@ public class SignUp implements ActionListener {
 	}
 
 	// Checks if any of the text fields are blank
-	// Displays an error message beside blank fields by enabling and/or setting
-	// JLabels
+	// Displays an error message beside blank fields by enabling and/or setting JLabels
 	// Returns boolean
 	private boolean isInfoEmpty(String first, String last, String user, String pswd, String pswdConfirm) {
+		// Default set to false
+		// If any of the following fields are empty, anyEmpty set to true
 		boolean anyEmpty = false;
+		
+		
 
-		if (first.isEmpty()) {
+		// Checks if first name empty
+		if (first.isEmpty()) { 
 			lblFirstNameError.setVisible(true);
 			anyEmpty = true;
 		} else
 			lblFirstNameError.setVisible(false);
 
+		// Checks if last name empty
 		if (last.isEmpty()) {
 			lblLastNameError.setVisible(true);
 			anyEmpty = true;
 		} else
 			lblLastNameError.setVisible(false);
 
+		// Checks if username empty
 		if (user.isEmpty()) {
 			lblUsernameError.setVisible(true);
 			anyEmpty = true;
 		} else
 			lblUsernameError.setVisible(false);
 
+		// Checks if password empty
 		if (pswd.isEmpty()) {
 			lblPasswordError.setVisible(true);
 			anyEmpty = true;
 		} else
 			lblPasswordError.setVisible(false);
 
+		// Checks if password confirmation is empty
 		if (pswdConfirm.isEmpty()) {
 			lblConfirmPasswordError.setText("Enter your Password again");
 			lblConfirmPasswordError.setVisible(true);
@@ -365,6 +385,7 @@ public class SignUp implements ActionListener {
 		} else
 			lblConfirmPasswordError.setVisible(false);
 
+		// Return boolean
 		return anyEmpty;
 	}
 
@@ -372,12 +393,15 @@ public class SignUp implements ActionListener {
 	// Displays message accordingly
 	// Returns boolean
 	private boolean validateUsername(String user) {
+		// Validates if usernamea already taken
 		if (LoadUserKeys.checkUsername(user)) {
 			lblUsernameError.setText("Username already taken");
 			lblUsernameError.setForeground(Color.RED);
 			lblUsernameError.setVisible(true);
 
 			return false;
+			
+		// Validates if textField is emtpy
 		} else if (user.isEmpty()) {
 			lblUsernameError.setText("Please Enter a Username");
 			lblUsernameError.setForeground(Color.RED);
@@ -385,12 +409,17 @@ public class SignUp implements ActionListener {
 
 			return false;
 
+		// Validates the length of the username
 		} else if (user.length() < 5) {
 			lblUsernameError.setText("Username too short");
 			lblUsernameError.setForeground(Color.RED);
 			lblUsernameError.setVisible(true);
 			return false;
 		}
+		
+		// If everything above false - username is valid
+		// Displays success message
+		// Returns true
 		lblUsernameError.setText("Username Valid");
 		lblUsernameError.setForeground(Color.GREEN);
 		lblUsernameError.setVisible(true);
@@ -402,33 +431,48 @@ public class SignUp implements ActionListener {
 	// Displays message accordingly
 	// Returns boolean
 	private boolean validatePassword(String pass) {
+		// Boolean value default set to true
+		// If any of the following fail, isValid set to false
 		boolean isValid = true;
-		String upperCaseChars = "(.*[A-Z].*)"; // Upper case
-		String lowerCaseChars = "(.*[a-z].*)"; // Lower case
+		String upperCaseChars = "(.*[A-Z].*)"; // Upper case letters
+		String lowerCaseChars = "(.*[a-z].*)"; // Lower case letters
 		String numbers = "(.*[0-9].*)"; // Numbers
 
+		// Checks if the password field is empty
 		if (pass.isEmpty()) {
 			isValid = false;
 			lblPasswordError.setText("Please Enter a Password");
+			
+		// Checks password length
 		} else if (pass.length() < 6) {
 			isValid = false;
+			
+		// Checks if password contains an upper case letter 
 		} else if (!pass.matches(upperCaseChars)) {
 			isValid = false;
+
+		// Checks if password contains a lower case letter
 		} else if (!pass.matches(lowerCaseChars)) {
 			isValid = false;
+		
+		// Checks if password contains a number
 		} else if (!pass.matches(numbers)) {
 			isValid = false;
+		// If all of the above fails, password is valid
+		// Display success method
 		} else {
 			lblPasswordError.setText("Password valid");
 			lblPasswordError.setForeground(Color.GREEN);
 		}
 
+		// If password is empty display error message
 		if (!isValid && !pass.isEmpty()) {
 			lblPasswordError.setText("Password Invalid");
 			lblPasswordError.setForeground(Color.RED);
 		}
 		lblPasswordError.setVisible(true);
 
+		// Set requirement colors to blue
 		if (!isValid)
 			lblPasswordReq.setForeground(Color.BLUE);
 
@@ -440,7 +484,11 @@ public class SignUp implements ActionListener {
 	// Disables all previous buttons and fields if successful
 	// Returns boolean
 	private boolean isAllVaild() {
+		// Boolean value default set to true
+		// If any of the below evaluate, success set to false
 		boolean success = true;
+		
+		// Checks if any info empty, displays appropriate error message
 		if ((isInfoEmpty(firstName_txt.getText(), lastName_txt.getText(), username_txt.getText(),
 				password_ptxt.getText(), confirmPassword_ptxt.getText()))) {
 			lblSuccessOrError.setText("Please fill out the form properly");
@@ -448,29 +496,34 @@ public class SignUp implements ActionListener {
 			lblSuccessOrError.setVisible(true);
 			success = false;
 		}
+		
+		// Checks if username valid, displays appropriate error message
 		if (!validateUsername(username_txt.getText())) {
 			lblSuccessOrError.setText("Please fill out the form properly");
 			lblSuccessOrError.setForeground(Color.RED);
 			lblSuccessOrError.setVisible(true);
 			success = false;
 		}
+		
+		// Checks if password valid, displays appropriate error message
 		if (!validatePassword(password_ptxt.getText())) {
 			lblSuccessOrError.setText("Please fill out the form properly");
 			lblSuccessOrError.setForeground(Color.RED);
 			lblSuccessOrError.setVisible(true);
 			success = false;
 		}
+		// Checks if passwords match, displays appropriate error message 
 		if (!isPasswordsSame(password_ptxt.getText(), confirmPassword_ptxt.getText())) {
 			lblSuccessOrError.setText("Please fill out the form properly");
 			lblSuccessOrError.setForeground(Color.RED);
 			lblSuccessOrError.setVisible(true);
 			success = false;
 		}
+		// If success is still true, display success method
 		if (success) {
 			lblSuccessOrError.setText("SUCCESS! ACCOUNT CREATED");
 			lblSuccessOrError.setForeground(new Color(153, 0, 255));
 			lblSuccessOrError.setVisible(true);
-			disableAll();
 			
 			
 //			System.out.println("Account Created: ");
@@ -481,10 +534,11 @@ public class SignUp implements ActionListener {
 
 		}
 
+		// Return boolean
 		return success;
 	}
 
-	// Disables specified buttons
+	// Disables specified fields
 	private void disableAll() {
 		firstName_txt.setEnabled(false);
 		lastName_txt.setEnabled(false);
@@ -493,6 +547,6 @@ public class SignUp implements ActionListener {
 		confirmPassword_ptxt.setEnabled(false);
 		btnCreateAccount.setEnabled(false);
 		btnLoginInstead.setEnabled(false);
-		tglbtnShowhide.setEnabled(false);
+		tglbtnShowHide.setEnabled(false);
 	}
 }

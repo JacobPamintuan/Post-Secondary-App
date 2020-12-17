@@ -27,9 +27,9 @@ public class Initialize {
 		user.setCity("Markham");
 		user.setProvince("ON");
 		user.setCountry("Canada");
-//		new LoginGUI();
-		UniversityQuiz quiz = new UniversityQuiz();
-		quiz.frame.setVisible(true);
+		new LoginGUI();
+//		UniversityQuiz quiz = new UniversityQuiz();
+//		quiz.frame.setVisible(true);
 	
 
 	}

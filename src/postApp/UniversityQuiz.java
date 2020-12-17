@@ -18,11 +18,12 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 
 public class UniversityQuiz implements ActionListener {
-
+	//Fields
+	
 	JFrame frame;
 
-	JLabel[] less;
-	JLabel[] more;
+	JLabel[] lblNotImportant;
+	JLabel[] lblVeryImportant;
 	JSlider[] factor;
 
 	private JLabel lblFactorImportance;
@@ -67,7 +68,7 @@ public class UniversityQuiz implements ActionListener {
 	private AbstractButton aDistance;
 	private AbstractButton aEngType;
 
-	JButton btnDoSomething;
+	JButton btnChooseUni;
 	JButton btnHOME;
 	private JLabel lblError;
 
@@ -85,9 +86,9 @@ public class UniversityQuiz implements ActionListener {
 
 	private JSlider sliderECs;
 
-	private JLabel logos = new JLabel(new ImageIcon(
-			"/Users/jacobpamintuan/Desktop/ICS4U1/Post-Secondary-App/Post-Secondary-App/images/UniLogos.png"));
-//	private JLabel logos = new JLabel(new ImageIcon("images/UniLogos.png"));
+//	private JLabel logos = new JLabel(new ImageIcon(
+//			"/Users/jacobpamintuan/Desktop/ICS4U1/Post-Secondary-App/Post-Secondary-App/images/UniLogos.png"));
+	private JLabel logos = new JLabel(new ImageIcon("images/UniLogos.png"));
 
 	private Map<String, Integer> importance;
 
@@ -102,56 +103,67 @@ public class UniversityQuiz implements ActionListener {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		// Initialize JFrame
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1290, 745);
-//		frame.setBounds(0, 0, 1920, 1080);
-//		frame.setResizable(false);
+		frame.getContentPane().setBackground(Color.lightGray); // sets background color
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
+		// Set bounds of logos image
 		logos.setBounds(790, 0, 500, 725);
 		frame.getContentPane().add(logos);
 
-		less = new JLabel[7];
-		more = new JLabel[7];
+		// Initializes JLabel arrays; lblNotImportant, lblVeryImportant
+		// Initializes JSlider array; factor
+		lblNotImportant = new JLabel[7];
+		lblVeryImportant = new JLabel[7];
 		factor = new JSlider[7];
 
 		// Creates sliders for all question
 		// Sets them to visible false until user selects a radiobutton
-		for (int i = 0; i < less.length; i++) {
-			less[i] = new JLabel("<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
-			more[i] = new JLabel("<html><div style='text-align: center;'><html>Very<br>important</div></html>");
+		for (int i = 0; i < lblNotImportant.length; i++) {
+			// Creates the Labels and sets text
+			// HTML used to format text in centre and adds breaklines
+			lblNotImportant[i] = new JLabel("<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
+			lblVeryImportant[i] = new JLabel("<html><div style='text-align: center;'><html>Very<br>important</div></html>");
+			
+			// Creates new sliders
 			factor[i] = new JSlider();
-
-			less[i].setBounds(395, (60 * i + 112), 60, 35);
-			more[i].setBounds(658, (60 * i + 112), 60, 35);
+			
+			// Sets bounds of JLabels
+			lblNotImportant[i].setBounds(395, (60 * i + 112), 60, 35);
+			lblVeryImportant[i].setBounds(658, (60 * i + 112), 60, 35);
+			
+			// Adds tick marks to factor slider
 			factor[i].setPaintTicks(true);
 			factor[i].setMajorTickSpacing(10);
 			factor[i].setMinorTickSpacing(5);
+			// Sets bounds of factor slider
 			factor[i].setBounds(456, (60 * i + 120), 190, 30);
-
+			// Sets slider default value to 0
 			factor[i].setValue(0);
 
-			frame.getContentPane().add(less[i]);
-			frame.getContentPane().add(more[i]);
+			// Adds labels and slider to frame
+			frame.getContentPane().add(lblNotImportant[i]);
+			frame.getContentPane().add(lblVeryImportant[i]);
 			frame.getContentPane().add(factor[i]);
 
+			// Sets labels and slider to invisible
 			sliderVisible(i, false);
 
 		}
 
-		// JLabel question
+		// JLabel factor question
 		lblFactorImportance = new JLabel("How important is this factor?");
 		lblFactorImportance.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		lblFactorImportance.setBounds(442, 89, 235, 16);
 		frame.getContentPane().add(lblFactorImportance);
 
-		// Title
+		// JLabel Title - Image Icon
 		lblUniQuiz = new JLabel(new ImageIcon(
-				"/Users/jacobpamintuan/Desktop/ICS4U1/Post-Secondary-App/Post-Secondary-App/images/UniQuizTitle.png"));// ("University
-																														// Quiz");
-//		lblUniQuiz = new JLabel(new ImageIcon("images/UniQuizTitle.png"));//("University Quiz");
-//		lblUniQuiz.setFont(new Font("Lucida Grande", Font.PLAIN, 41));
+				"/Users/jacobpamintuan/Desktop/ICS4U1/Post-Secondary-App/Post-Secondary-App/images/UniQuizTitle.png"));
+//		lblUniQuiz = new JLabel(new ImageIcon("images/UniQuizTitle.png"));
 		lblUniQuiz.setBounds(45, 25, 325, 50);
 		frame.getContentPane().add(lblUniQuiz);
 
@@ -361,7 +373,7 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnSpecialized.addActionListener(engAction);
 
 		// Displays average based on calculation form profile setup
-		lblAverage = new JLabel("Your average: " + Initialize.user.getAverageMark());
+		lblAverage = new JLabel("Your average: " + String.format("%.2f",Initialize.user.getAverageMark()));
 		lblAverage.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblAverage.setBounds(45, 561, 162, 25);
 		frame.getContentPane().add(lblAverage);
@@ -390,11 +402,11 @@ public class UniversityQuiz implements ActionListener {
 		lblVery.setBounds(289, 628, 60, 35);
 		frame.getContentPane().add(lblVery);
 
-		// Button that does something
-		btnDoSomething = new JButton("Do Something");
-		btnDoSomething.addActionListener(this);//
-		btnDoSomething.setBounds(427, 635, 117, 29);
-		frame.getContentPane().add(btnDoSomething);
+		// JButton - calculates which uni
+		btnChooseUni = new JButton("Get Result");
+		btnChooseUni.addActionListener(this);//
+		btnChooseUni.setBounds(427, 635, 117, 29);
+		frame.getContentPane().add(btnChooseUni);
 
 		// Error if user does not fill out quiz
 		lblError = new JLabel("*Please answer all questions.*");
@@ -403,8 +415,7 @@ public class UniversityQuiz implements ActionListener {
 		frame.getContentPane().add(lblError);
 		lblError.setVisible(false);
 
-		frame.getContentPane().setBackground(Color.lightGray);
-
+		// JButton - Redirects to home page
 		btnHOME = new JButton("HOME");
 		btnHOME.addActionListener(this);
 		btnHOME.setBounds(587, 635, 117, 29);
@@ -414,6 +425,8 @@ public class UniversityQuiz implements ActionListener {
 	}
 
 	// Checks if every question has been answered
+	// Returns true if complete
+	// Returns false if any incomplete
 	public boolean isComplete() {
 		if (tuition.getSelection() == null || coop.getSelection() == null || gradReview.getSelection() == null
 				|| classSize.getSelection() == null || campusType.getSelection() == null
@@ -424,12 +437,13 @@ public class UniversityQuiz implements ActionListener {
 
 	// Displays slider when respective radio button is selected
 	public void sliderVisible(int i, boolean vis) {
-		less[i].setVisible(vis);
-		more[i].setVisible(vis);
+		lblNotImportant[i].setVisible(vis);
+		lblVeryImportant[i].setVisible(vis);
 		factor[i].setVisible(vis);
 		factor[i].setEnabled(vis);
 	}
 
+	// Calcuates which university is best based on the inputs
 	public void chooseUni(int[] arr) {
 		int tuition = arr[0], coop = arr[1], gradRev = arr[2], size = arr[3], campus = arr[4], distance = arr[5],
 				eng = arr[6], ec = arr[7];
@@ -441,13 +455,15 @@ public class UniversityQuiz implements ActionListener {
 
 	}
 
+	// ActionPerformed
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// if HOME button clicked
 		if (e.getSource() == btnHOME) {
 //frame.setVisible(false);
 // new home
-		} else if (e.getSource() == btnDoSomething) {
-			if (isComplete()) {
+		} else if (e.getSource() == btnChooseUni) {
+			if (isComplete()) { // Validates if all information is filled out
 
 				int[] vals = new int[8];
 				for (int i = 0; i < 7; i++) {
@@ -455,8 +471,10 @@ public class UniversityQuiz implements ActionListener {
 				}
 				vals[7] = sliderECs.getValue();
 
+				// Initializes new HashMap
 				importance = new HashMap<String, Integer>();
 
+				// Put data in map importance
 				importance.put("Tuition", factor[0].getValue());
 				importance.put("Coop", factor[1].getValue());
 				importance.put("GradRev", factor[2].getValue());
@@ -468,6 +486,8 @@ public class UniversityQuiz implements ActionListener {
 				importance.put("Extracurriculars", sliderECs.getValue());
 
 				chooseUni(vals);
+				
+				// Saves data to user
 				Initialize.user.setImportance(importance);
 				System.out.println(importance.toString());
 
@@ -483,7 +503,7 @@ public class UniversityQuiz implements ActionListener {
 				// System.out.println();
 				btnHOME.setEnabled(true);
 				lblError.setVisible(false);
-			} else
+			} else // Error message if any information missing
 				lblError.setVisible(true);
 		}
 
