@@ -19,8 +19,8 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 
 public class UniversityQuiz implements ActionListener {
-	//Fields
-	
+	// Fields
+
 	JFrame frame;
 
 	JLabel[] lblNotImportant;
@@ -34,7 +34,6 @@ public class UniversityQuiz implements ActionListener {
 	private JLabel lblWhatClassSize;
 	private JLabel lblCampusType;
 	private JLabel lblDistance;
-	private JLabel lblEngType;
 	private JLabel lblAverage;
 	private JLabel lblExtracurriculars;
 	private JLabel lblNotAtAll;
@@ -44,14 +43,12 @@ public class UniversityQuiz implements ActionListener {
 	private JRadioButton rdbtnTuitonN;
 	private JRadioButton rdbtnCoopY;
 	private JRadioButton rdbtnCoopN;
-	private JRadioButton rdbtnClassSizeS;
-	private JRadioButton rdbtnClassSizeL;
-	private JRadioButton rdbtnCampusT;
-	private JRadioButton rdbtnCampusC;
-	private JRadioButton rdbtnClose;
-	private JRadioButton rdbtnFar;
-	private JRadioButton rdbtnGeneral;
-	private JRadioButton rdbtnSpecialized;
+	private JRadioButton rdbtnClassSizeY;
+	private JRadioButton rdbtnClassSizeN;
+	private JRadioButton rdbtnCampusY;
+	private JRadioButton rdbtnCampusN;
+	private JRadioButton rdbtnDistanceY;
+	private JRadioButton rdbtnDistanceN;
 
 	private ButtonGroup tuition;
 	private ButtonGroup coop;
@@ -59,7 +56,6 @@ public class UniversityQuiz implements ActionListener {
 	private ButtonGroup classSize;
 	private ButtonGroup campusType;
 	private ButtonGroup distance;
-	private ButtonGroup engType;
 
 	private AbstractButton aTuition;
 	private AbstractButton aCoop;
@@ -67,7 +63,6 @@ public class UniversityQuiz implements ActionListener {
 	private AbstractButton aClass;
 	private AbstractButton aCampus;
 	private AbstractButton aDistance;
-	private AbstractButton aEngType;
 
 	JButton btnChooseUni;
 	JButton btnHOME;
@@ -83,7 +78,6 @@ public class UniversityQuiz implements ActionListener {
 	private ActionListener classAction;
 	private ActionListener campusAction;
 	private ActionListener distanceAction;
-	private ActionListener engAction;
 
 	private JSlider sliderECs;
 
@@ -117,25 +111,27 @@ public class UniversityQuiz implements ActionListener {
 
 		// Initializes JLabel arrays; lblNotImportant, lblVeryImportant
 		// Initializes JSlider array; factor
-		lblNotImportant = new JLabel[7];
-		lblVeryImportant = new JLabel[7];
-		factor = new JSlider[7];
+		lblNotImportant = new JLabel[6];
+		lblVeryImportant = new JLabel[6];
+		factor = new JSlider[6];
 
 		// Creates sliders for all question
 		// Sets them to visible false until user selects a radiobutton
 		for (int i = 0; i < lblNotImportant.length; i++) {
 			// Creates the Labels and sets text
 			// HTML used to format text in centre and adds breaklines
-			lblNotImportant[i] = new JLabel("<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
-			lblVeryImportant[i] = new JLabel("<html><div style='text-align: center;'><html>Very<br>important</div></html>");
-			
+			lblNotImportant[i] = new JLabel(
+					"<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
+			lblVeryImportant[i] = new JLabel(
+					"<html><div style='text-align: center;'><html>Very<br>important</div></html>");
+
 			// Creates new sliders
 			factor[i] = new JSlider();
-			
+
 			// Sets bounds of JLabels
 			lblNotImportant[i].setBounds(395, (60 * i + 112), 60, 35);
 			lblVeryImportant[i].setBounds(658, (60 * i + 112), 60, 35);
-			
+
 			// Adds tick marks to factor slider
 			factor[i].setPaintTicks(true);
 			factor[i].setMajorTickSpacing(10);
@@ -191,8 +187,10 @@ public class UniversityQuiz implements ActionListener {
 				aTuition = (AbstractButton) actionEvent.getSource();
 				if (aTuition.equals(rdbtnTuitonY))
 					sliderVisible(0, true);
-				else
+				else {
 					sliderVisible(0, false);
+					factor[0].setValue(0);
+				}
 			}
 		};
 		// Add actionlistener to radiobuttons
@@ -222,8 +220,10 @@ public class UniversityQuiz implements ActionListener {
 				aCoop = (AbstractButton) actionEvent.getSource();
 				if (aCoop.equals(rdbtnCoopY))
 					sliderVisible(1, true);
-				else
+				else {
 					sliderVisible(1, false);
+					factor[1].setValue(0);
+				}
 			}
 		};
 		// Add actionlistener to radiobuttons
@@ -253,8 +253,10 @@ public class UniversityQuiz implements ActionListener {
 				aGraduate = (AbstractButton) actionEvent.getSource();
 				if (aGraduate.equals(rdbtnGraduateY))
 					sliderVisible(2, true);
-				else
+				else {
 					sliderVisible(2, false);
+					factor[2].setValue(0);
+				}
 			}
 		};
 		// Add actionlistener to radiobuttons
@@ -262,164 +264,153 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnGraduateN.addActionListener(gradAction);
 
 		// Class sizes
-		lblWhatClassSize = new JLabel("What class size do you prefer?*");
+		lblWhatClassSize = new JLabel("Does class size matter to you?");
 		lblWhatClassSize.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblWhatClassSize.setBounds(45, 280, 325, 25);
 		frame.getContentPane().add(lblWhatClassSize);
 		// Radio Buttons - Smaller/Larger
-		rdbtnClassSizeS = new JRadioButton("Smaller");
-		rdbtnClassSizeS.setBounds(45, 305, 88, 23);
-		frame.getContentPane().add(rdbtnClassSizeS);
+		rdbtnClassSizeY = new JRadioButton("Yes");
+		rdbtnClassSizeY.setBounds(45, 305, 88, 23);
+		frame.getContentPane().add(rdbtnClassSizeY);
 
-		rdbtnClassSizeL = new JRadioButton("Larger");
-		rdbtnClassSizeL.setBounds(145, 305, 99, 23);
-		frame.getContentPane().add(rdbtnClassSizeL);
+		rdbtnClassSizeN = new JRadioButton("No");
+		rdbtnClassSizeN.setBounds(145, 305, 99, 23);
+		frame.getContentPane().add(rdbtnClassSizeN);
 		// Group Radio Buttons
 		classSize = new ButtonGroup();
-		classSize.add(rdbtnClassSizeS);
-		classSize.add(rdbtnClassSizeL);
+		classSize.add(rdbtnClassSizeY);
+		classSize.add(rdbtnClassSizeN);
 		// ActionListener for radiobuttons
 		classAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aClass = (AbstractButton) actionEvent.getSource();
-				sliderVisible(3, true);
+				if (aClass.equals(rdbtnClassSizeY))
+					sliderVisible(3, true);
+				else {
+					sliderVisible(3, false);
+					factor[3].setValue(0);
+				}
 			}
 		};
 		// Add actionlistener to radiobuttons
-		rdbtnClassSizeS.addActionListener(classAction);
-		rdbtnClassSizeL.addActionListener(classAction);
+		rdbtnClassSizeY.addActionListener(classAction);
+		rdbtnClassSizeN.addActionListener(classAction);
 
 		// Campus Type
-		lblCampusType = new JLabel("Which type of campus do you prefer?*");
+		lblCampusType = new JLabel("Does campus size matter to you?");
 		lblCampusType.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblCampusType.setBounds(45, 340, 325, 25);
 		frame.getContentPane().add(lblCampusType);
 		// RadioButtons - Town/City
-		rdbtnCampusT = new JRadioButton("Town");
-		rdbtnCampusT.setBounds(45, 365, 88, 23);
-		frame.getContentPane().add(rdbtnCampusT);
+		rdbtnCampusY = new JRadioButton("Yes");
+		rdbtnCampusY.setBounds(45, 365, 88, 23);
+		frame.getContentPane().add(rdbtnCampusY);
 
-		rdbtnCampusC = new JRadioButton("City");
-		rdbtnCampusC.setBounds(145, 365, 99, 23);
-		frame.getContentPane().add(rdbtnCampusC);
+		rdbtnCampusN = new JRadioButton("No");
+		rdbtnCampusN.setBounds(145, 365, 99, 23);
+		frame.getContentPane().add(rdbtnCampusN);
 		// Group Radio Buttons
 		campusType = new ButtonGroup();
-		campusType.add(rdbtnCampusT);
-		campusType.add(rdbtnCampusC);
+		campusType.add(rdbtnCampusY);
+		campusType.add(rdbtnCampusN);
 		// ActionListener for radiobuttons
 		campusAction = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				aCampus = (AbstractButton) actionEvent.getSource();
-				sliderVisible(4, true);
+				if (aCampus.equals(rdbtnCampusY))
+					sliderVisible(4, true);
+				else {
+					sliderVisible(4, false);
+					factor[4].setValue(0);
+				}
 			}
 		};
 		// Add actionlistener to radiobuttons
-		rdbtnCampusT.addActionListener(campusAction);
-		rdbtnCampusC.addActionListener(campusAction);
+		rdbtnCampusY.addActionListener(campusAction);
+		rdbtnCampusN.addActionListener(campusAction);
 
 		// Distance
-		lblDistance = new JLabel("How close to home do you want to live?*");
+		lblDistance = new JLabel("Does distance matter to you?");
 		lblDistance.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblDistance.setBounds(45, 400, 325, 25);
 		frame.getContentPane().add(lblDistance);
 		// RadioButtons - Close/Far
-		rdbtnClose = new JRadioButton("Close");
-		rdbtnClose.setBounds(45, 425, 88, 23);
-		frame.getContentPane().add(rdbtnClose);
+		rdbtnDistanceY = new JRadioButton("Yes");
+		rdbtnDistanceY.setBounds(45, 425, 88, 23);
+		frame.getContentPane().add(rdbtnDistanceY);
 
-		rdbtnFar = new JRadioButton("Far");
-		rdbtnFar.setBounds(145, 425, 99, 23);
-		frame.getContentPane().add(rdbtnFar);
+		rdbtnDistanceN = new JRadioButton("No");
+		rdbtnDistanceN.setBounds(145, 425, 99, 23);
+		frame.getContentPane().add(rdbtnDistanceN);
 		// Group Radio Buttons
 		distance = new ButtonGroup();
-		distance.add(rdbtnClose);
-		distance.add(rdbtnFar);
+		distance.add(rdbtnDistanceY);
+		distance.add(rdbtnDistanceN);
 		// ActionListener for radiobuttons
 		distanceAction = new ActionListener() {
+
 			public void actionPerformed(ActionEvent actionEvent) {
 				aDistance = (AbstractButton) actionEvent.getSource();
-				sliderVisible(5, true);
+				if (aDistance.equals(rdbtnDistanceY))
+					sliderVisible(5, true);
+				else {
+					sliderVisible(5, false);
+					factor[5].setValue(0);
+				}
 			}
+
 		};
 		// Add actionlistener to radiobuttons
-		rdbtnClose.addActionListener(distanceAction);
-		rdbtnFar.addActionListener(distanceAction);
-
-		// First Year Eng Type
-		lblEngType = new JLabel("Which type of engineering first year?*");
-		lblEngType.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblEngType.setBounds(45, 460, 325, 25);
-		frame.getContentPane().add(lblEngType);
-		// RadioButtons - General/Specialized
-		rdbtnGeneral = new JRadioButton("General");
-		rdbtnGeneral.setBounds(45, 485, 88, 23);
-		frame.getContentPane().add(rdbtnGeneral);
-
-		rdbtnSpecialized = new JRadioButton("Specialized");
-		rdbtnSpecialized.setBounds(145, 485, 113, 23);
-		frame.getContentPane().add(rdbtnSpecialized);
-		// Group Radio Buttons
-		engType = new ButtonGroup();
-		engType.add(rdbtnGeneral);
-		engType.add(rdbtnSpecialized);
-		// ActionListener for radiobuttons
-		engAction = new ActionListener() {
-			public void actionPerformed(ActionEvent actionEvent) {
-				aEngType = (AbstractButton) actionEvent.getSource();
-				sliderVisible(6, true);
-			}
-		};
-		// Add actionlistener to radiobuttons
-		rdbtnGeneral.addActionListener(engAction);
-		rdbtnSpecialized.addActionListener(engAction);
+		rdbtnDistanceY.addActionListener(distanceAction);
+		rdbtnDistanceN.addActionListener(distanceAction);
 
 		// Displays average based on calculation form profile setup
-		lblAverage = new JLabel("Your average: " + String.format("%.2f",Initialize.user.getAverageMark()));
+		lblAverage = new JLabel("Your average: " + String.format("%.2f", Initialize.user.getAverageMark()));
 		lblAverage.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblAverage.setBounds(45, 561, 162, 25);
+		lblAverage.setBounds(44, 460, 162, 25);
 		frame.getContentPane().add(lblAverage);
 
 		// Involvement in EC's - slider
 		lblExtracurriculars = new JLabel("How involved are you with extracurriculars?*");
 		lblExtracurriculars.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblExtracurriculars.setBounds(45, 598, 325, 25);
+		lblExtracurriculars.setBounds(44, 497, 325, 25);
 		frame.getContentPane().add(lblExtracurriculars);
 
 		// EC slider
 		sliderECs = new JSlider();
 		sliderECs.setPaintTicks(true);
-		sliderECs.setBounds(87, 635, 190, 29);
+		sliderECs.setBounds(86, 534, 190, 29);
 		sliderECs.setMajorTickSpacing(10);
 		frame.getContentPane().add(sliderECs);
 
 		// Labels for EC slider
 		lblNotAtAll = new JLabel("<html><div style='text-align: center;'><html>Not at all<br>involved</div></html>");
 		lblNotAtAll.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNotAtAll.setBounds(25, 628, 60, 35);
+		lblNotAtAll.setBounds(24, 527, 60, 35);
 		frame.getContentPane().add(lblNotAtAll);
 
 		lblVery = new JLabel("<html><div style='text-align: center;'><html>Very<br>involved</div></html>");
 		lblVery.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVery.setBounds(289, 628, 60, 35);
+		lblVery.setBounds(288, 527, 60, 35);
 		frame.getContentPane().add(lblVery);
 
 		// JButton - calculates which uni
 		btnChooseUni = new JButton("Get Result");
 		btnChooseUni.addActionListener(this);//
-		btnChooseUni.setBounds(427, 635, 117, 29);
+		btnChooseUni.setBounds(426, 534, 117, 29);
 		frame.getContentPane().add(btnChooseUni);
 
 		// Error if user does not fill out quiz
 		lblError = new JLabel("*Please answer all questions.*");
 		lblError.setForeground(Color.RED);
-		lblError.setBounds(471, 676, 190, 16);
+		lblError.setBounds(472, 577, 190, 16);
 		frame.getContentPane().add(lblError);
 		lblError.setVisible(false);
 
 		// JButton - Redirects to home page
 		btnHOME = new JButton("HOME");
 		btnHOME.addActionListener(this);
-		btnHOME.setBounds(587, 635, 117, 29);
+		btnHOME.setBounds(586, 534, 117, 29);
 		frame.getContentPane().add(btnHOME);
 		btnHOME.setEnabled(false);
 
@@ -431,7 +422,7 @@ public class UniversityQuiz implements ActionListener {
 	public boolean isComplete() {
 		if (tuition.getSelection() == null || coop.getSelection() == null || gradReview.getSelection() == null
 				|| classSize.getSelection() == null || campusType.getSelection() == null
-				|| distance.getSelection() == null || engType.getSelection() == null)
+				|| distance.getSelection() == null)
 			return false;
 		return true;
 	}
@@ -446,21 +437,53 @@ public class UniversityQuiz implements ActionListener {
 
 	// Calcuates which university is best based on the inputs
 	public void chooseUni(int[] arr) {
-		int tuition = arr[0], coop = arr[1], gradRev = arr[2], size = arr[3], campus = arr[4], distance = arr[5],
-				eng = arr[6], ec = arr[7];
+		
+		
 
-		int waterloo, uoft, western, carleton, windsor, queens, ryerson, guelph, lakehead, york, ontarioTech, mcmaster,
-				laurier, uOttawa;
+		UniQuizInfo unis[] = new UniQuizInfo[14];
+		unis[0]= new UniQuizInfo("Waterloo",1,14,12,14,10,14,14,95); 
+		unis[1]= new UniQuizInfo("University of Toronto",2,14,12,14,10,14,14,93); 
+		unis[2]= new UniQuizInfo("Western University",3,14,12,14,10,14,14,88); 
+		unis[3]= new UniQuizInfo("Carleton",4,14,12,14,10,14,14,80); 
+		unis[4]= new UniQuizInfo("Windsor",5,14,12,14,10,14,14,75); 
+		unis[5]= new UniQuizInfo("Queens",6,14,12,14,10,14,14,89); 
+		unis[6]= new UniQuizInfo("Ryerson",7,14,12,14,10,14,14,85); 
+		unis[7]= new UniQuizInfo("Guelph",8,14,12,14,10,14,14,80);  
+		unis[8]= new UniQuizInfo("Lakehead",9,14,12,14,10,14,14,70); 
+		unis[9]= new UniQuizInfo("York",10,14,12,14,10,14,14,70); 
+		unis[10]= new UniQuizInfo("Ontario Tech",11,14,12,14,10,14,14,70); 
+		unis[11]= new UniQuizInfo("McMaster",12,14,12,14,10,14,14,80);
+		unis[12]= new UniQuizInfo("Laurier",13,14,12,14,10,14,14,85); 
+		unis[13]= new UniQuizInfo("UOttawa",14,14,12,14,10,14,14,90); 
+		
+		double mark = Initialize.user.getAverageMark();
+		
+		int grade = (int)mark;
+		
+		for(int i=0;i<14;i++) {
+			unis[i].getWeight(arr, grade);
+		}
+		
+		Arrays.sort(unis,new uniComparator());
+		
+		for(int i=0;i<14;i++) {
+			System.out.println(unis[i].getName()+" "+unis[i].weight);
+		}
+		
+//		int tuition = arr[0], coop = arr[1], gradRev = arr[2], size = arr[3], campus = arr[4], distance = arr[5],
+//				 ec = arr[6];
+//
+//		int waterloo, uoft, western, carleton, windsor, queens, ryerson, guelph, lakehead, york, ontarioTech, mcmaster,
+//				laurier, uOttawa;
 
 //		waterloo=tuition+coop+gradRev
 
-		
-		
-		//JOptionPane.showMessageDialog(null, "Waterloo");
-		JOptionPane.showMessageDialog(frame, "Waterloo","University Quiz",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("images/WelcomeLogin.png"));
+		// JOptionPane.showMessageDialog(null, "Waterloo");
+		JOptionPane.showMessageDialog(frame, unis[0].getName(), "University Quiz", JOptionPane.INFORMATION_MESSAGE,
+				new ImageIcon("images/WelcomeLogin.png"));
 //		JOptionPane.showMessageDialog(parentComponent, message, title, messageType, icon);
 //		JOptionPane.showMessageDialog(parentComponent, message, title, messageType);
-		
+
 	}
 
 	// ActionPerformed
@@ -473,11 +496,11 @@ public class UniversityQuiz implements ActionListener {
 		} else if (e.getSource() == btnChooseUni) {
 			if (isComplete()) { // Validates if all information is filled out
 
-				int[] vals = new int[8];
-				for (int i = 0; i < 7; i++) {
+				int[] vals = new int[7];
+				for (int i = 0; i < 6; i++) {
 					vals[i] = factor[i].getValue();
 				}
-				vals[7] = sliderECs.getValue();
+				vals[6] = sliderECs.getValue();
 
 				// Initializes new HashMap
 				importance = new HashMap<String, Integer>();
@@ -489,25 +512,23 @@ public class UniversityQuiz implements ActionListener {
 				importance.put("Size", factor[3].getValue());
 				importance.put("Campus", factor[4].getValue());
 				importance.put("Distance", factor[5].getValue());
-				importance.put("Engineering", factor[6].getValue());
 
 				importance.put("Extracurriculars", sliderECs.getValue());
 
-				chooseUni(vals);
 				
+
 				// Saves data to user
 				Initialize.user.setImportance(importance);
 				System.out.println(importance.toString());
 
-//				System.out.printf("Tuition: %s, %d\n", aTuition.getText(), factor[0].getValue());
-//				System.out.printf("Coop: %s, %d\n", aCoop.getText(), factor[1].getValue());
-//				System.out.printf("GradRev: %s, %d\n", aGraduate.getText(), factor[2].getValue());
-//				System.out.printf("Size: %s, %d\n", aClass.getText(), factor[3].getValue());
-//				System.out.printf("Campus: %s, %d\n", aCampus.getText(), factor[4].getValue());
-//				System.out.printf("Distance: %s, %d\n", aDistance.getText(), factor[5].getValue());
-//				System.out.printf("Engineering: %s, %d\n", aEngType.getText(), factor[6].getValue());
-//				System.out.printf("Extracurriculars: %d\n", sliderECs.getValue());
-
+				System.out.printf("Tuition: %s, %d\n", aTuition.getText(), factor[0].getValue());
+				System.out.printf("Coop: %s, %d\n", aCoop.getText(), factor[1].getValue());
+				System.out.printf("GradRev: %s, %d\n", aGraduate.getText(), factor[2].getValue());
+				System.out.printf("Size: %s, %d\n", aClass.getText(), factor[3].getValue());
+				System.out.printf("Campus: %s, %d\n", aCampus.getText(), factor[4].getValue());
+				System.out.printf("Distance: %s, %d\n", aDistance.getText(), factor[5].getValue());
+				System.out.printf("Extracurriculars: %d\n", sliderECs.getValue());
+				chooseUni(vals);
 				// System.out.println();
 				btnHOME.setEnabled(true);
 				lblError.setVisible(false);
@@ -515,5 +536,13 @@ public class UniversityQuiz implements ActionListener {
 				lblError.setVisible(true);
 		}
 
+	}
+	
+}
+
+
+class uniComparator implements Comparator<UniQuizInfo>{
+	public int compare(UniQuizInfo a, UniQuizInfo b) {
+		return Integer.compare(b.weight, a.weight);
 	}
 }

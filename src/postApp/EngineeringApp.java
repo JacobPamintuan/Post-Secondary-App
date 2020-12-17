@@ -16,8 +16,8 @@
 //					//Initialize.user.setAverageMark(99.0);
 //					UniversityQuiz quiz = new UniversityQuiz();
 //					quiz.frame.setVisible(true);
-////					LoginGUI window = new LoginGUI();
-////					window.frame.setVisible(true);
+//					LoginGUI window = new LoginGUI();
+//					window.frame.setVisible(true);
 //				} catch (Exception e) {
 //					e.printStackTrace();
 //				}
