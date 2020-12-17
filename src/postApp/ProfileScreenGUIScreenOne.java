@@ -176,7 +176,7 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 			CorrectMarkInBox1[x] = true;
 		}
 
-		//add the warning that will show up besides the table(used for users type directly in the box)
+		//add the warning that will show up besides the table(used when sers type directly in the box)
 		for (int x = 0; x < 6; x++) {
 
 			WrongCodeInBox[x] = new JLabel("Wrong Code");
@@ -192,10 +192,12 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 			TitlePanel.add(WrongCodeInBox[x]);
 			TitlePanel.add(WrongMarkInBox[x]);
 			WrongCodeInBox[x].setVisible(false);
-			WrongMarkInBox[x].setVisible(false);
+			WrongMarkInBox[x].setVisible(false);// set the JLabel to false
 
 		}
 
+		//initailize the textfield where store the Course Code user are put in
+		//the textfields are not enable to edit utill users have input some information in them 
 		for (int y = 0; y < 6; y++) {
 
 			Code[y] = new JTextField(25);
@@ -203,15 +205,24 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 			Code[y].setBounds(290, 215 + 25 * y, 150, 25);
 			Code[y].enable(false);
 
+			//after the users input the code into the TextFields
+			//they will be able to edit, so these codes are used for the error checking
 			Code[y].getDocument().addDocumentListener(new DocumentListener() {
 
+				//check ever time when user remove something in the text box
 				public void removeUpdate(DocumentEvent e) {
 
+					//check all the six boxes
 					for (int x = 0; x < 6; x++) {
-
+						
+						//asssume the code is right
 						CorrectCodeInBox1[x] = true;
 
+						//when the box is not empty
 						if (Code[x].getText().isEmpty() == false) {
+							
+							//if the code itself is wrong or it is the same as the other course in the box
+							//system show the error
 							if (CodeBoxChecking(Code[x].getText()) == false
 									|| RepeatCourseCode(Code[x].getText(), x) == false) {
 
@@ -219,11 +230,11 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 								CorrectCodeInBox1[x] = false;
 
 							} else {
-								WrongCodeInBox[x].setVisible(false);
+								WrongCodeInBox[x].setVisible(false);//otherwise, make the warning invisible
 
 							}
 						} else {
-							WrongCodeInBox[x].setVisible(false);
+							WrongCodeInBox[x].setVisible(false);//when the box is empty, don't show the warning
 
 						}
 
@@ -231,8 +242,10 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 
 				}
 
+				//check everytime when user input something in the text box(the checking process is the same as remove update)
 				public void insertUpdate(DocumentEvent e) {
 
+					//check all the textboxes
 					for (int x = 0; x < 6; x++) {
 
 						CorrectCodeInBox1[x] = true;
