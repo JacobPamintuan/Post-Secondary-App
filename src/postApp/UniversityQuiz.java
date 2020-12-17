@@ -437,52 +437,49 @@ public class UniversityQuiz implements ActionListener {
 
 	// Calcuates which university is best based on the inputs
 	public void chooseUni(int[] arr) {
+			
+		// Creates an array of UniversityWeights objects
+		UniversityWeights unis[] = new UniversityWeights[14];
 		
+		// Initializes each school with their respective weights per catagory
+		// Ranges from 1-14, 14 being the highest, 1 being the lowest
+		// Refer to UniversityWeights class
+		unis[0]= new UniversityWeights("Waterloo",1,14,12,14,10,14,14,95); 
+		unis[1]= new UniversityWeights("University of Toronto",2,14,12,14,10,14,14,93); // NEED TO PUT PROPER NUMBERS
+		unis[2]= new UniversityWeights("Western University",3,14,12,14,10,14,14,88); 
+		unis[3]= new UniversityWeights("Carleton",4,14,12,14,10,14,14,80); 
+		unis[4]= new UniversityWeights("Windsor",5,14,12,14,10,14,14,75); 
+		unis[5]= new UniversityWeights("Queens",6,14,12,14,10,14,14,89); 
+		unis[6]= new UniversityWeights("Ryerson",7,14,12,14,10,14,14,85); 
+		unis[7]= new UniversityWeights("Guelph",8,14,12,14,10,14,14,80);  
+		unis[8]= new UniversityWeights("Lakehead",9,14,12,14,10,14,14,70); 
+		unis[9]= new UniversityWeights("York University",10,14,12,14,10,14,14,70); 
+		unis[10]= new UniversityWeights("Ontario Tech University",11,14,12,14,10,14,14,70); 
+		unis[11]= new UniversityWeights("McMaster",12,14,12,14,10,14,14,80);
+		unis[12]= new UniversityWeights("Laurier",13,14,12,14,10,14,14,85); 
+		unis[13]= new UniversityWeights("UOttawa",14,14,12,14,10,14,14,90); 
 		
-
-		UniQuizInfo unis[] = new UniQuizInfo[14];
-		unis[0]= new UniQuizInfo("Waterloo",1,14,12,14,10,14,14,95); 
-		unis[1]= new UniQuizInfo("University of Toronto",2,14,12,14,10,14,14,93); 
-		unis[2]= new UniQuizInfo("Western University",3,14,12,14,10,14,14,88); 
-		unis[3]= new UniQuizInfo("Carleton",4,14,12,14,10,14,14,80); 
-		unis[4]= new UniQuizInfo("Windsor",5,14,12,14,10,14,14,75); 
-		unis[5]= new UniQuizInfo("Queens",6,14,12,14,10,14,14,89); 
-		unis[6]= new UniQuizInfo("Ryerson",7,14,12,14,10,14,14,85); 
-		unis[7]= new UniQuizInfo("Guelph",8,14,12,14,10,14,14,80);  
-		unis[8]= new UniQuizInfo("Lakehead",9,14,12,14,10,14,14,70); 
-		unis[9]= new UniQuizInfo("York",10,14,12,14,10,14,14,70); 
-		unis[10]= new UniQuizInfo("Ontario Tech",11,14,12,14,10,14,14,70); 
-		unis[11]= new UniQuizInfo("McMaster",12,14,12,14,10,14,14,80);
-		unis[12]= new UniQuizInfo("Laurier",13,14,12,14,10,14,14,85); 
-		unis[13]= new UniQuizInfo("UOttawa",14,14,12,14,10,14,14,90); 
-		
+		// Gets users mark
 		double mark = Initialize.user.getAverageMark();
-		
+		// Casts user mark to int
 		int grade = (int)mark;
 		
+		// Calculate how well of a fit each university is - refer to .calculateCompatability in UniversityWeights class 
 		for(int i=0;i<14;i++) {
-			unis[i].getWeight(arr, grade);
+			unis[i].calculateCompatability(arr, grade);
 		}
 		
+		// Sorts universities - most to least compatible
 		Arrays.sort(unis,new uniComparator());
 		
 		for(int i=0;i<14;i++) {
-			System.out.println(unis[i].getName()+" "+unis[i].weight);
+			System.out.println(unis[i].getName()+" "+unis[i].compatability);
 		}
-		
-//		int tuition = arr[0], coop = arr[1], gradRev = arr[2], size = arr[3], campus = arr[4], distance = arr[5],
-//				 ec = arr[6];
-//
-//		int waterloo, uoft, western, carleton, windsor, queens, ryerson, guelph, lakehead, york, ontarioTech, mcmaster,
-//				laurier, uOttawa;
 
-//		waterloo=tuition+coop+gradRev
+		// Pop-up message displaying most compatible university
+		JOptionPane.showMessageDialog(frame, unis[0].getName()+"!", "Your University:", JOptionPane.INFORMATION_MESSAGE,
+				new ImageIcon("images/" +unis[0].getName()+"Logo.png"));
 
-		// JOptionPane.showMessageDialog(null, "Waterloo");
-		JOptionPane.showMessageDialog(frame, unis[0].getName(), "University Quiz", JOptionPane.INFORMATION_MESSAGE,
-				new ImageIcon("images/WelcomeLogin.png"));
-//		JOptionPane.showMessageDialog(parentComponent, message, title, messageType, icon);
-//		JOptionPane.showMessageDialog(parentComponent, message, title, messageType);
 
 	}
 
@@ -490,12 +487,14 @@ public class UniversityQuiz implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// if HOME button clicked
-		if (e.getSource() == btnHOME) {
+		if (e.getSource() == btnHOME) { // BRYAN
 //frame.setVisible(false);
 // new home
 		} else if (e.getSource() == btnChooseUni) {
 			if (isComplete()) { // Validates if all information is filled out
 
+				lblError.setVisible(false);
+				
 				int[] vals = new int[7];
 				for (int i = 0; i < 6; i++) {
 					vals[i] = factor[i].getValue();
@@ -531,7 +530,7 @@ public class UniversityQuiz implements ActionListener {
 				chooseUni(vals);
 				// System.out.println();
 				btnHOME.setEnabled(true);
-				lblError.setVisible(false);
+				
 			} else // Error message if any information missing
 				lblError.setVisible(true);
 		}
@@ -541,8 +540,8 @@ public class UniversityQuiz implements ActionListener {
 }
 
 
-class uniComparator implements Comparator<UniQuizInfo>{
-	public int compare(UniQuizInfo a, UniQuizInfo b) {
-		return Integer.compare(b.weight, a.weight);
+class uniComparator implements Comparator<UniversityWeights>{
+	public int compare(UniversityWeights a, UniversityWeights b) {
+		return Integer.compare(b.compatability, a.compatability);
 	}
 }

@@ -1,6 +1,8 @@
 package postApp;
 
-public class UniQuizInfo {
+import javax.swing.ImageIcon;
+
+public class UniversityWeights {
 
 	private String name;
 	private int cost;
@@ -11,10 +13,11 @@ public class UniQuizInfo {
 	private int distance;
 	private int EC;
 	private int avg;
+	private ImageIcon image;
 
-	public int weight=0;
+	public int compatability=0;
 
-	public UniQuizInfo(String name, int cost, int coop, int gradRev, int size, int campus, int distance, int EC,int avg) {
+	public UniversityWeights(String name, int cost, int coop, int gradRev, int size, int campus, int distance, int EC,int avg) {
 		this.name=name;
 		this.cost = cost;
 		this.coop = coop;
@@ -26,8 +29,8 @@ public class UniQuizInfo {
 		this.avg=avg;
 	}
 
-	public void getWeight(int weights[], int average) {
-		 weight = weights[0] * cost + weights[1] * coop + weights[2] * gradRev + weights[3] * size + weights[4] * campus+ weights[5] * distance + weights[6] * EC + (average - avg) * 9;
+	public void calculateCompatability(int weights[], int average) {
+		 compatability = weights[0] * cost + weights[1] * coop + weights[2] * gradRev + weights[3] * size + weights[4] * campus+ weights[5] * distance + weights[6] * EC + (average - avg) * 9;
 		
 	}
 
@@ -83,12 +86,16 @@ public class UniQuizInfo {
 		return EC;
 	}
 
-	public void setEC(int eC) {
-		EC = eC;
+	public void setEC(int EC) {
+		this.EC = EC;
+	}
+	
+	public int getCompatability() {
+		return compatability;
 	}
 
-	public void setWeight(int weight) {
-		this.weight = weight;
+	public void setCompatability(int compatability) {
+		this.compatability = compatability;
 	}
 
 	public int getAvg() {
@@ -105,6 +112,14 @@ public class UniQuizInfo {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public ImageIcon getImage() {
+		return image;
+	}
+
+	public void setImage(ImageIcon image) {
+		this.image = image;
 	}
 
 }

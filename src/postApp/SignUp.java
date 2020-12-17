@@ -38,6 +38,10 @@ public class SignUp implements ActionListener {
 	private JLabel lblPassword;
 	private JLabel lblConfirmPassword;
 	private JLabel lblPasswordReq;
+	private JLabel lblStreetNum;
+	private JLabel lblStreetName;
+	private JLabel lblCity;
+	private JLabel lblProvince;
 
 	private JLabel lblFirstNameError;
 	private JLabel lblLastNameError;
@@ -52,6 +56,11 @@ public class SignUp implements ActionListener {
 	private JButton btnCreateAccount;
 	private JButton btnHOME;
 	private JButton btnSetupProfile;
+	private JTextField streetNum_txt;
+	private JTextField streetName_txt;
+	private JTextField city_txt;
+	private JTextField province_txt;
+	
 
 	/**
 	 * Create the application.
@@ -67,7 +76,8 @@ public class SignUp implements ActionListener {
 		// JFrame
 		frame = new JFrame();
 		frame.setForeground(Color.RED);
-		frame.setBounds(0, 0, 700, 800);
+		frame.setBounds(0, 0, 700, 1000);
+		frame.setResizable(false);
 		frame.getContentPane().setBackground(Color.lightGray); // Sets background color
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -163,7 +173,7 @@ public class SignUp implements ActionListener {
 		lblPasswordReq = new JLabel("<html>Use 6 or more characters." + "<br>Must include:" + "<br>1 UPPERCASE letter,"
 				+ "<br>1 lowercase letter, and" + "<br>1 number");
 		lblPasswordReq.setVerticalAlignment(SwingConstants.TOP);
-		lblPasswordReq.setBounds(184, 504, 165, 97);
+		lblPasswordReq.setBounds(184, 491, 165, 87);
 		frame.getContentPane().add(lblPasswordReq);
 		
 
@@ -181,7 +191,7 @@ public class SignUp implements ActionListener {
 		btnLoginInstead = new JButton("Login Instead");
 		btnLoginInstead.addActionListener(this); // ActionListener
 		btnLoginInstead.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		btnLoginInstead.setBounds(180, 613, 117, 29);
+		btnLoginInstead.setBounds(188, 855, 117, 29);
 		frame.getContentPane().add(btnLoginInstead);
 
 		// JButton Create Account
@@ -189,7 +199,7 @@ public class SignUp implements ActionListener {
 		btnCreateAccount = new JButton("Create Account");
 		btnCreateAccount.addActionListener(this); // ActionListener
 		btnCreateAccount.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		btnCreateAccount.setBounds(351, 612, 117, 29);
+		btnCreateAccount.setBounds(359, 854, 117, 29);
 		frame.getContentPane().add(btnCreateAccount);
 
 		// JButton HOME
@@ -197,7 +207,7 @@ public class SignUp implements ActionListener {
 		btnHOME = new JButton("HOME");
 		btnHOME.addActionListener(this); // ActionListener
 		btnHOME.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnHOME.setBounds(180, 682, 117, 29);
+		btnHOME.setBounds(188, 924, 117, 29);
 		btnHOME.setEnabled(false);
 		frame.getContentPane().add(btnHOME);
 
@@ -206,7 +216,7 @@ public class SignUp implements ActionListener {
 		btnSetupProfile = new JButton("Setup Profile");
 		btnSetupProfile.addActionListener(this); // ActionListener
 		btnSetupProfile.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnSetupProfile.setBounds(351, 681, 117, 29);
+		btnSetupProfile.setBounds(359, 923, 117, 29);
 		btnSetupProfile.setEnabled(false);
 		frame.getContentPane().add(btnSetupProfile);
 
@@ -249,9 +259,45 @@ public class SignUp implements ActionListener {
 		// Success or Error Label
 		lblSuccessOrError = new JLabel("SUCESS/ERROR");
 		lblSuccessOrError.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSuccessOrError.setBounds(200, 654, 255, 16);
+		lblSuccessOrError.setBounds(208, 896, 255, 16);
 		lblSuccessOrError.setVisible(false);
 		frame.getContentPane().add(lblSuccessOrError);
+		
+		lblStreetNum = new JLabel("Street Number: ");
+		lblStreetNum.setBounds(188, 626, 145, 16);
+		frame.getContentPane().add(lblStreetNum);
+		
+		streetNum_txt = new JTextField();
+		streetNum_txt.setColumns(10);
+		streetNum_txt.setBounds(184, 644, 101, 26);
+		frame.getContentPane().add(streetNum_txt);
+		
+		lblStreetName = new JLabel("Street Name:");
+		lblStreetName.setBounds(188, 672, 88, 16);
+		frame.getContentPane().add(lblStreetName);
+		
+		streetName_txt = new JTextField();
+		streetName_txt.setColumns(10);
+		streetName_txt.setBounds(184, 690, 288, 26);
+		frame.getContentPane().add(streetName_txt);
+		
+		lblCity = new JLabel("City: ");
+		lblCity.setBounds(188, 728, 88, 16);
+		frame.getContentPane().add(lblCity);
+		
+		city_txt = new JTextField();
+		city_txt.setColumns(10);
+		city_txt.setBounds(184, 746, 288, 26);
+		frame.getContentPane().add(city_txt);
+		
+		lblProvince = new JLabel("Province:");
+		lblProvince.setBounds(188, 784, 88, 16);
+		frame.getContentPane().add(lblProvince);
+		
+		province_txt = new JTextField();
+		province_txt.setColumns(10);
+		province_txt.setBounds(184, 802, 288, 26);
+		frame.getContentPane().add(province_txt);
 
 		frame.setVisible(true);
 	}
@@ -273,6 +319,11 @@ public class SignUp implements ActionListener {
 				Initialize.user.setLastName(lastName_txt.getText());
 				Initialize.user.setUsername(username_txt.getText().toLowerCase());
 				Initialize.user.setPassword(password_ptxt.getText());
+				Initialize.user.setStreetNumber(streetNum_txt.getText());
+				Initialize.user.setStreetName(streetName_txt.getText());
+				Initialize.user.setCity(city_txt.getText());
+				Initialize.user.setProvince(province_txt.getText());
+				Initialize.user.setCountry("Canada");
 				
 				// Saves username and password to textfile
 				try {

@@ -153,7 +153,7 @@ public class LoginGUI extends JFrame implements ActionListener, KeyListener{
 			frame.setVisible(false); // Hides current screen
 		}
 		// If btnLogIn is clicked, information is validated, then user is "redirected" to main screen
-		else if(event.getSource()==btnLogIn) {
+		else if(event.getSource()==btnLogIn) { // BRYAN PUT BOOLEAN HERE
 			try {
 				// Checks if username exists and if the password matches the username
 				if(LoadUserKeys.checkUsername(username.toLowerCase())&&LoadUserKeys.checkPassword(username.toLowerCase(), password)) {

@@ -23,13 +23,13 @@ public class Initialize {
 //		loadUniversityList();
 		new LoadUserKeys();
 //		user.setStreetNumber("622");
-		user.setStreetName("Fred McLaren blvd.");
-		user.setCity("Markham");
-		user.setProvince("ON");
-		user.setCountry("Canada");
+//		user.setStreetName("Fred McLaren blvd.");
+//		user.setCity("Markham");
+//		user.setProvince("ON");
+//		user.setCountry("Canada");
 		new LoginGUI();
-//		UniversityQuiz quiz = new UniversityQuiz();
-//		quiz.frame.setVisible(true);
+		UniversityQuiz quiz = new UniversityQuiz();
+		quiz.frame.setVisible(true);
 	
 
 	}
