@@ -205,7 +205,7 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 			Code[y].setBounds(290, 215 + 25 * y, 150, 25);
 			Code[y].enable(false);
 
-			//after the users input the code into the TextFields
+			//after the users input the course code into the TextFields
 			//they will be able to edit, so these codes are used for the error checking
 			Code[y].getDocument().addDocumentListener(new DocumentListener() {
 
@@ -250,6 +250,8 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 
 						CorrectCodeInBox1[x] = true;
 
+						//if the code itself is wrong or it is the same as the other course in the box
+							//system show the error
 						if (Code[x].getText().isEmpty() == false) {
 							if (CodeBoxChecking(Code[x].getText()) == false
 									|| RepeatCourseCode(Code[x].getText(), x) == false) {
@@ -276,6 +278,8 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 
 		}
 
+		//set the boxes to store users marks
+		//the textfields are not enable to edit utill users have input some information in them 
 		for (int y = 0; y < 6; y++) {
 
 			Mark[y] = new JTextField(25);
@@ -283,25 +287,29 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 			Mark[y].setBounds(440, 215 + 25 * y, 150, 25);
 			Mark[y].enable(false);
 
+			
+			//after the users input the mark into the TextFields
+			//they will be able to edit, so these codes are used for the error checking
 			Mark[y].getDocument().addDocumentListener(new DocumentListener() {
 
 				public void removeUpdate(DocumentEvent e) {
 
 					for (int x = 0; x < 6; x++) {
 
-						CorrectMarkInBox1[x] = true;
-
+						CorrectMarkInBox1[x] = true;//assume the amrk is correct
+						
+						//if the mark itself is wrong system show the error
 						if (Mark[x].getText().isEmpty() == false) {
 							if (MarkBoxChecking(Mark[x].getText()) == false) {
 								WrongMarkInBox[x].setVisible(true);
 								CorrectMarkInBox1[x] = false;
 
 							} else {
-								WrongMarkInBox[x].setVisible(false);
+								WrongMarkInBox[x].setVisible(false);//Otherwise set the warning invisible
 
 							}
 						} else {
-							WrongMarkInBox[x].setVisible(false);
+							WrongMarkInBox[x].setVisible(false);// if the text field is empty, set the warning invisible too
 
 						}
 
@@ -309,23 +317,26 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 
 				}
 
+				//check evertime user inout something into the Text Fields
 				public void insertUpdate(DocumentEvent e) {
 
+					//check all the TextFields
 					for (int x = 0; x < 6; x++) {
 
-						CorrectMarkInBox1[x] = true;
+						CorrectMarkInBox1[x] = true;//assue all the TextFields are correct
 
+						//if the mark is worn ,show the warning
 						if (Mark[x].getText().isEmpty() == false) {
 							if (MarkBoxChecking(Mark[x].getText()) == false) {
 								WrongMarkInBox[x].setVisible(true);
 								CorrectMarkInBox1[x] = false;
 
 							} else {
-								WrongMarkInBox[x].setVisible(false);
+								WrongMarkInBox[x].setVisible(false);//otherwise make the warning invisible
 
 							}
 						} else {
-							WrongMarkInBox[x].setVisible(false);
+							WrongMarkInBox[x].setVisible(false);// if the text field is empty, set the warning invisible too
 
 						}
 
@@ -340,6 +351,7 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 
 		}
 
+		//add all the components to the Panel
 		TitlePanel.add(Title);
 		TitlePanel.add(CourseMark);
 		TitlePanel.add(QuestionTitle);
@@ -355,18 +367,21 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 		TitlePanel.add(closeInformation);
 		TitlePanel.add(WrongWarning);
 
+		//make both the warnings and information invisible
 		CrouseInformation.setVisible(false);
-
-		setContentPane(TitlePanel);
-		TitlePanel.setOpaque(false);
-
 		WrongCode.setVisible(false);
 		WrongMark.setVisible(false);
 		WrongWarning.setVisible(false);
+		
+		//
+		setContentPane(TitlePanel);
+		TitlePanel.setOpaque(false);
 
+		//add the Text field that show users the information they input
 		for (int y = 0; y < 6; y++)
 			TitlePanel.add(Code[y]);
 
+		//add the Text field where users can input their mark
 		TitlePanel.add(MarkEnter);
 
 		for (int x = 0; x < 6; x++)
