@@ -20,6 +20,7 @@ import javax.swing.text.Document;
 
 public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListener {
 
+	//initialize the variables
 	public static JPanel TitlePanel = new JPanel();
 	public static JLabel Title = new JLabel("Personal codeInformation");
 	public static JLabel WrongCode = new JLabel("Wrong course code");
@@ -53,34 +54,40 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 	public static String MarkCollect[] = new String[6];
 	public static String CodeCollect[] = new String[6];
 	public JLabel background = new JLabel();
-
+	
+	//set the first screen
 	public ProfileScreenGUIScreenOne(String s) {
 
 		setBounds(360, 60, 832, 500);
 		setTitle("Profile Screen");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//close all the window when this window is closed
 
 		TitlePanel.setLayout(null);
 		TitlePanel.setBounds(50, 50, 200, 30);
 		TitlePanel.setBackground(Color.white);
 		TitlePanel.setVisible(true);
-		add(TitlePanel);
+		add(TitlePanel);// add the JPanel to tthe JFrame
 
+		//Add the tiltle
 		Title.setFont(new Font("Serif", Font.BOLD, 20));
 		Title.setBounds(20, 10, 300, 30);
 
+		//Add the wrong code warning
 		WrongCode.setFont(new Font("Serif", Font.PLAIN, 12));
 		WrongCode.setForeground(Color.RED);
 		WrongCode.setBounds(225, 160, 300, 30);
 
+		//Add the information of course
 		CrouseInformation.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
 		CrouseInformation.setForeground(new Color(0, 0, 0));
 		CrouseInformation.setBounds(10, 70, 300, 300);
 
+		//Add the wrong warning
 		WrongWarning.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
 		WrongWarning.setForeground(new Color(205, 92, 92));
 		WrongWarning.setBounds(10, 200, 300, 300);
 
+		//add the button to close the information 
 		closeInformation.setFont(new Font("Nunito", Font.BOLD, 20));
 		closeInformation.setForeground(new Color(255, 127, 80));
 		closeInformation.setBounds(10, 250, 70, 40);
@@ -90,25 +97,29 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 		closeInformation.setBorder(null);
 		closeInformation.setFocusPainted(false);
 		closeInformation.setContentAreaFilled(false);
-		closeInformation.setVisible(false);
+		closeInformation.setVisible(false);//the codes above are used to set the button invisible(just show the word instead)
 
+		//Add the wrong mark warning
 		WrongMark.setFont(new Font("Serif", Font.PLAIN, 12));
 		WrongMark.setForeground(Color.RED);
 		WrongMark.setBounds(525, 160, 300, 30);
 
+		//Add the qeustion
 		QuestionTitle.setFont(new Font("Serif", Font.BOLD, 20));
 		QuestionTitle.setBounds(40, 60, 200, 30);
 		
-		
+		//Add the course code title
 		CourseCode.setFont(new Font("Oswald", Font.BOLD, 20));
 		CourseCode.setBounds(215, 120, 200, 30);
 		
+		//Add the course mark title
 		CourseMark.setFont(new Font("Oswald", Font.BOLD, 20));
 		CourseMark.setBounds(520, 120, 200, 30);
 		
 		CodeEnter.setBounds(225, 150, 110, 20);
 		MarkEnter.setBounds(525, 150, 110, 20);
 		
+		//Add the save button and set the button invisible(just show the word)
 		save.setBounds(395, 170, 80, 40);
 		save.setFont(new Font("Impact", Font.PLAIN, 40));
 		save.setForeground(new Color(255, 127, 80));
@@ -121,6 +132,7 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 		save.setContentAreaFilled(false);
 		save.setVisible(true);
 
+		//Add the delete button and set the button invisible(just show the word)
 		delete.setBounds(200, 360, 130, 70);
 		delete.setFont(new Font("Impact", Font.PLAIN, 40));
 		delete.setForeground(new Color(255, 127, 80));
@@ -133,6 +145,7 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 		delete.setContentAreaFilled(false);
 		delete.setVisible(true);
 
+		////Add the next button and set the button invisible(just show the word)
 		next.setBounds(625, 370, 130, 60);
 		next.setFont(new Font("Impact", Font.PLAIN, 60));
 		next.setForeground(new Color(255, 127, 80));
@@ -145,6 +158,7 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 		next.setContentAreaFilled(false);
 		next.setVisible(true);
 
+		//Add the instructioin button and set the button invisible(just show the word)
 		codeInformation.setBounds(346, 127, 25, 25);
 		codeInformation.setIcon(new ImageIcon("images/Info.png"));
 		codeInformation.setBorderPainted(false);
@@ -156,11 +170,13 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 		codeInformation.setContentAreaFilled(false);
 		codeInformation.setVisible(true);
 
+		//assume all the codes and marks in the box are right
 		for (int x = 0; x < 6; x++) {
 			CorrectCodeInBox1[x] = true;
 			CorrectMarkInBox1[x] = true;
 		}
 
+		//add the warning that will show up besides the table(used when sers type directly in the box)
 		for (int x = 0; x < 6; x++) {
 
 			WrongCodeInBox[x] = new JLabel("Wrong Code");
@@ -176,10 +192,12 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 			TitlePanel.add(WrongCodeInBox[x]);
 			TitlePanel.add(WrongMarkInBox[x]);
 			WrongCodeInBox[x].setVisible(false);
-			WrongMarkInBox[x].setVisible(false);
+			WrongMarkInBox[x].setVisible(false);// set the JLabel to false
 
 		}
 
+		//initailize the textfield where store the Course Code user are put in
+		//the textfields are not enable to edit utill users have input some information in them 
 		for (int y = 0; y < 6; y++) {
 
 			Code[y] = new JTextField(25);
@@ -187,15 +205,24 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 			Code[y].setBounds(290, 215 + 25 * y, 150, 25);
 			Code[y].enable(false);
 
+			//after the users input the code into the TextFields
+			//they will be able to edit, so these codes are used for the error checking
 			Code[y].getDocument().addDocumentListener(new DocumentListener() {
 
+				//check ever time when user remove something in the text box
 				public void removeUpdate(DocumentEvent e) {
 
+					//check all the six boxes
 					for (int x = 0; x < 6; x++) {
-
+						
+						//asssume the code is right
 						CorrectCodeInBox1[x] = true;
 
+						//when the box is not empty
 						if (Code[x].getText().isEmpty() == false) {
+							
+							//if the code itself is wrong or it is the same as the other course in the box
+							//system show the error
 							if (CodeBoxChecking(Code[x].getText()) == false
 									|| RepeatCourseCode(Code[x].getText(), x) == false) {
 
@@ -203,11 +230,11 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 								CorrectCodeInBox1[x] = false;
 
 							} else {
-								WrongCodeInBox[x].setVisible(false);
+								WrongCodeInBox[x].setVisible(false);//otherwise, make the warning invisible
 
 							}
 						} else {
-							WrongCodeInBox[x].setVisible(false);
+							WrongCodeInBox[x].setVisible(false);//when the box is empty, don't show the warning
 
 						}
 
@@ -215,8 +242,10 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 
 				}
 
+				//check everytime when user input something in the text box(the checking process is the same as remove update)
 				public void insertUpdate(DocumentEvent e) {
 
+					//check all the textboxes
 					for (int x = 0; x < 6; x++) {
 
 						CorrectCodeInBox1[x] = true;
