@@ -13,12 +13,13 @@ public class UniversityWeights {
 	private int distance;
 	private int EC;
 	private int avg;
-	private ImageIcon image;
+	private String link;
 
-	public int compatability=0;
+	public int compatability = 0;
 
-	public UniversityWeights(String name, int cost, int coop, int gradRev, int size, int campus, int distance, int EC,int avg) {
-		this.name=name;
+	public UniversityWeights(String name, int cost, int coop, int gradRev, int size, int campus, int distance, int EC,
+			int avg, String link) {
+		this.name = name;
 		this.cost = cost;
 		this.coop = coop;
 		this.gradRev = gradRev;
@@ -26,12 +27,14 @@ public class UniversityWeights {
 		this.campus = campus;
 		this.distance = distance;
 		this.EC = EC;
-		this.avg=avg;
+		this.avg = avg;
+		this.setLink(link);
 	}
 
 	public void calculateCompatability(int weights[], int average) {
-		 compatability = weights[0] * cost + weights[1] * coop + weights[2] * gradRev + weights[3] * size + weights[4] * campus+ weights[5] * distance + weights[6] * EC + (average - avg) * 9;
-		
+		compatability = weights[0] * cost + weights[1] * coop + weights[2] * gradRev + weights[3] * size
+				+ weights[4] * campus + weights[5] * distance + weights[6] * EC + (average - avg) * 9;
+
 	}
 
 	public int getCost() {
@@ -89,7 +92,7 @@ public class UniversityWeights {
 	public void setEC(int EC) {
 		this.EC = EC;
 	}
-	
+
 	public int getCompatability() {
 		return compatability;
 	}
@@ -114,12 +117,12 @@ public class UniversityWeights {
 		this.name = name;
 	}
 
-	public ImageIcon getImage() {
-		return image;
+	public String getLink() {
+		return link;
 	}
 
-	public void setImage(ImageIcon image) {
-		this.image = image;
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 }

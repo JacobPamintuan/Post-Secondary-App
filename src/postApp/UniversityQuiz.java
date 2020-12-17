@@ -1,6 +1,7 @@
 package postApp;
 
 import java.util.*;
+import java.awt.desktop.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -10,6 +11,13 @@ import javax.swing.JSlider;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.SwingConstants;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,14 +25,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.Desktop;
 
 public class UniversityQuiz implements ActionListener {
 	// Fields
 
 	JFrame frame;
 
-	JLabel[] lblNotImportant;
-	JLabel[] lblVeryImportant;
+	JLabel[] lblLess;
+	JLabel[] lblMore;
 	JSlider[] factor;
 
 	private JLabel lblFactorImportance;
@@ -109,28 +118,41 @@ public class UniversityQuiz implements ActionListener {
 		logos.setBounds(790, 0, 500, 725);
 		frame.getContentPane().add(logos);
 
-		// Initializes JLabel arrays; lblNotImportant, lblVeryImportant
 		// Initializes JSlider array; factor
-		lblNotImportant = new JLabel[6];
-		lblVeryImportant = new JLabel[6];
+		lblLess = new JLabel[6];
+		lblMore = new JLabel[6];
 		factor = new JSlider[6];
+
+		// Initializes JLabel arrays; lblLess, lblMore
+		// Creates Labels and sets text
+		// HTML used to format text in centre and adds breaklines
+		// Creates Labels for first three questions - tuition,coop,gradreviews
+		for (int i = 0; i < 3; i++) {
+			lblLess[i] = new JLabel(
+					"<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
+			lblMore[i] = new JLabel("<html><div style='text-align: center;'><html>Very<br>important</div></html>");
+		}
+		// Labels for class size
+		lblLess[3] = new JLabel("<html><div style='text-align: center;'><html>Smaller class</div></html>");
+		lblMore[3] = new JLabel("<html><div style='text-align: center;'><html>Larger class<br>size</div></html>");
+		// Labels for campus size
+		lblLess[4] = new JLabel("<html><div style='text-align: center;'><html>Smaller campus</div></html>");
+		lblMore[4] = new JLabel("<html><div style='text-align: center;'><html>Larger campus</div></html>");
+
+		// Labels for distance
+		lblLess[5] = new JLabel("<html><div style='text-align: center;'><html>Close</div></html>");
+		lblMore[5] = new JLabel("<html><div style='text-align: center;'><html>Far</div></html>");
 
 		// Creates sliders for all question
 		// Sets them to visible false until user selects a radiobutton
-		for (int i = 0; i < lblNotImportant.length; i++) {
-			// Creates the Labels and sets text
-			// HTML used to format text in centre and adds breaklines
-			lblNotImportant[i] = new JLabel(
-					"<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
-			lblVeryImportant[i] = new JLabel(
-					"<html><div style='text-align: center;'><html>Very<br>important</div></html>");
+		for (int i = 0; i < lblLess.length; i++) {
 
 			// Creates new sliders
 			factor[i] = new JSlider();
 
 			// Sets bounds of JLabels
-			lblNotImportant[i].setBounds(395, (60 * i + 112), 60, 35);
-			lblVeryImportant[i].setBounds(658, (60 * i + 112), 60, 35);
+			lblLess[i].setBounds(395, (60 * i + 112), 60, 35);
+			lblMore[i].setBounds(658, (60 * i + 112), 60, 35);
 
 			// Adds tick marks to factor slider
 			factor[i].setPaintTicks(true);
@@ -142,8 +164,8 @@ public class UniversityQuiz implements ActionListener {
 			factor[i].setValue(0);
 
 			// Adds labels and slider to frame
-			frame.getContentPane().add(lblNotImportant[i]);
-			frame.getContentPane().add(lblVeryImportant[i]);
+			frame.getContentPane().add(lblLess[i]);
+			frame.getContentPane().add(lblMore[i]);
 			frame.getContentPane().add(factor[i]);
 
 			// Sets labels and slider to invisible
@@ -429,57 +451,81 @@ public class UniversityQuiz implements ActionListener {
 
 	// Displays slider when respective radio button is selected
 	public void sliderVisible(int i, boolean vis) {
-		lblNotImportant[i].setVisible(vis);
-		lblVeryImportant[i].setVisible(vis);
+		lblLess[i].setVisible(vis);
+		lblMore[i].setVisible(vis);
 		factor[i].setVisible(vis);
 		factor[i].setEnabled(vis);
 	}
 
 	// Calcuates which university is best based on the inputs
 	public void chooseUni(int[] arr) {
-			
+
 		// Creates an array of UniversityWeights objects
 		UniversityWeights unis[] = new UniversityWeights[14];
-		
-		// Initializes each school with their respective weights per catagory
-		// Ranges from 1-14, 14 being the highest, 1 being the lowest
+
+		// Initializes each school with their respective weights per category
+		// Ranges from 1-14, 14 being the highest, 1 being the lowest (Admission average is the only different)
 		// Refer to UniversityWeights class
-		unis[0]= new UniversityWeights("Waterloo",1,14,12,14,10,14,14,95); 
-		unis[1]= new UniversityWeights("University of Toronto",2,14,12,14,10,14,14,93); // NEED TO PUT PROPER NUMBERS
-		unis[2]= new UniversityWeights("Western University",3,14,12,14,10,14,14,88); 
-		unis[3]= new UniversityWeights("Carleton",4,14,12,14,10,14,14,80); 
-		unis[4]= new UniversityWeights("Windsor",5,14,12,14,10,14,14,75); 
-		unis[5]= new UniversityWeights("Queens",6,14,12,14,10,14,14,89); 
-		unis[6]= new UniversityWeights("Ryerson",7,14,12,14,10,14,14,85); 
-		unis[7]= new UniversityWeights("Guelph",8,14,12,14,10,14,14,80);  
-		unis[8]= new UniversityWeights("Lakehead",9,14,12,14,10,14,14,70); 
-		unis[9]= new UniversityWeights("York University",10,14,12,14,10,14,14,70); 
-		unis[10]= new UniversityWeights("Ontario Tech University",11,14,12,14,10,14,14,70); 
-		unis[11]= new UniversityWeights("McMaster",12,14,12,14,10,14,14,80);
-		unis[12]= new UniversityWeights("Laurier",13,14,12,14,10,14,14,85); 
-		unis[13]= new UniversityWeights("UOttawa",14,14,12,14,10,14,14,90); 
-		
+		// Name, tuition,coop,graduate reviews, class size, distance, extracurriculars, admission average
+		unis[0] = new UniversityWeights("Waterloo", 1, 14, 9, 14, 10, 14, 14, 93, "https://uwaterloo.ca/engineering/");
+		unis[1] = new UniversityWeights("University of Toronto", 2, 13, 6, 14, 10, 14, 14, 93,
+				"https://www.engineering.utoronto.ca"); // NEED TO PUT PROPER NUMBERS
+		unis[2] = new UniversityWeights("Western University", 3, 6, 10, 14, 10, 14, 14, 90, "https://www.eng.uwo.ca");
+		unis[3] = new UniversityWeights("Carleton", 4, 8, 8, 14, 10, 14, 14, 84,
+				"https://carleton.ca/engineering-design/");
+		unis[4] = new UniversityWeights("Windsor", 5, 4, 4, 14, 10, 14, 14, 85, "https://www.uwindsor.ca/engineering/");
+		unis[5] = new UniversityWeights("Queens", 6, 1, 14, 14, 10, 14, 14, 91, "https://engineering.queensu.ca/");
+		unis[6] = new UniversityWeights("Ryerson", 7, 10, 5, 14, 10, 14, 14, 86,
+				"https://www.ryerson.ca/engineering-architectural-science/");
+		unis[7] = new UniversityWeights("Guelph", 8, 9, 11, 14, 10, 14, 14, 87, "https://www.uoguelph.ca/engineering/");
+		unis[8] = new UniversityWeights("Lakehead", 9, 3, 3, 14, 10, 14, 14, 82,
+				"https://www.lakeheadu.ca/programs/faculties/engineering/");
+		unis[9] = new UniversityWeights("York University", 10, 5, 1, 14, 10, 14, 14, 84, "https://lassonde.yorku.ca");
+		unis[10] = new UniversityWeights("Ontario Tech University", 11, 2, 7, 14, 10, 14, 14, 81,
+				"https://engineering.ontariotechu.ca");
+		unis[11] = new UniversityWeights("McMaster", 12, 12, 12, 14, 10, 14, 14, 91, "https://www.eng.mcmaster.ca");
+		unis[12] = new UniversityWeights("Laurier", 13, 7, 13, 14, 10, 14, 14, 70, "https://www.wlu.ca/programs/");
+		unis[13] = new UniversityWeights("UOttawa", 14, 11, 2, 14, 10, 14, 14, 85, "https://engineering.uottawa.ca");
+
 		// Gets users mark
 		double mark = Initialize.user.getAverageMark();
 		// Casts user mark to int
-		int grade = (int)mark;
-		
-		// Calculate how well of a fit each university is - refer to .calculateCompatability in UniversityWeights class 
-		for(int i=0;i<14;i++) {
+		int grade = (int) mark;
+
+		// Calculate how well of a fit each university is - refer to
+		// .calculateCompatability in UniversityWeights class
+		for (int i = 0; i < 14; i++) {
 			unis[i].calculateCompatability(arr, grade);
 		}
-		
+
 		// Sorts universities - most to least compatible
-		Arrays.sort(unis,new uniComparator());
-		
-		for(int i=0;i<14;i++) {
-			System.out.println(unis[i].getName()+" "+unis[i].compatability);
+		Arrays.sort(unis, new uniComparator());
+
+		for (int i = 0; i < 14; i++) {
+			System.out.println(unis[i].getName() + " " + unis[i].compatability);
 		}
 
 		// Pop-up message displaying most compatible university
-		JOptionPane.showMessageDialog(frame, unis[0].getName()+"!", "Your University:", JOptionPane.INFORMATION_MESSAGE,
-				new ImageIcon("images/" +unis[0].getName()+"Logo.png"));
+		JLabel link = new JLabel("<html><u>Link to "+unis[0].getName()+"'s website<u><html>"); // JLabel - Link with underlined text
+		link.setForeground(Color.BLUE); // Set color to blue (resembles hyperlink)
 
+		// Mouse listener - if JLabel link is clicked
+		link.addMouseListener(new MouseAdapter() { // Turns JLabel link into hyperlink
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+
+					Desktop.getDesktop().browse(new URI(unis[0].getLink())); // Opens link
+
+				} catch (IOException | URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		JOptionPane.showMessageDialog(frame, link, "Your University:", JOptionPane.INFORMATION_MESSAGE,
+				new ImageIcon("images/" + unis[0].getName() + "Logo.png"));
 
 	}
 
@@ -494,7 +540,7 @@ public class UniversityQuiz implements ActionListener {
 			if (isComplete()) { // Validates if all information is filled out
 
 				lblError.setVisible(false);
-				
+
 				int[] vals = new int[7];
 				for (int i = 0; i < 6; i++) {
 					vals[i] = factor[i].getValue();
@@ -514,8 +560,6 @@ public class UniversityQuiz implements ActionListener {
 
 				importance.put("Extracurriculars", sliderECs.getValue());
 
-				
-
 				// Saves data to user
 				Initialize.user.setImportance(importance);
 				System.out.println(importance.toString());
@@ -530,17 +574,18 @@ public class UniversityQuiz implements ActionListener {
 				chooseUni(vals);
 				// System.out.println();
 				btnHOME.setEnabled(true);
-				
+
 			} else // Error message if any information missing
 				lblError.setVisible(true);
 		}
 
 	}
-	
+
 }
 
-
-class uniComparator implements Comparator<UniversityWeights>{
+// Class uniComparator
+// Compares universities to each other based on compatibility
+class uniComparator implements Comparator<UniversityWeights> {
 	public int compare(UniversityWeights a, UniversityWeights b) {
 		return Integer.compare(b.compatability, a.compatability);
 	}
