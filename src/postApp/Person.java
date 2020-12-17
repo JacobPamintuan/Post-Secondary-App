@@ -61,7 +61,7 @@ public class Person{
 	ArrayList<String> AwardActionType= new ArrayList<String>();
 	ArrayList<String> AwardDescription= new ArrayList<String>();
 	ArrayList<String> AwardDate= new ArrayList<String>();
-	Double AverageMark;
+	Double AverageMark = 99.3;
 	Map<String, Integer> marks;
 	
 	

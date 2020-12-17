@@ -3,6 +3,7 @@ package postApp;
 import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
@@ -453,6 +454,13 @@ public class UniversityQuiz implements ActionListener {
 
 //		waterloo=tuition+coop+gradRev
 
+		
+		
+		//JOptionPane.showMessageDialog(null, "Waterloo");
+		JOptionPane.showMessageDialog(frame, "Waterloo","University Quiz",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("images/WelcomeLogin.png"));
+//		JOptionPane.showMessageDialog(parentComponent, message, title, messageType, icon);
+//		JOptionPane.showMessageDialog(parentComponent, message, title, messageType);
+		
 	}
 
 	// ActionPerformed
