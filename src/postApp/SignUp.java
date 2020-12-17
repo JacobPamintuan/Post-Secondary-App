@@ -281,9 +281,10 @@ public class SignUp implements ActionListener {
 		} else if (e.getSource() == btnHOME) {
 //			frame.setVisible(false);
 		} else if (e.getSource() == btnSetupProfile) {
-			// ProfileScreenGUIScreenOne setUp = new ProfileScreenGUIScreenOne();
-			UniversityQuiz quiz = new UniversityQuiz();
-			quiz.frame.setVisible(true);
+			new ProfileScreenGUIScreenOne("Profile Setup");
+			
+//			UniversityQuiz quiz = new UniversityQuiz();
+//			quiz.frame.setVisible(true);
 
 			System.out.println("\nGo to profile screen");
 			frame.setVisible(false);

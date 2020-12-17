@@ -1,3 +1,5 @@
+package postApp;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
@@ -34,7 +36,8 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 	public static JLabel AwardIncomplete = new JLabel("The information isn't filled out.");
 	public static JLabel WrongeDateType = new JLabel("Wrong Date Type.");
 	public static JLabel WrongDate = new JLabel("Wrong Date type.");
-	public static JLabel AwardInfo= new JLabel("<html> Some universies like Waterloo <br/>really pay their attention on applicants awards.");
+	public static JLabel AwardInfo = new JLabel(
+			"<html> Some universies like Waterloo <br/>really pay their attention on applicants awards.");
 	public static JLabel UncompleteChoiceWarning;
 	public static JLabel UncompleteRequiredCourseWarning;
 	public static JLabel UncompleteCourseOrMarkWarning;
@@ -49,7 +52,7 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 	public static ArrayList<String> AwardDate = new ArrayList<String>();
 	public Boolean RequiredCourseBoolean[] = new Boolean[5];
 	public static Boolean DateType = null;
-	private Map<String,Integer> CourseAndMark;
+	private Map<String, Integer> CourseAndMark;
 
 	public ProfileScreenGUIScreenThree() {
 
@@ -88,7 +91,7 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 		AwardBox[0].setBounds(60, 190, 70, 20);
 		AwardBox[1].setBounds(127, 190, 348, 20);
 		AwardBox[2].setBounds(472, 190, 100, 20);
-		
+
 		ViewAll.setBounds(40, 240, 190, 40);
 		ViewAll.setFont(new Font("Impact", Font.PLAIN, 40));
 		ViewAll.setForeground(new Color(255, 127, 80));
@@ -100,7 +103,7 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 		ViewAll.setFocusPainted(false);
 		ViewAll.setContentAreaFilled(false);
 		ViewAll.setVisible(true);
-		
+
 		close.setBounds(680, 90, 100, 70);
 		close.setFont(new Font("Impact", Font.PLAIN, 20));
 		close.setForeground(new Color(255, 127, 80));
@@ -138,7 +141,7 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 		back.setVisible(true);
 
 		AwardInformation.setBounds(100, 130, 25, 25);
-		AwardInformation.setIcon(new ImageIcon("images/kk.png"));
+		AwardInformation.setIcon(new ImageIcon("images/Info.png"));
 		AwardInformation.setMargin(new Insets(0, 0, 0, 0));
 		AwardInformation.setIconTextGap(0);
 		AwardInformation.setBorderPainted(false);
@@ -146,8 +149,7 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 		AwardInformation.setFocusPainted(false);
 		AwardInformation.setContentAreaFilled(false);
 		AwardInformation.setVisible(true);
-		
-		
+
 		choiceYes.setBounds(230, 110, 12, 15);
 		choiceYes.setIcon(new ImageIcon("images/choice.png"));
 		choiceYes.setBorderPainted(false);
@@ -158,7 +160,7 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 		choiceYes.setFocusPainted(false);// delete the frame for focus
 		choiceYes.setContentAreaFilled(false);
 		choiceYes.setVisible(true);
-		
+
 		choiceNo.setBounds(330, 110, 12, 15);
 		choiceNo.setIcon(new ImageIcon("images/choice.png"));
 		choiceNo.setBorderPainted(false);
@@ -169,7 +171,7 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 		choiceNo.setFocusPainted(false);// delete the frame for focus
 		choiceNo.setContentAreaFilled(false);
 		choiceNo.setVisible(true);
-		
+
 		save.setBounds(500, 240, 100, 40);
 		save.setFont(new Font("Impact", Font.PLAIN, 40));
 		save.setForeground(new Color(255, 127, 80));
@@ -189,7 +191,7 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 		AwardIncomplete.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
 		AwardIncomplete.setForeground(Color.RED);
 		AwardIncomplete.setBounds(60, 204, 300, 30);
-		
+
 		AwardInfo.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
 		AwardInfo.setForeground(new Color(255, 250, 250));
 		AwardInfo.setBounds(500, 30, 300, 90);
@@ -221,18 +223,18 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 		TotalPanel.add(WrongeDateType);
 		TotalPanel.add(AwardInfo);
 		TotalPanel.add(close);
-		
+
 		close.setVisible(false);
 		AwardInfo.setVisible(false);
 		WrongeDateType.setVisible(false);
 		AwardIncomplete.setVisible(false);
-		
+
 		setContentPane(TotalPanel);
 		TotalPanel.setOpaque(false);
-		
+
 		init();
-		
-		UncompleteChoiceWarning=new JLabel("You haven't fill up your choices.");
+
+		UncompleteChoiceWarning = new JLabel("You haven't fill up your choices.");
 		UncompleteChoiceWarning.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
 		UncompleteChoiceWarning.setForeground(new Color(255, 250, 250));
 		UncompleteChoiceWarning.setBounds(500, 300, 300, 90);
@@ -292,8 +294,6 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 			}
 
 		});
-		
-		
 
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -388,19 +388,17 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 
 				for (int x = 0; x < 6; x++) {
 					if (ProfileScreenGUIScreenOne.CodeCollect[x].isEmpty() == true) {
-						//warning(0, "You haven't fill up your courses.(6 mark total)");
+						// warning(0, "You haven't fill up your courses.(6 mark total)");
 						break;
 					}
 				}
-				
+
 				for (int x = 0; x < 6; x++) {
 					if (ProfileScreenGUIScreenOne.MarkCollect[x].isEmpty() == true) {
-						//warning(12, "You haven't fill up your course marks.(6 mark total)");
+						// warning(12, "You haven't fill up your course marks.(6 mark total)");
 						break;
 					}
 				}
-				
-				
 
 				if (ProfileScreenGUIScreenTwo.EarlyAccpetanceChoice == null
 						|| ProfileScreenGUIScreenTwo.CoopChoice == null
@@ -424,25 +422,43 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 					if (RequiredCourseBoolean[4] == false)
 						missingCourse = missingCourse + " SPH4U ";
 
-					//warning(4, missingCourse);
+					// warning(4, missingCourse);
 
 				} else {
-					
-					CourseAndMark = new HashMap<String,Integer>();
-					
-					int sum=0;
-					
-					for(int x=0;x<6;x++) {
-						
-						CourseAndMark.put(ProfileScreenGUIScreenOne.CodeCollect[x], Integer.parseInt(ProfileScreenGUIScreenOne.MarkCollect[x]));
-						
-						sum=sum+Integer.parseInt(ProfileScreenGUIScreenOne.MarkCollect[x]);
-						
+
+					CourseAndMark = new HashMap<String, Integer>();
+
+					int sum = 0;
+
+					for (int x = 0; x < 6; x++) {
+
+						CourseAndMark.put(ProfileScreenGUIScreenOne.CodeCollect[x],
+								Integer.parseInt(ProfileScreenGUIScreenOne.MarkCollect[x]));
+
+						sum = sum + Integer.parseInt(ProfileScreenGUIScreenOne.MarkCollect[x]);
+
 					}
-					
-						//codeqwer
-					
-					
+
+					Initialize.user.setMarks(CourseAndMark);
+                    Initialize.user.setEarlyAcceptance(ProfileScreenGUIScreenTwo.EarlyAccpetanceChoice);
+                    Initialize.user.setExtracurricularActionType(ProfileScreenGUIScreenTwo.ExtracurricularActionType);
+                    Initialize.user.setExtracurricularDescription(ProfileScreenGUIScreenTwo.ExtracurricularDescription);
+                    Initialize.user.setExtracurricularStarDate(ProfileScreenGUIScreenTwo.ExtracurricularStarDate);
+                    Initialize.user.setExtracurricularEndDate(    ProfileScreenGUIScreenTwo.ExtracurricularEndDate);
+                    Initialize.user.setCitzenship(ProfileScreenGUIScreenTwo.CitzenshipChoice);
+                    Initialize.user.setCoop(ProfileScreenGUIScreenTwo.CoopChoice);
+                    Initialize.user.setVolunteer(ProfileScreenGUIScreenThree.volunteerHourChoice);
+                    Initialize.user.setAwardActionType(ProfileScreenGUIScreenThree.AwardActionName);
+                    Initialize.user.setAwardDescription(ProfileScreenGUIScreenThree.AwardDescription);
+                    Initialize.user.setAwardDate(ProfileScreenGUIScreenThree.AwardDate);
+                    Initialize.user.setAverageMark((double)sum/6);
+
+                    dispose();
+
+                    UniversityQuiz quiz = new UniversityQuiz();
+
+                    quiz.frame.setVisible(true);
+
 				}
 			}
 
@@ -457,8 +473,6 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 	public static boolean RequiredCourseDetermine(Boolean[] array, Boolean course) {
 		return Arrays.asList(array).contains(course);
 	}
-
-	
 
 	public Boolean DateType(String s) {
 
@@ -476,7 +490,7 @@ public class ProfileScreenGUIScreenThree extends JFrame {
 		return true;
 
 	}
-	
+
 	public void init() {
 
 		ImageIcon img = new ImageIcon("images/background.PNG");

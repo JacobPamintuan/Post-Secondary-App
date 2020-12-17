@@ -152,7 +152,7 @@ public class LoginGUI extends JFrame implements ActionListener, KeyListener{
 		}
 		else if(event.getSource()==btnLogIn) {
 			try {
-				if(LoadUserKeys.checkUsername(username)&&LoadUserKeys.checkPassword(username, password)) {
+				if(LoadUserKeys.checkUsername(username.toLowerCase())&&LoadUserKeys.checkPassword(username.toLowerCase(), password)) {
 					System.out.println("Welcome");
 //					new MainScreen();
 					frame.setVisible(false);
@@ -192,7 +192,7 @@ public class LoginGUI extends JFrame implements ActionListener, KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		username = textUsername.getText();
+		username = textUsername.getText().toLowerCase();
 		password = passwordField.getText();
 		System.out.println(username +" "+password);
 		

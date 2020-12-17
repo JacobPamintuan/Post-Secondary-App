@@ -1,3 +1,5 @@
+package postApp;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
@@ -149,7 +151,6 @@ public class ProfileScreenGUIScreenTwo extends JFrame {
 		close.setFocusPainted(false);// delete the frame for focus
 		close.setContentAreaFilled(false);
 		close.setVisible(true);
-		
 
 		close2.setBounds(475, 360, 100, 70);
 		close2.setFont(new Font("Impact", Font.PLAIN, 20));
@@ -162,7 +163,6 @@ public class ProfileScreenGUIScreenTwo extends JFrame {
 		close2.setFocusPainted(false);// delete the frame for focus
 		close2.setContentAreaFilled(false);
 		close2.setVisible(true);
-		
 
 		save.setBounds(590, 130, 100, 40);
 		save.setFont(new Font("Impact", Font.PLAIN, 40));
@@ -209,7 +209,7 @@ public class ProfileScreenGUIScreenTwo extends JFrame {
 		WrongeDateType.setBounds(300, 204, 300, 30);
 
 		EarlyInformation.setBounds(185, 49, 25, 25);
-		EarlyInformation.setIcon(new ImageIcon("images/kk.png"));
+		EarlyInformation.setIcon(new ImageIcon("images/Info.png"));
 		EarlyInformation.setMargin(new Insets(0, 0, 0, 0));
 		EarlyInformation.setIconTextGap(0);
 		EarlyInformation.setBorderPainted(false);
@@ -219,7 +219,7 @@ public class ProfileScreenGUIScreenTwo extends JFrame {
 		EarlyInformation.setVisible(true);
 
 		ExtracurricularInformation.setBounds(170, 130, 25, 25);
-		ExtracurricularInformation.setIcon(new ImageIcon("images/kk.png"));
+		ExtracurricularInformation.setIcon(new ImageIcon("images/Info.png"));
 		ExtracurricularInformation.setMargin(new Insets(0, 0, 0, 0));
 		ExtracurricularInformation.setIconTextGap(0);
 		ExtracurricularInformation.setBorderPainted(false);
@@ -352,7 +352,7 @@ public class ProfileScreenGUIScreenTwo extends JFrame {
 
 				dispose();
 				new ProfileScreenGUIScreenThree();
-				
+
 				close.setVisible(false);
 				close2.setVisible(false);
 
@@ -481,8 +481,6 @@ public class ProfileScreenGUIScreenTwo extends JFrame {
 				ExtracurricularInfo.setVisible(true);
 				close2.setVisible(true);
 
-				
-
 			}
 
 		});
@@ -566,6 +564,5 @@ public class ProfileScreenGUIScreenTwo extends JFrame {
 		this.getLayeredPane().add(imgLabel, new Integer(Integer.MIN_VALUE));// add the background to the LayeredPane
 		imgLabel.setBounds(0, 0, img.getIconWidth(), img.getIconHeight());// set the location of the background
 	}
-	
 
 }

@@ -1,3 +1,5 @@
+package postApp;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
@@ -144,7 +146,7 @@ public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListene
 		next.setVisible(true);
 
 		codeInformation.setBounds(346, 127, 25, 25);
-		codeInformation.setIcon(new ImageIcon("images/kk.png"));
+		codeInformation.setIcon(new ImageIcon("images/Info.png"));
 		codeInformation.setBorderPainted(false);
 		codeInformation.setMargin(new Insets(0, 0, 0, 0));// set the distance between margin to zero
 		codeInformation.setIconTextGap(0);// set the distance between Icon and text to zero

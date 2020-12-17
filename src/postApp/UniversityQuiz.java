@@ -68,6 +68,7 @@ public class UniversityQuiz implements ActionListener {
 	private AbstractButton aEngType;
 
 	JButton btnDoSomething;
+	JButton btnHOME;
 	private JLabel lblError;
 
 	private JLabel lblGraduateReviews;
@@ -359,10 +360,8 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnGeneral.addActionListener(engAction);
 		rdbtnSpecialized.addActionListener(engAction);
 
-		Initialize.user.setAverage(99.3);
-
 		// Displays average based on calculation form profile setup
-		lblAverage = new JLabel("Your average: " + Initialize.user.getAverage());
+		lblAverage = new JLabel("Your average: " + Initialize.user.getAverageMark());
 		lblAverage.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblAverage.setBounds(45, 561, 162, 25);
 		frame.getContentPane().add(lblAverage);
@@ -394,7 +393,7 @@ public class UniversityQuiz implements ActionListener {
 		// Button that does something
 		btnDoSomething = new JButton("Do Something");
 		btnDoSomething.addActionListener(this);//
-		btnDoSomething.setBounds(502, 635, 117, 29);
+		btnDoSomething.setBounds(427, 635, 117, 29);
 		frame.getContentPane().add(btnDoSomething);
 
 		// Error if user does not fill out quiz
@@ -405,6 +404,12 @@ public class UniversityQuiz implements ActionListener {
 		lblError.setVisible(false);
 
 		frame.getContentPane().setBackground(Color.lightGray);
+
+		btnHOME = new JButton("HOME");
+		btnHOME.addActionListener(this);
+		btnHOME.setBounds(587, 635, 117, 29);
+		frame.getContentPane().add(btnHOME);
+		btnHOME.setEnabled(false);
 
 	}
 
@@ -426,8 +431,9 @@ public class UniversityQuiz implements ActionListener {
 	}
 
 	public void chooseUni(int[] arr) {
-		int tuition=arr[0],coop=arr[1],gradRev=arr[2],size=arr[3],campus=arr[4],distance=arr[5],eng=arr[6],ec=arr[7];
-		
+		int tuition = arr[0], coop = arr[1], gradRev = arr[2], size = arr[3], campus = arr[4], distance = arr[5],
+				eng = arr[6], ec = arr[7];
+
 		int waterloo, uoft, western, carleton, windsor, queens, ryerson, guelph, lakehead, york, ontarioTech, mcmaster,
 				laurier, uOttawa;
 
@@ -437,14 +443,17 @@ public class UniversityQuiz implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnDoSomething) {
+		if (e.getSource() == btnHOME) {
+//frame.setVisible(false);
+// new home
+		} else if (e.getSource() == btnDoSomething) {
 			if (isComplete()) {
 
 				int[] vals = new int[8];
-				for (int i = 0; i < 8; i++) {
+				for (int i = 0; i < 7; i++) {
 					vals[i] = factor[i].getValue();
 				}
-				vals[7]=sliderECs.getValue();
+				vals[7] = sliderECs.getValue();
 
 				importance = new HashMap<String, Integer>();
 
@@ -472,6 +481,7 @@ public class UniversityQuiz implements ActionListener {
 //				System.out.printf("Extracurriculars: %d\n", sliderECs.getValue());
 
 				// System.out.println();
+				btnHOME.setEnabled(true);
 				lblError.setVisible(false);
 			} else
 				lblError.setVisible(true);
