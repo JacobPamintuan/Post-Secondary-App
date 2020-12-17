@@ -20,6 +20,7 @@ import javax.swing.text.Document;
 
 public class ProfileScreenGUIScreenOne extends JFrame implements DocumentListener {
 
+	//initialize the variables
 	public static JPanel TitlePanel = new JPanel();
 	public static JLabel Title = new JLabel("Personal codeInformation");
 	public static JLabel WrongCode = new JLabel("Wrong course code");
