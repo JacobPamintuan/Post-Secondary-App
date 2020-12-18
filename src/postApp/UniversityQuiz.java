@@ -167,7 +167,7 @@ public class UniversityQuiz implements ActionListener {
 		}
 
 		// JLabel factor question
-		lblFactorImportance = new JLabel("How important is this factor?");
+		lblFactorImportance = new JLabel("How important is this factor?*");
 		lblFactorImportance.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		lblFactorImportance.setBounds(442, 89, 235, 16);
 		frame.getContentPane().add(lblFactorImportance);
@@ -180,7 +180,7 @@ public class UniversityQuiz implements ActionListener {
 		frame.getContentPane().add(lblUniQuiz);
 
 		// Tuition Cost
-		lblTuitionCostQ = new JLabel("Is cost of tuition an important factor?*");
+		lblTuitionCostQ = new JLabel("Is cost of tuition an important factor?**");
 		lblTuitionCostQ.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblTuitionCostQ.setBounds(45, 100, 325, 25);
 		frame.getContentPane().add(lblTuitionCostQ);
@@ -213,7 +213,7 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnTuitonY.addActionListener(tuitionAction);
 
 		// Coop
-		lblCoopQ = new JLabel("Are you interested in co-op?*");
+		lblCoopQ = new JLabel("Are you interested in co-op?**");
 		lblCoopQ.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblCoopQ.setBounds(45, 160, 325, 25);
 		frame.getContentPane().add(lblCoopQ);
@@ -246,7 +246,7 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnCoopN.addActionListener(coopAction);
 
 		// Graduate Reviews
-		lblGraduateReviews = new JLabel("Do graduate reviews matter to you?*");
+		lblGraduateReviews = new JLabel("Do graduate reviews matter to you?**");
 		lblGraduateReviews.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblGraduateReviews.setBounds(45, 220, 325, 25);
 		frame.getContentPane().add(lblGraduateReviews);
@@ -279,7 +279,7 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnGraduateN.addActionListener(gradAction);
 
 		// Class sizes
-		lblWhatClassSize = new JLabel("Do you want a small class size?");
+		lblWhatClassSize = new JLabel("Do you want a small class size?*");
 		lblWhatClassSize.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblWhatClassSize.setBounds(45, 280, 325, 25);
 		frame.getContentPane().add(lblWhatClassSize);
@@ -312,7 +312,7 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnClassSizeN.addActionListener(classAction);
 
 		// Campus Type
-		lblCampusType = new JLabel("Do you want a large campus?");
+		lblCampusType = new JLabel("Do you want a large campus?*");
 		lblCampusType.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblCampusType.setBounds(45, 340, 325, 25);
 		frame.getContentPane().add(lblCampusType);
@@ -345,7 +345,7 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnCampusN.addActionListener(campusAction);
 
 		// Distance
-		lblDistance = new JLabel("Do you want to live far away?");
+		lblDistance = new JLabel("Do you want to live far away?*");
 		lblDistance.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblDistance.setBounds(45, 400, 325, 25);
 		frame.getContentPane().add(lblDistance);
@@ -386,7 +386,7 @@ public class UniversityQuiz implements ActionListener {
 		frame.getContentPane().add(lblAverage);
 
 		// Involvement in EC's - slider
-		lblExtracurriculars = new JLabel("How involved are you with extracurriculars?*");
+		lblExtracurriculars = new JLabel("How involved are you with extracurriculars?**");
 		lblExtracurriculars.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblExtracurriculars.setBounds(44, 497, 325, 25);
 		frame.getContentPane().add(lblExtracurriculars);
