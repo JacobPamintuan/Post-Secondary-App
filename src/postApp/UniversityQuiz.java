@@ -111,6 +111,7 @@ public class UniversityQuiz implements ActionListener {
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1290, 745);
 		frame.getContentPane().setBackground(Color.lightGray); // sets background color
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -144,8 +145,8 @@ public class UniversityQuiz implements ActionListener {
 			factor[i] = new JSlider();
 
 			// Sets bounds of JLabels
-			lblLess[i].setBounds(395, (60 * i + 112), 60, 35);
-			lblMore[i].setBounds(658, (60 * i + 112), 60, 35);
+			lblLess[i].setBounds(395, (60 * i + 112), 62, 35);
+			lblMore[i].setBounds(658, (60 * i + 112), 62, 35);
 
 			// Adds tick marks to factor slider
 			factor[i].setPaintTicks(true);
@@ -417,7 +418,7 @@ public class UniversityQuiz implements ActionListener {
 
 		// Error if user does not fill out quiz
 		lblError = new JLabel("*Please answer all questions.*");
-		lblError.setForeground(Color.RED);
+		lblError.setForeground(new Color(153, 0, 225));
 		lblError.setBounds(472, 577, 190, 16);
 		frame.getContentPane().add(lblError);
 		lblError.setVisible(false);
