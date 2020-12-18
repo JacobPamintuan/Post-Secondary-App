@@ -123,29 +123,22 @@ public class UniversityQuiz implements ActionListener {
 		lblMore = new JLabel[6];
 		factor = new JSlider[6];
 
-		// Initializes JLabel arrays; lblLess, lblMore
-		// Creates Labels and sets text
-		// HTML used to format text in centre and adds breaklines
-		// Creates Labels for first three questions - tuition,coop,gradreviews
-		for (int i = 0; i < 3; i++) {
-			lblLess[i] = new JLabel(
-					"<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
-			lblMore[i] = new JLabel("<html><div style='text-align: center;'><html>Very<br>important</div></html>");
-		}
-		// Labels for class size
-		lblLess[3] = new JLabel("<html><div style='text-align: center;'><html>Smaller class</div></html>");
-		lblMore[3] = new JLabel("<html><div style='text-align: center;'><html>Larger class<br>size</div></html>");
-		// Labels for campus size
-		lblLess[4] = new JLabel("<html><div style='text-align: center;'><html>Smaller campus</div></html>");
-		lblMore[4] = new JLabel("<html><div style='text-align: center;'><html>Larger campus</div></html>");
-
 		// Labels for distance
 		lblLess[5] = new JLabel("<html><div style='text-align: center;'><html>Close</div></html>");
 		lblMore[5] = new JLabel("<html><div style='text-align: center;'><html>Far</div></html>");
 
+		// Initializes JLabel arrays; lblLess, lblMore
 		// Creates sliders for all question
 		// Sets them to visible false until user selects a radiobutton
 		for (int i = 0; i < lblLess.length; i++) {
+
+			// Creates Labels and sets text
+			// HTML used to format text in centre and adds breaklines
+			if (i != 5) {
+				lblLess[i] = new JLabel(
+						"<html><div style='text-align: center;'><html>Not at all<br>important</div></html>");
+				lblMore[i] = new JLabel("<html><div style='text-align: center;'><html>Very<br>important</div></html>");
+			}
 
 			// Creates new sliders
 			factor[i] = new JSlider();
@@ -286,7 +279,7 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnGraduateN.addActionListener(gradAction);
 
 		// Class sizes
-		lblWhatClassSize = new JLabel("Does class size matter to you?");
+		lblWhatClassSize = new JLabel("Do you want a small class size?");
 		lblWhatClassSize.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblWhatClassSize.setBounds(45, 280, 325, 25);
 		frame.getContentPane().add(lblWhatClassSize);
@@ -319,7 +312,7 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnClassSizeN.addActionListener(classAction);
 
 		// Campus Type
-		lblCampusType = new JLabel("Does campus size matter to you?");
+		lblCampusType = new JLabel("Do you want a large campus?");
 		lblCampusType.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblCampusType.setBounds(45, 340, 325, 25);
 		frame.getContentPane().add(lblCampusType);
@@ -352,7 +345,7 @@ public class UniversityQuiz implements ActionListener {
 		rdbtnCampusN.addActionListener(campusAction);
 
 		// Distance
-		lblDistance = new JLabel("Does distance matter to you?");
+		lblDistance = new JLabel("Do you want to live far away?");
 		lblDistance.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		lblDistance.setBounds(45, 400, 325, 25);
 		frame.getContentPane().add(lblDistance);
@@ -464,28 +457,31 @@ public class UniversityQuiz implements ActionListener {
 		UniversityWeights unis[] = new UniversityWeights[14];
 
 		// Initializes each school with their respective weights per category
-		// Ranges from 1-14, 14 being the highest, 1 being the lowest (Admission average is the only different)
+		// Ranges from 1-14, 14 being the highest, 1 being the lowest (Admission average
+		// is the only different)
 		// Refer to UniversityWeights class
-		// Name, tuition,coop,graduate reviews, class size, distance, extracurriculars, admission average
-		unis[0] = new UniversityWeights("Waterloo", 1, 14, 9, 14, 10, 14, 14, 93, "https://uwaterloo.ca/engineering/");
-		unis[1] = new UniversityWeights("University of Toronto", 2, 13, 6, 14, 10, 14, 14, 93,
+		// Name, tuition,coop,graduate reviews, class size, campus size, distance,
+		// extracurriculars, admission average
+		int xx=0;
+		unis[0] = new UniversityWeights("Waterloo", 1, 14, 9, 1, 10, xx, 6, 93, "https://uwaterloo.ca/engineering/");
+		unis[1] = new UniversityWeights("University of Toronto", 2, 13, 6, 2, 14, xx, 6, 93,
 				"https://www.engineering.utoronto.ca"); // NEED TO PUT PROPER NUMBERS
-		unis[2] = new UniversityWeights("Western University", 3, 6, 10, 14, 10, 14, 14, 90, "https://www.eng.uwo.ca");
-		unis[3] = new UniversityWeights("Carleton", 4, 8, 8, 14, 10, 14, 14, 84,
+		unis[2] = new UniversityWeights("Western University", 3, 6, 10, 13, 9, xx, 5, 90, "https://www.eng.uwo.ca");
+		unis[3] = new UniversityWeights("Carleton", 4, 8, 8, 14, 5, xx, 5, 84,
 				"https://carleton.ca/engineering-design/");
-		unis[4] = new UniversityWeights("Windsor", 5, 4, 4, 14, 10, 14, 14, 85, "https://www.uwindsor.ca/engineering/");
-		unis[5] = new UniversityWeights("Queens", 6, 1, 14, 14, 10, 14, 14, 91, "https://engineering.queensu.ca/");
-		unis[6] = new UniversityWeights("Ryerson", 7, 10, 5, 14, 10, 14, 14, 86,
+		unis[4] = new UniversityWeights("Windsor", 5, 4, 4, 9, 3, xx, 4, 85, "https://www.uwindsor.ca/engineering/");
+		unis[5] = new UniversityWeights("Queens", 6, 1, 14, 11, 6, xx, 4, 91, "https://engineering.queensu.ca/");
+		unis[6] = new UniversityWeights("Ryerson", 7, 10, 5, 4, 12, xx, 4, 86,
 				"https://www.ryerson.ca/engineering-architectural-science/");
-		unis[7] = new UniversityWeights("Guelph", 8, 9, 11, 14, 10, 14, 14, 87, "https://www.uoguelph.ca/engineering/");
-		unis[8] = new UniversityWeights("Lakehead", 9, 3, 3, 14, 10, 14, 14, 82,
+		unis[7] = new UniversityWeights("Guelph", 8, 9, 11, 5, 17, xx, 4, 87, "https://www.uoguelph.ca/engineering/");
+		unis[8] = new UniversityWeights("Lakehead", 9, 3, 3, 8, 1, xx, 4, 82,
 				"https://www.lakeheadu.ca/programs/faculties/engineering/");
-		unis[9] = new UniversityWeights("York University", 10, 5, 1, 14, 10, 14, 14, 84, "https://lassonde.yorku.ca");
-		unis[10] = new UniversityWeights("Ontario Tech University", 11, 2, 7, 14, 10, 14, 14, 81,
+		unis[9] = new UniversityWeights("York University", 10, 5, 1, 10, 13, xx, 4, 84, "https://lassonde.yorku.ca");
+		unis[10] = new UniversityWeights("Ontario Tech University", 11, 2, 7, 3, 2, xx, 4, 81,
 				"https://engineering.ontariotechu.ca");
-		unis[11] = new UniversityWeights("McMaster", 12, 12, 12, 14, 10, 14, 14, 91, "https://www.eng.mcmaster.ca");
-		unis[12] = new UniversityWeights("Laurier", 13, 7, 13, 14, 10, 14, 14, 70, "https://www.wlu.ca/programs/");
-		unis[13] = new UniversityWeights("UOttawa", 14, 11, 2, 14, 10, 14, 14, 85, "https://engineering.uottawa.ca");
+		unis[11] = new UniversityWeights("McMaster", 12, 12, 12, 7, 8, xx, 4, 91, "https://www.eng.mcmaster.ca");
+		unis[12] = new UniversityWeights("Laurier", 13, 7, 13, 12, 4, xx, 1, 70, "https://www.wlu.ca/programs/");
+		unis[13] = new UniversityWeights("UOttawa", 14, 11, 2, 6, 11, xx, 4, 85, "https://engineering.uottawa.ca");
 
 		// Gets users mark
 		double mark = Initialize.user.getAverageMark();
@@ -504,9 +500,11 @@ public class UniversityQuiz implements ActionListener {
 		for (int i = 0; i < 14; i++) {
 			System.out.println(unis[i].getName() + " " + unis[i].compatability);
 		}
+		System.out.println();
 
 		// Pop-up message displaying most compatible university
-		JLabel link = new JLabel("<html><u>Link to "+unis[0].getName()+"'s website<u><html>"); // JLabel - Link with underlined text
+		JLabel link = new JLabel("<html><u>Link to " + unis[0].getName() + "'s website<u><html>"); // JLabel - Link with
+																									// underlined text
 		link.setForeground(Color.BLUE); // Set color to blue (resembles hyperlink)
 
 		// Mouse listener - if JLabel link is clicked

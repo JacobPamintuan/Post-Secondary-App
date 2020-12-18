@@ -61,7 +61,7 @@ public class Person {
 	ArrayList<String> AwardActionType = new ArrayList<String>();
 	ArrayList<String> AwardDescription = new ArrayList<String>();
 	ArrayList<String> AwardDate = new ArrayList<String>();
-	Double AverageMark = 10.0; // Delete later
+	Double AverageMark = 90.0; // Delete later
 	Map<String, Integer> marks;
 
 	// UNi Quiz

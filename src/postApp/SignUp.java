@@ -298,6 +298,12 @@ public class SignUp implements ActionListener {
 		province_txt.setColumns(10);
 		province_txt.setBounds(184, 802, 288, 26);
 		frame.getContentPane().add(province_txt);
+		
+		JLabel lblNewLabel = new JLabel("Address (optional):");
+		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+		lblNewLabel.setBounds(184, 598, 175, 16);
+		;
+		frame.getContentPane().add(lblNewLabel);
 
 		frame.setVisible(true);
 	}
