@@ -1,7 +1,6 @@
 package postApp;
 
 import java.util.*;
-import java.awt.desktop.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -90,9 +89,7 @@ public class UniversityQuiz implements ActionListener {
 
 	private JSlider sliderECs;
 
-//	private JLabel logos = new JLabel(new ImageIcon(
-//			"/Users/jacobpamintuan/Desktop/ICS4U1/Post-Secondary-App/Post-Secondary-App/images/UniLogos.png"));
-	private JLabel logos = new JLabel(new ImageIcon("images/UniLogos.png"));
+	private JLabel logos = new JLabel(new ImageIcon("Images/UniLogos.png"));
 
 	private Map<String, Integer> importance;
 
@@ -174,9 +171,7 @@ public class UniversityQuiz implements ActionListener {
 		frame.getContentPane().add(lblFactorImportance);
 
 		// JLabel Title - Image Icon
-		lblUniQuiz = new JLabel(new ImageIcon(
-				"/Users/jacobpamintuan/Desktop/ICS4U1/Post-Secondary-App/Post-Secondary-App/images/UniQuizTitle.png"));
-//		lblUniQuiz = new JLabel(new ImageIcon("images/UniQuizTitle.png"));
+		lblUniQuiz = new JLabel(new ImageIcon("Images/UniQuizTitle.png"));
 		lblUniQuiz.setBounds(45, 25, 325, 50);
 		frame.getContentPane().add(lblUniQuiz);
 
@@ -429,6 +424,9 @@ public class UniversityQuiz implements ActionListener {
 		btnHOME.setBounds(586, 534, 117, 29);
 		frame.getContentPane().add(btnHOME);
 		btnHOME.setEnabled(false);
+		
+		frame.setVisible(true);
+		frame.repaint();
 
 	}
 
@@ -524,7 +522,7 @@ public class UniversityQuiz implements ActionListener {
 		});
 
 		JOptionPane.showMessageDialog(frame, link, "Your University:", JOptionPane.INFORMATION_MESSAGE,
-				new ImageIcon("images/" + unis[0].getName() + "Logo.png"));
+				new ImageIcon("Images/" + unis[0].getName() + "Logo.png"));
 
 	}
 

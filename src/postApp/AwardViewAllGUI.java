@@ -33,7 +33,7 @@ public class AwardViewAllGUI extends JFrame {
 
 		TotalPanel.add(delete);
 
-		for (int x = 0; x < ProfileScreenGUIScreenThree.AwardActionName.size(); x++) {
+		for (int x = 0; x < ProfileGUIThree.AwardActionName.size(); x++) {
 
 			AwardNameShowBox.add(new JTextField(25));
 			AwardDescriptionShowBox.add(new JTextField(25));
@@ -47,9 +47,9 @@ public class AwardViewAllGUI extends JFrame {
 			TotalPanel.add(AwardDescriptionShowBox.get(x));
 			TotalPanel.add(AwardDateShowBox.get(x));
 
-			AwardNameShowBox.get(x).setText(ProfileScreenGUIScreenThree.AwardActionName.get(x));
-			AwardDescriptionShowBox.get(x).setText(ProfileScreenGUIScreenThree.AwardDescription.get(x));
-			AwardDateShowBox.get(x).setText(ProfileScreenGUIScreenThree.AwardDate.get(x));
+			AwardNameShowBox.get(x).setText(ProfileGUIThree.AwardActionName.get(x));
+			AwardDescriptionShowBox.get(x).setText(ProfileGUIThree.AwardDescription.get(x));
+			AwardDateShowBox.get(x).setText(ProfileGUIThree.AwardDate.get(x));
 
 		}
 
@@ -58,24 +58,24 @@ public class AwardViewAllGUI extends JFrame {
 		delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 
-				if (ProfileScreenGUIScreenThree.AwardActionName.size() != 0 && AwardNameShowBox.size() != 0) {
+				if (ProfileGUIThree.AwardActionName.size() != 0 && AwardNameShowBox.size() != 0) {
 
-					ProfileScreenGUIScreenThree.AwardActionName
-							.remove(ProfileScreenGUIScreenThree.AwardActionName.size() - 1);
-					AwardNameShowBox.get(ProfileScreenGUIScreenThree.AwardActionName.size()).setVisible(false);
-					AwardNameShowBox.remove(ProfileScreenGUIScreenThree.AwardActionName.size());
+					ProfileGUIThree.AwardActionName
+							.remove(ProfileGUIThree.AwardActionName.size() - 1);
+					AwardNameShowBox.get(ProfileGUIThree.AwardActionName.size()).setVisible(false);
+					AwardNameShowBox.remove(ProfileGUIThree.AwardActionName.size());
 
 					
-					AwardDescriptionShowBox.get(ProfileScreenGUIScreenThree.AwardDescription.size() - 1)
+					AwardDescriptionShowBox.get(ProfileGUIThree.AwardDescription.size() - 1)
 							.setVisible(false);
-					AwardDescriptionShowBox.remove(ProfileScreenGUIScreenThree.AwardDescription.size() - 1);
-					ProfileScreenGUIScreenThree.AwardDescription
-							.remove(ProfileScreenGUIScreenThree.AwardDescription.size() - 1);
+					AwardDescriptionShowBox.remove(ProfileGUIThree.AwardDescription.size() - 1);
+					ProfileGUIThree.AwardDescription
+							.remove(ProfileGUIThree.AwardDescription.size() - 1);
 
 					
-					AwardDateShowBox.get(ProfileScreenGUIScreenThree.AwardDate.size() - 1).setVisible(false);
-					AwardDateShowBox.remove(ProfileScreenGUIScreenThree.AwardDate.size() - 1);
-					ProfileScreenGUIScreenThree.AwardDate.remove(ProfileScreenGUIScreenThree.AwardDate.size() - 1);
+					AwardDateShowBox.get(ProfileGUIThree.AwardDate.size() - 1).setVisible(false);
+					AwardDateShowBox.remove(ProfileGUIThree.AwardDate.size() - 1);
+					ProfileGUIThree.AwardDate.remove(ProfileGUIThree.AwardDate.size() - 1);
 
 				}
 				

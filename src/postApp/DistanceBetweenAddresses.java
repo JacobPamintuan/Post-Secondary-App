@@ -1,5 +1,4 @@
 package postApp;
-
 import java.io.*; 
 import java.util.*;  
 import java.net.*;
@@ -8,35 +7,42 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
- 
+  
 public class DistanceBetweenAddresses {
+	
 	
 	public static ArrayList<String> origins = new ArrayList<String>();
 	public static ArrayList<String> destinations = new ArrayList<String>();
 	public static ArrayList<Long> distances[]; 
-	private static String key = "AIzaSyB_yQfDw3ers-hQDc43gsaK-ssvfCwzVho";
+	//google key
+	private static String key = "AIzaSyAHMDXYA18E5CJFdiw70D3a2kJ3K4tlixU";
 	
 	
 	
     public DistanceBetweenAddresses() throws Exception  { 
     	
+    	//gets the JSON string
     	String jsonString = jsonGetRequest(generateURL());
+    	//extracts the information from the JSON string
     	parseJson(jsonString);
+    
     	for(int i =0;i<distances.length;i++) {
     		System.out.println(distances[i].toString());
     	}
     	
     }
     
-    private static String generateURL() {
+    
+
+	private static String generateURL() {
     	//url address
     	String url = "https://maps.googleapis.com/maps/api/distancematrix/json?";
     	
     	//adds users's address (there is only one).
     	url+="origins=";
-//    	url+=String.format("%s+%s+%s+%s+%s", Initialize.user.getStreetNumber().replace(' ','+'),Initialize.user.getStreetName().replace(' ','+'),
-//    										  Initialize.user.getCity().replace(' ','+'),Initialize.user.getProvince().replace(' ','+'),
-//    										  Initialize.user.getCountry().replace(' ','+'));
+    	url+=String.format("%s+%s+%s+%s+%s", Initialize.user.getStreetNumber().replace(' ','+'),Initialize.user.getStreetName().replace(' ','+'),
+    										  Initialize.user.getCity().replace(' ','+'),Initialize.user.getProvince().replace(' ','+'),
+    										  Initialize.user.getCountry().replace(' ','+'));
     	//add the names of the available universities
     	url+="&destinations=";
     	url+=Initialize.universityList.get(0).replace(' ','+');
@@ -113,6 +119,37 @@ public class DistanceBetweenAddresses {
 			}    		      
 		}
 	  
+	}
+	
+	//this method narrows down the number of schools to consider recommending
+	private ArrayList<String> recommendedSchoolsByDistance(int percent) {
+    	//loops through the distances data (since there's only one address
+		//the outer for loop technically does not need to exist).
+		for(int i =0;i<distances.length;i++) {
+			
+			//finds the farthest school
+			long max =0;
+    		for(int j =0;j<distances[i].size();j++)
+    			max= Math.max(max, distances[i].get(j));
+    	
+			max+=10000; //adds an additional 10 km to the max distance.
+			max=(max*percent)/100; //the percent is equal to how willing the user
+			//is to live far from home. 100 would mean they are willing to go anywhere
+			
+			//narrows down the recommended universities to those whose distance is shorter than max
+			ArrayList<String> tmp = new ArrayList<String>();
+			
+			for(int j =0;j<distances[i].size();j++)
+				if(distances[i].get(j)<max)	
+					tmp.add(destinations.get(i));
+		
+			return tmp;
+    		
+    	}
+    	//this won't run but makes sure there isn't an error.
+    	ArrayList<String> tmp = new ArrayList<String>();
+    	return tmp;
+		
 	}
       
 }

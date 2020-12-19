@@ -36,7 +36,7 @@ public class ExtracurricularViewAll extends JFrame {
 
 		TotalPanel.add(delete);
 
-		for (int x = 0; x < ProfileScreenGUIScreenTwo.ExtracurricularActionType.size(); x++) {
+		for (int x = 0; x < ProfileGUITwo.ExtracurricularActionType.size(); x++) {
 
 			ExtracurricularActionTypeShowBox.add(new JTextField(25));
 			ExtracurricularDescriptionShowBox.add(new JTextField(25));
@@ -53,10 +53,10 @@ public class ExtracurricularViewAll extends JFrame {
 			TotalPanel.add(ExtracurricularStarDateShowBox.get(x));
 			TotalPanel.add(ExtracurricularEndDateShowBox.get(x));
 
-			ExtracurricularActionTypeShowBox.get(x).setText(ProfileScreenGUIScreenTwo.ExtracurricularActionType.get(x));
-			ExtracurricularDescriptionShowBox.get(x).setText(ProfileScreenGUIScreenTwo.ExtracurricularDescription.get(x));
-			ExtracurricularStarDateShowBox.get(x).setText(ProfileScreenGUIScreenTwo.ExtracurricularStarDate.get(x));
-			ExtracurricularEndDateShowBox.get(x).setText(ProfileScreenGUIScreenTwo.ExtracurricularEndDate.get(x));
+			ExtracurricularActionTypeShowBox.get(x).setText(ProfileGUITwo.ExtracurricularActionType.get(x));
+			ExtracurricularDescriptionShowBox.get(x).setText(ProfileGUITwo.ExtracurricularDescription.get(x));
+			ExtracurricularStarDateShowBox.get(x).setText(ProfileGUITwo.ExtracurricularStarDate.get(x));
+			ExtracurricularEndDateShowBox.get(x).setText(ProfileGUITwo.ExtracurricularEndDate.get(x));
 		}
 
 		setVisible(true);
@@ -64,36 +64,36 @@ public class ExtracurricularViewAll extends JFrame {
 		delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 
-				if (ProfileScreenGUIScreenTwo.ExtracurricularActionType.size() != 0&&ExtracurricularActionTypeShowBox.size()!=0)
+				if (ProfileGUITwo.ExtracurricularActionType.size() != 0&&ExtracurricularActionTypeShowBox.size()!=0)
 				{
-					ExtracurricularActionTypeShowBox.get(ProfileScreenGUIScreenTwo.ExtracurricularActionType.size() - 1)
+					ExtracurricularActionTypeShowBox.get(ProfileGUITwo.ExtracurricularActionType.size() - 1)
 							.setVisible(false);
-					ProfileScreenGUIScreenTwo.ExtracurricularActionType
-							.remove(ProfileScreenGUIScreenTwo.ExtracurricularActionType.size() - 1);
-					ExtracurricularActionTypeShowBox.remove(ProfileScreenGUIScreenTwo.ExtracurricularActionType.size());
+					ProfileGUITwo.ExtracurricularActionType
+							.remove(ProfileGUITwo.ExtracurricularActionType.size() - 1);
+					ExtracurricularActionTypeShowBox.remove(ProfileGUITwo.ExtracurricularActionType.size());
 					
 
-					ExtracurricularDescriptionShowBox.get(ProfileScreenGUIScreenTwo.ExtracurricularDescription.size() - 1)
+					ExtracurricularDescriptionShowBox.get(ProfileGUITwo.ExtracurricularDescription.size() - 1)
 							.setVisible(false);
-					ProfileScreenGUIScreenTwo.ExtracurricularDescription
-							.remove(ProfileScreenGUIScreenTwo.ExtracurricularDescription.size() - 1);
-					ExtracurricularDescriptionShowBox.remove(ProfileScreenGUIScreenTwo.ExtracurricularDescription.size());
+					ProfileGUITwo.ExtracurricularDescription
+							.remove(ProfileGUITwo.ExtracurricularDescription.size() - 1);
+					ExtracurricularDescriptionShowBox.remove(ProfileGUITwo.ExtracurricularDescription.size());
 
 					
-					ExtracurricularStarDateShowBox.get(ProfileScreenGUIScreenTwo.ExtracurricularStarDate.size() - 1)
+					ExtracurricularStarDateShowBox.get(ProfileGUITwo.ExtracurricularStarDate.size() - 1)
 							.setVisible(false);
-					ProfileScreenGUIScreenTwo.ExtracurricularStarDate
-							.remove(ProfileScreenGUIScreenTwo.ExtracurricularStarDate.size() - 1);
-					ExtracurricularStarDateShowBox.remove(ProfileScreenGUIScreenTwo.ExtracurricularStarDate.size());
+					ProfileGUITwo.ExtracurricularStarDate
+							.remove(ProfileGUITwo.ExtracurricularStarDate.size() - 1);
+					ExtracurricularStarDateShowBox.remove(ProfileGUITwo.ExtracurricularStarDate.size());
 
 
 					
-					ExtracurricularEndDateShowBox.get(ProfileScreenGUIScreenTwo.ExtracurricularEndDate.size() - 1)
+					ExtracurricularEndDateShowBox.get(ProfileGUITwo.ExtracurricularEndDate.size() - 1)
 							.setVisible(false);
 					
-					ProfileScreenGUIScreenTwo.ExtracurricularEndDate
-							.remove(ProfileScreenGUIScreenTwo.ExtracurricularEndDate.size() - 1);
-					ExtracurricularEndDateShowBox.remove(ProfileScreenGUIScreenTwo.ExtracurricularEndDate.size());
+					ProfileGUITwo.ExtracurricularEndDate
+							.remove(ProfileGUITwo.ExtracurricularEndDate.size() - 1);
+					ExtracurricularEndDateShowBox.remove(ProfileGUITwo.ExtracurricularEndDate.size());
 
 				}
 			}
