@@ -1,55 +1,64 @@
 package postApp;
 
+import java.util.*;
+
 public class School {
 	
-	private String program;
-	private String school;
-	public int index;
-	
-	public String[] general = new String[8];
-	public String[] civil = new String[4];
-	public String manufacturing; 
-	public String[] electrical = new String[5];
-	public String areospace;
-	public String[] biomedical = new String[5];
+	int id;
+	String School;
+	ArrayList<String> programs;
+	ArrayList<String> programLinks;
 	
 	
-	//sets program university data
-	public School(int index, String program,String school ) {
-		this.index = index;
-		this.school = school;
-		this.program = program;
+	public School(int id, String school) {
+		super();
+		this.id = id;
+		School = school;
+		programs=new ArrayList<String>();
+		programLinks=new ArrayList<String>();
 	}
 	
-	//sets school data
-	public School(String school) {
-		this.school = school;
-	}
 	
-	public School(int index, String School) {
-		
+	public int getId() {
+		return id;
 	}
-
-	public String getProgram() {
-		return program;
+	public void setId(int id) {
+		this.id = id;
 	}
-
-	public void setProgram(String program) {
-		this.program = program;
-	}
-
 	public String getSchool() {
-		return school;
+		return School;
 	}
-
 	public void setSchool(String school) {
-		this.school = school;
+		School = school;
+	}
+	public ArrayList<String> getPrograms() {
+		return programs;
+	}
+	public void setPrograms(ArrayList<String> programs) {
+		this.programs = programs;
 	}
 	
+
+	public ArrayList<String> getProgramLinks() {
+		return programLinks;
+	}
+
+
+	public void setProgramLinks(ArrayList<String> programLinks) {
+		this.programLinks = programLinks;
+	}
+
+
 	@Override
 	public String toString() {
-		return "[program=" + program + ", school=" + school + ", index=" + index + "]";
+		return "School [id=" + id + ", School=" + School + ", programs=" + programs + ", programLinks=" + programLinks
+				+ "]";
 	}
+
 	
 	
+	
+	
+	
+
 }

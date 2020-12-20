@@ -1,0 +1,68 @@
+Algoma University,Mechanical Engineering,https://www.algomau.ca/academics/programs/engineering/
+Algoma University,Chemical Engineering,https://www.algomau.ca/academics/programs/engineering/
+Algoma University,Mining Engineering,https://www.algomau.ca/academics/programs/engineering/
+Carleton University,General Engineering,https://admissions.carleton.ca/programs/engineering/
+University of Guelph,Biomedical Engineering,https://www.uoguelph.ca/engineering/undergraduate/prospective/biomedical
+University of Guelph,Mechanical Engineering,https://www.uoguelph.ca/registrar/calendars/undergraduate/current/c10/c10beng-mech.shtml
+University of Guelph,Computer Engineering,https://www.uoguelph.ca/registrar/calendars/undergraduate/current/c10/c10beng-ceng.shtml
+University of Guelph,Environmental Engineering,https://www.uoguelph.ca/registrar/calendars/undergraduate/current/c10/c10beng-enve.shtml
+University of Guelph,Water Resources Engineering,https://www.uoguelph.ca/registrar/calendars/undergraduate/current/c10/c10beng-wre.shtml
+University of Guelph,Mining Engineering,https://www.uoguelph.ca/engineering/
+University of Guelph,Software Engineering,https://www.uoguelph.ca/registrar/calendars/undergraduate/current/c10/c10bcomp-seng.shtml
+Lakehead University,General Engineering,https://www.lakeheadu.ca/programs/faculties/engineering
+Laurentian University,Mechanical Engineering,https://laurentian.ca/program/engineering
+Laurentian University,General Engineering,https://laurentian.ca/program/engineering
+McMaster University,Engineering Science,https://www.eng.mcmaster.ca/
+McMaster University,General Engineering,https://www.eng.mcmaster.ca/
+Ontario Tech University,General Engineering,https://ontariotechu.ca/programs/engineering-and-applied-science/comprehensive-engineering.php
+Ontario Tech University,Manufacturing Engineering,https://ontariotechu.ca/programs/engineering-and-applied-science/manufacturing-engineering-manufacturing-engineering-and-management.php
+Ontario Tech University,Electrical Engineering,https://ontariotechu.ca/programs/engineering-and-applied-science/electrical-engineering-electrical-engineering-and-management.php
+Ontario Tech University,Mechanical Engineering,https://ontariotechu.ca/programs/engineering-and-applied-science/mechanical-engineering-mechanical-engineering-and-management.php
+Ontario Tech University,Nuclear Engineering,https://ontariotechu.ca/programs/energy-systems-and-nuclear-science/nuclear-engineering.php
+Ontario Tech University,Automotive Engineering,https://ontariotechu.ca/programs/engineering-and-applied-science/automotive-engineering-automotive-engineering-and-management.php
+Ontario Tech University,Software Engineering,https://ontariotechu.ca/programs/engineering-and-applied-science/software-engineering-software-engineering-and-management.php
+University of Ottawa,Civil Engineering,https://engineering.uottawa.ca/civil-dept
+University of Ottawa,Electrical Engineering,https://engineering.uottawa.ca/undergraduate-programs/electrical-engineering
+University of Ottawa,Biomedical Engineering,https://engineering.uottawa.ca/undergraduate-programs/biomedical-mechanical-engineering
+University of Ottawa,Mechanical Engineering,https://engineering.uottawa.ca/mechanical-dept
+University of Ottawa,Computer Engineering,https://engineering.uottawa.ca/undergraduate-programs/computer-engineering
+University of Ottawa,Chemical Engineering,https://engineering.uottawa.ca/chemical-and-biological
+University of Ottawa,Software Engineering,https://engineering.uottawa.ca/undergraduate-programs/software-engineering
+Queen's University,General Engineering,https://engineering.queensu.ca/
+Ryerson University,Civil Engineering,https://www.ryerson.ca/programs/undergraduate/civil-engineering/
+Ryerson University,Electrical Engineering,https://www.ryerson.ca/programs/undergraduate/electrical-engineering/
+Ryerson University,Aerospace Engineering,https://www.ryerson.ca/programs/undergraduate/aerospace-engineering/
+Ryerson University,Biomedical Engineering,https://www.ryerson.ca/programs/undergraduate/biomedical-engineering/
+Ryerson University,Mechanical Engineering,https://www.ryerson.ca/programs/undergraduate/mechanical-engineering/
+Ryerson University,Computer Engineering,https://www.ryerson.ca/programs/undergraduate/computer-engineering/
+Ryerson University,Chemical Engineering,https://www.ryerson.ca/programs/undergraduate/chemical-engineering-co-op/
+Ryerson University,Software Engineering,https://www.ryerson.ca/programs/undergraduate/computer-engineering/
+Ryerson University,Industrial Engineering,https://www.ryerson.ca/programs/undergraduate/industrial-engineering/
+University of Toronto,Civil Engineering,https://civmin.utoronto.ca/
+University of Toronto,Mechanical Engineering,https://www.mie.utoronto.ca/
+University of Toronto,Computer Engineering,https://future.utoronto.ca/undergraduate-programs/computer-engineering/
+University of Toronto,Chemical Engineering,https://chem-eng.utoronto.ca/
+University of Toronto,Industrial Engineering,https://www.mie.utoronto.ca/
+University of Toronto,Materials Engineering,https://mse.utoronto.ca/
+University of Toronto,Engineering Science,https://engsci.utoronto.ca/program/majors/
+University of Waterloo,Civil Engineering,https://uwaterloo.ca/future-students/programs/civil-engineering
+University of Waterloo,Electrical Engineering,https://uwaterloo.ca/future-students/programs/electrical-engineering
+University of Waterloo,Biomedical Engineering,https://uwaterloo.ca/future-students/programs/biomedical-engineering
+University of Waterloo,Mechanical Engineering,https://uwaterloo.ca/future-students/programs/mechanical-engineering
+University of Waterloo,Computer Engineering,https://uwaterloo.ca/future-students/programs/computer-engineering
+University of Waterloo,Environmental Engineering,https://uwaterloo.ca/future-students/programs/environmental-engineering
+University of Waterloo,Chemical Engineering,https://uwaterloo.ca/future-students/programs/chemical-engineering
+University of Waterloo,Software Engineering,https://uwaterloo.ca/future-students/programs/software-engineering
+University of Waterloo,Architectural Engineering,https://uwaterloo.ca/architectural-engineering/
+University of Waterloo,Geological Engineering,https://uwaterloo.ca/future-students/programs/geological-engineering
+University of Waterloo,Management Engineering,https://uwaterloo.ca/future-students/programs/management-engineering
+University of Waterloo,Mechatronics Engineering,https://uwaterloo.ca/future-students/programs/mechatronics-engineering
+University of Waterloo,Nanotechnology Engineering,https://uwaterloo.ca/future-students/programs/nanotechnology-engineering
+University of Waterloo,Systems Design Engineering,https://uwaterloo.ca/systems-design-engineering/
+Western University,General Engineering,https://www.eng.uwo.ca/undergraduate/programs/index.html
+Western University,Engineering Science,https://www.eng.uwo.ca/undergraduate/programs/index.html
+University of Windsor,General Engineering,https://www.uwindsor.ca/engineering/
+University of Windsor,Electrical Engineering,https://www.uwindsor.ca/engineering/electrical/
+University of Windsor,Environmental Engineering,https://www.uwindsor.ca/graduate-studies/324/environmental-engineering
+University of Windsor,Industrial Engineering,https://www.uwindsor.ca/graduate-studies/329/industrial-engineering
+York University,General Engineering,https://lassonde.yorku.ca/

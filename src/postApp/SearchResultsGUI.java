@@ -1,218 +1,179 @@
 package postApp;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-public class SearchResultsGUI implements ActionListener {
+public class SearchResultsGUI extends JFrame implements ActionListener{
+	
+	private final static int NUM_SCHOOLS = 15;
+	private final static int NUM_PROGRAMS = 24;
+	private JFrame frame;
+	private JPanel screen;
+	private JLabel surveyScreen;
+	
+	private static ArrayList<Programs> recommendedPrograms = new ArrayList<Programs>();
+	private static int numRecommendations;
+	
+	private static JButton programButtons[];
+	private static JButton atButtons[];
+	private static JButton universityButtons[];
+	
+	
+	private JButton backButton;
+	private JButton searchButton;
+	
 
-	public ProcessingInformation data;
-	public BackupInformation backupData;
-
-	public JFrame results = new JFrame();
-
-	private JPanel[] showResults = new JPanel[6];
-
-	private String searchResult;
-	private String[] tagResults;
-
-	private JButton[] addProgram = new JButton[6];
-	private JButton[] moreInformation = new JButton[6];
-
-	// For displaying the program Name and information
-	private JLabel[] programName = new JLabel[6];
-	private JLabel[] programSchool = new JLabel[6];
-
-	// OUAC logo image
-	private ImageIcon ouacImage = new ImageIcon();
-	private JLabel image = new JLabel();
-
-	// A constructor which is called by the search class when Basic Search is used
-	public SearchResultsGUI(String searchResult) {
-		super();
-		this.searchResult = searchResult;
-		System.out.println(searchResult);
-		setResultLayout();
-		displayResults();
-	}
-
-	// A constructor which is called by the search class when Search only using tags
-	// is used
-	public SearchResultsGUI(String[] tagResults) {
-		super();
-		this.tagResults = tagResults;
-		setResultLayout();
-		displayResults();
-	}
-
-	// combo Search
-	public SearchResultsGUI(String searchResult, String[] tagResults) {
-		super();
-		this.searchResult = searchResult;
-		this.tagResults = tagResults;
-		setResultLayout();
-		displayResults();
-	}
-
-	// A recursive method which sets the layout of the results of the search
-	private void setResultLayout() {
-		results.setSize(960, 568);
-		results.setLayout(null);
-		results.setTitle("Search Results");
-
-		ouacImage = new ImageIcon("images/ouaclogo.png");
-		image = new JLabel(ouacImage);
-		image.setBounds(225, 0, 510, 80);
-		results.add(image);
-
-		results.getContentPane().setBackground(Color.lightGray);
-
-		for (int x = 0; x < 3; x++) {
-			showResults[x] = new JPanel(null, false);
-			showResults[x].setBounds(0, 80 + (150 * x), 480, 150);
-
-			addProgram[x] = new JButton("Add Program #" + (x + 1));
-			addProgram[x].addActionListener(this);
-			addProgram[x].setBounds(320, 100 + (150 * x), 130, 45);
-
-			moreInformation[x] = new JButton("More Information");
-			moreInformation[x].addActionListener(this);
-			moreInformation[x].setBounds(310, 155 + (150 * x), 140, 45);
-
-			programName[x] = new JLabel();
-			programSchool[x] = new JLabel();
-			programName[x].setBounds(20, (100 + (150 * x)), 130, 35);
-			programSchool[x].setBounds(20, 140 + (150 * x), 130, 35);
-
-			if (x == 0 || x == 2) {
-				showResults[x].setBackground(Color.white);
-			} else {
-				showResults[x].setBackground(Color.lightGray);
-			}
-			results.getContentPane().add(showResults[x]);
-			results.getContentPane().add(addProgram[x]);
-			results.getContentPane().add(moreInformation[x]);
+	/**
+	 * Create the application.
+	 */
+	public SearchResultsGUI(ArrayList<Programs> recommendedPrograms) {
+		this.recommendedPrograms = recommendedPrograms;
+		numRecommendations = recommendedPrograms.size()<=10?recommendedPrograms.size():10;
+		programButtons = new JButton[numRecommendations];
+		atButtons = new JButton[numRecommendations];
+		universityButtons = new JButton[numRecommendations];
+		for(int i =0;i<numRecommendations;i++) {
+			System.out.println(recommendedPrograms.get(i).toString());
 		}
-
-		for (int x = 3; x < 6; x++) {
-			showResults[x] = new JPanel(null, false);
-			showResults[x].setBounds(480, 80 + (150 * (x - 3)), 480, 150);
-
-			addProgram[x] = new JButton("Add Program #" + (x + 1));
-			addProgram[x].addActionListener(this);
-			addProgram[x].setBounds(800, 100 + (150 * (x - 3)), 130, 45);
-
-			moreInformation[x] = new JButton("More Information");
-			moreInformation[x].addActionListener(this);
-			moreInformation[x].setBounds(790, 155 + (150 * (x - 3)), 140, 45);
-
-			programName[x] = new JLabel();
-			programSchool[x] = new JLabel();
-			programName[x].setBounds(500, 100 + (150 * (x - 3)), 130, 35);
-			programSchool[x].setBounds(500, 140 + (150 * (x - 3)), 130, 35);
-
-			// moreInformation[x].setBackground(Color.cyan);
-			// moreInformation[x].setForeground(Color.white);
-
-			if (x == 4) {
-				showResults[x].setBackground(Color.white);
-			} else {
-				showResults[x].setBackground(Color.lightGray);
-			}
-
-			results.getContentPane().add(showResults[x]);
-			results.getContentPane().add(addProgram[x]);
-			results.getContentPane().add(moreInformation[x]);
-		}
-
-		results.repaint();
-
-		results.setVisible(true);
-		results.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
-	private void displayResults() {
 		
-		try {
-			new ProcessingInformation();
-			System.out.println(searchResult + "1");
-			int i = 0;
-			int j = 0;
-			for (int x = 0; x < ProcessingInformation.programList.size(); x++) {
-				if (ProcessingInformation.programList.get(x + 1).equals(searchResult + ProcessingInformation.universityList.get(x + 1)) == true) {
-					programName[i] = new JLabel("Program #" + (x + 1) + " Name: " + searchResult);
-					programSchool[i] = new JLabel("University: " + (ProcessingInformation.universityList.get(x)));
-					System.out.println("yes");
-					++j;
-				} else if (x == 15) {
-					break;
-				} else if (j == 6) {
-					break;
-				} else if (!(ProcessingInformation.programList.get(x).equals(searchResult + ProcessingInformation.universityList.get(x)) == true)) {
-					System.out.println("no");
-				}
-				System.out.println("bruh");
-			}
+		frameSetup();
+		panelDesign();
+	}
+	
+	private void frameSetup() {
+		frame = new JFrame();
+		screen = new JPanel();
+		
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //program will end when exited
+		frame.setSize(Initialize.WIDTH,Initialize.HEIGHT); // sets the size of the frame
+		frame.setTitle("Engineering Program Finder");
+		frame.setBounds(0,0,Initialize.WIDTH+5,Initialize.HEIGHT+29);
+		frame.getContentPane().setLayout(null);
+		frame.setResizable(false); // can't resize
+		frame.getContentPane().add(screen); // add panel to the frame
+		frame.validate();
+		frame.repaint();
+		frame.setVisible(true); 
+		
+	}
+	
 
-			System.out.println(searchResult + "1");
-			while (!(i == j)) {
-				results.add(programSchool[i]);
-				results.add(programName[i]);
-			}
-
-			results.repaint();
-
-			for (int x = 0; x < 6; x++) {
-				showResults[x].repaint();
-			}
-		} catch (Exception e) {
-			new BackupInformation(searchResult);
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void panelDesign() {
+		
+		screen.setBorder(null);
+		screen.setBounds(0,0,Initialize.WIDTH,Initialize.HEIGHT);
+		screen.setLayout(null);
+		
+		for(int i =0;i<numRecommendations;i++) {
+			programButtons[i] = new JButton();
+			programButtons[i].addActionListener(this);
+			programButtons[i].setBounds(240, 145 + 30 * i, 190, 30); // location moves so labels don't overlap
+			programButtons[i].setIcon(LoadImages.programLabels[recommendedPrograms.get(i).getProgramID()]);
+			programButtons[i].setOpaque(false); //The following three lines make the button completely invisible
+			programButtons[i].setContentAreaFilled(false);
+			programButtons[i].setBorderPainted(false);
+			screen.add(programButtons[i]);
 			
-			int i = 0;
-			int j = 0;
+			atButtons[i] = new JButton();
+			atButtons[i].addActionListener(this);
+			atButtons[i].setBounds(430, 145 + 30 * i, 100, 30); // location moves so labels don't overlap
+			atButtons[i].setIcon(LoadImages.at);
+			atButtons[i].setOpaque(false); //The following three lines make the button completely invisible
+			atButtons[i].setContentAreaFilled(false);
+			atButtons[i].setBorderPainted(false);
+			screen.add(atButtons[i]);
 			
-			for (int x = 0; x < 8; x++) {
-				if (backupData.programList[backupData.getIndex()][x].equals("") == true ) {
-					break;
-				} else {
-					programName[x] = new JLabel("Program #" + (x + 1) + " Name: " + searchResult);
-					programSchool[x] = new JLabel("University: " + (backupData.programList[backupData.getIndex()][x]));
-					i++;
-				}
+			universityButtons[i] = new JButton();
+			universityButtons[i].addActionListener(this);
+			universityButtons[i].setBounds(530, 145 + 30 * i, 190, 30); // location moves so labels don't overlap
+			universityButtons[i].setIcon(LoadImages.universityLabels[recommendedPrograms.get(i).getSchoolID()]);
+			universityButtons[i].setOpaque(false); //The following three lines make the button completely invisible
+			universityButtons[i].setContentAreaFilled(false);
+			universityButtons[i].setBorderPainted(false);
+			screen.add(universityButtons[i]);
+			
+		}
+
+		// JButton Login Instead
+		// Exits Sign-up screen and returns to login screen
+		backButton = new JButton();
+		backButton.addActionListener(this);
+		backButton.setBounds(190, 465, 100, 30);
+		backButton.setOpaque(false); 
+		backButton.setContentAreaFilled(false);
+		backButton.setBorderPainted(false);
+		screen.add(backButton);
+
+		// JButton Continue
+		// Continues to the next sign up step if all entered information is valid
+		searchButton = new JButton();
+		searchButton.addActionListener(this);
+		searchButton.setBounds(670, 465, 100, 30);
+		searchButton.setOpaque(false); 
+		searchButton.setContentAreaFilled(false);
+		searchButton.setBorderPainted(false);
+		screen.add(searchButton);
+		
+		
+		surveyScreen=new JLabel();
+		surveyScreen.setBounds(0, 0,Initialize.WIDTH,Initialize.HEIGHT);
+		surveyScreen.setIcon(LoadImages.searchGUIImages[numRecommendations==0?3:2]);
+		surveyScreen.setVisible(true);
+		screen.add(surveyScreen);
+		
+		frame.repaint();
+	}
+	
+	
+	private void openWebBrowser(int index) {//this method opens the link on the buttons
+		if (Desktop.isDesktopSupported()) {
+			try {
+				//opens hyperlink
+				Desktop.getDesktop().browse(new URI(recommendedPrograms.get(index).getLink()));
+				//browser
+			} catch (IOException e1) {
+				e1.printStackTrace();//if there is an error
+			} catch (URISyntaxException e1) {
+				e1.printStackTrace();// if there is a syntax error
+			}
+		}
+	}
+	
+	// ActionPerformed - when user clicks any button
+	public void actionPerformed(ActionEvent event) {
+		if (event.getSource() == backButton) { // If user clicked loginButton
+			new SearchGUI(); // Create new login screen (redirect back to login)
+			frame.setVisible(false); // Make current screen (signup) invisible
+			
+		} 
+		else if (event.getSource() == searchButton) { // if user clicked continueButton
+			new MainGUI();
+			frame.setVisible(false);
+
+		}
+		
+		for(int i =0;i<numRecommendations;i++) {
+			if(event.getSource()==programButtons[i]||event.getSource()==atButtons[i]||event.getSource()==universityButtons[i]) {
+				openWebBrowser(i);
+			}
 				
-			} 
-			
-			while (!(i == j)) {
-				results.add(programSchool[i]);
-				results.add(programName[i]);
-				j++;
-			}
 		}
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == addProgram[0]) {
-			addprogram(0);
-
-		} else if (e.getSource() == addProgram[1]) {
-			addprogram(1);
-
-		} else if (e.getSource() == addProgram[2]) {
-			addprogram(2);
-
-		} else if (e.getSource() == addProgram[3]) {
-			addprogram(3);
-
-		} else if (e.getSource() == addProgram[4]) {
-			addprogram(4);
-
-		}
-	}
-
-	private void addprogram(int i) {
+		
+		repaint();
 
 	}
+	
+	
+
 
 }

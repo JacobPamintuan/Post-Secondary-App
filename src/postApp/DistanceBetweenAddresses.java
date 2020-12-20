@@ -15,7 +15,7 @@ public class DistanceBetweenAddresses {
 	public static ArrayList<String> destinations = new ArrayList<String>();
 	public static ArrayList<Long> distances[]; 
 	//google key
-	private static String key = "AIzaSyAHMDXYA18E5CJFdiw70D3a2kJ3K4tlixU";
+	private static String key = "AIzaSyA7YJGnhvGeH9wTe8pv5dqsNUpNQy4HPAc";
 	
 	
 	
@@ -45,9 +45,9 @@ public class DistanceBetweenAddresses {
     										  Initialize.user.getCountry().replace(' ','+'));
     	//add the names of the available universities
     	url+="&destinations=";
-    	url+=Initialize.universityList.get(0).replace(' ','+');
-    	for(int i =1;i<Initialize.universityList.size()-1;i++) {
-    		url+="|"+Initialize.universityList.get(i).replace(' ','+');
+    	url+=Initialize.universityList[0].replace(' ','+');
+    	for(int i =1;i<Initialize.universityList.length;i++) {
+    		url+="|"+Initialize.universityList[i].replace(' ','+');
     	}
     	//optional parameters (most are default anways though)
     	url+="&avoid=tolls";

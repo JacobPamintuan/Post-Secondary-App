@@ -135,7 +135,7 @@ public class MainGUI  extends JFrame implements ActionListener {
 		}
 		
 		else if (event.getSource() == buttons[0][1]) {
-			
+			new SearchGUI();
 			frame.setVisible(false);
 		}
 		

@@ -6,8 +6,12 @@ import audio.MusicPlayer;
 
 public class Initialize {
 	
-	public static ArrayList<String> universityList = new ArrayList<String>();
+	public static String universityList[] = new String[15];
+	public static String programList[] = new String[24];
+	public static School universities[]  =new School[15];
 	public static ArrayList<String> recommendedUniversityList = new ArrayList<String>();
+	
+	
 	static PrintWriter pr = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 	static StringTokenizer st;
 	public static Person user;
@@ -26,6 +30,14 @@ public class Initialize {
 		user = new Person();
 		Arrays.fill(surveyAnswers, -1);
 		loadUniversityList();
+		loadProgramList();
+		loadSchools();
+		
+//		for(int i =0;i<universities.length;i++) {
+//			System.out.println(universities[i].toString());
+//		}
+		
+		
 		playTunes();
 //		new DistanceBetweenAddresses();
 		new LoadImages();
@@ -50,12 +62,46 @@ public class Initialize {
 	private void loadUniversityList() throws IOException {
 		BufferedReader br = new BufferedReader(new java.io.FileReader(new File("Files/UniversityList.txt")));
 		
+		int index=0;
 		String line;
 		while((line=br.readLine())!=null) {
-			universityList.add(line);
+			universityList[index++] = line;
 			recommendedUniversityList.add(line);
 		}
 		br.close();
 		
 	}
+	
+	private void loadProgramList() throws IOException {
+		BufferedReader br = new BufferedReader(new java.io.FileReader(new File("Files/ProgramList.txt")));
+		
+		int index = 0;
+		String line;
+		while((line=br.readLine())!=null) {
+			programList[index++] = line;
+		}
+		br.close();
+		
+	}
+	
+	private void loadSchools() throws IOException {
+		BufferedReader br = new BufferedReader(new java.io.FileReader(new File("Files/UniversityProgramList.txt")));
+		
+		int id = -1;
+		String previousSchool = "null";
+		String line;
+		while((line=br.readLine())!=null) {
+			String str[] = line.trim().split(",");
+			if(!str[0].equals(previousSchool)) {
+				id++;
+				universities[id] = new School(id,str[0]);
+			}
+			universities[id].getPrograms().add(str[1]);
+			universities[id].getProgramLinks().add(str[2]);
+			previousSchool = str[0];
+		}
+		br.close();
+		
+	}
+	
 }

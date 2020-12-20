@@ -1,11 +1,9 @@
 Algoma University
-Brock University
 Carleton University
 University of Guelph
 Lakehead University
 Laurentian University
 McMaster University
-Nipissing University
 Ontario Tech University
 University of Ottawa
 Queen's University
@@ -13,7 +11,5 @@ Ryerson University
 University of Toronto
 University of Waterloo
 Western University
-Wilfrid Laurier University
 University of Windsor
 York University
-Trent Univeristy
