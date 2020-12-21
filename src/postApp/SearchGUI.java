@@ -32,6 +32,7 @@ public class SearchGUI extends JFrame implements ActionListener, KeyListener{
 	public SearchGUI() {
 		Arrays.fill(addedSchools, false);
 		Arrays.fill(addedPrograms, false);
+		search="";
 		frameSetup();
 		panelDesign();
 	}

@@ -14,17 +14,17 @@ public class SearchResultsGUI extends JFrame implements ActionListener{
 	
 	private final static int NUM_SCHOOLS = 15;
 	private final static int NUM_PROGRAMS = 24;
-	private JFrame frame;
+	public JFrame frame;
 	private JPanel screen;
 	private JLabel surveyScreen;
 	
-	private static ArrayList<Programs> recommendedPrograms = new ArrayList<Programs>();
-	private static int numRecommendations;
+	private ArrayList<Programs> recommendedPrograms = new ArrayList<Programs>();
+	private int numRecommendations;
 	
-	private static JButton programButtons[];
-	private static JButton atButtons[];
-	private static JButton universityButtons[];
-	
+	private JButton programButtons[];
+	private JButton atButtons[];
+	private JButton universityButtons[];
+	private JButton mapButtons[];
 	
 	private JButton backButton;
 	private JButton searchButton;
@@ -39,9 +39,7 @@ public class SearchResultsGUI extends JFrame implements ActionListener{
 		programButtons = new JButton[numRecommendations];
 		atButtons = new JButton[numRecommendations];
 		universityButtons = new JButton[numRecommendations];
-		for(int i =0;i<numRecommendations;i++) {
-			System.out.println(recommendedPrograms.get(i).toString());
-		}
+		mapButtons  =new JButton[numRecommendations];
 		
 		frameSetup();
 		panelDesign();
@@ -101,6 +99,15 @@ public class SearchResultsGUI extends JFrame implements ActionListener{
 			universityButtons[i].setContentAreaFilled(false);
 			universityButtons[i].setBorderPainted(false);
 			screen.add(universityButtons[i]);
+			
+			mapButtons[i] = new JButton();
+			mapButtons[i].addActionListener(this);
+			mapButtons[i].setBounds(720, 145 + 30 * i, 63, 30); // location moves so labels don't overlap
+			mapButtons[i].setIcon(LoadImages.map);
+			mapButtons[i].setOpaque(false); //The following three lines make the button completely invisible
+			mapButtons[i].setContentAreaFilled(false);
+			mapButtons[i].setBorderPainted(false);
+			screen.add(mapButtons[i]);
 			
 		}
 
@@ -166,8 +173,19 @@ public class SearchResultsGUI extends JFrame implements ActionListener{
 			if(event.getSource()==programButtons[i]||event.getSource()==atButtons[i]||event.getSource()==universityButtons[i]) {
 				openWebBrowser(i);
 			}
+			
+			if(event.getSource()==mapButtons[i]) {
+				try {
+					new MapGUI(recommendedPrograms.get(i).getSchool(),recommendedPrograms);
+					frame.setVisible(false);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+				
 				
 		}
+		
 		
 		repaint();
 

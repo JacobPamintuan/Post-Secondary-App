@@ -11,6 +11,7 @@ public class Initialize {
 	public static School universities[]  =new School[15];
 	public static ArrayList<String> recommendedUniversityList = new ArrayList<String>();
 	
+	public static String googleAPIKey = "AIzaSyA7YJGnhvGeH9wTe8pv5dqsNUpNQy4HPAc";	
 	
 	static PrintWriter pr = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 	static StringTokenizer st;
@@ -20,7 +21,6 @@ public class Initialize {
 	public static boolean isSurveyCompleted= false;
 	
 	public static int surveyAnswers[]= new int [15];
-
 	
 	//screen dimensions
 	public final static int WIDTH = 960;
@@ -37,15 +37,21 @@ public class Initialize {
 //			System.out.println(universities[i].toString());
 //		}
 		
+		user.setStreetNumber("622");
+		user.setStreetName("Fred McLaren blvd");
+		user.setCity("Markham");
+		user.setProvince("Ontario");
+		user.setCountry("Canada");
+		
 		
 		playTunes();
 //		new DistanceBetweenAddresses();
 		new LoadImages();
+//		ArrayList<Programs> temp = new ArrayList<Programs>();
+//		MapGUI map1 = new MapGUI("University of Waterloo",temp);
+//		MapGUI map2 = new MapGUI("University of Toronto",temp);
 		new UserKeys();
 		new LoginGUI();
-		
-		
-		
 		
 	}
 

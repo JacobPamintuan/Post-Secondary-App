@@ -16,6 +16,8 @@ public class LoadImages {
 	public static ImageIcon programLabels[] = new ImageIcon[24];
 	public static ImageIcon universityLabels[] = new ImageIcon[15];
 	public static ImageIcon at;
+	public static ImageIcon map;
+	public static ImageIcon mapGUIImages[] = new ImageIcon[1];
 
 
 	// Constructor
@@ -56,6 +58,12 @@ public class LoadImages {
 		}
 		
 		at= new ImageIcon(new ImageIcon("SearchLabels/At.png").getImage().getScaledInstance(100, 30, 0));
+		map= new ImageIcon(new ImageIcon("SearchLabels/Map.png").getImage().getScaledInstance(63, 30, 0));
+		
+		for(int i =0;i<1;i++) {
+			mapGUIImages[i] = new ImageIcon(
+					new ImageIcon(String.format("ScreenImages/MapGUI%d.png",i)).getImage().getScaledInstance(Initialize.WIDTH, Initialize.HEIGHT, 0));
+		}
 		
 	}
 }

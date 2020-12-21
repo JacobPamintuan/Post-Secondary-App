@@ -14,8 +14,6 @@ public class DistanceBetweenAddresses {
 	public static ArrayList<String> origins = new ArrayList<String>();
 	public static ArrayList<String> destinations = new ArrayList<String>();
 	public static ArrayList<Long> distances[]; 
-	//google key
-	private static String key = "AIzaSyA7YJGnhvGeH9wTe8pv5dqsNUpNQy4HPAc";
 	
 	
 	
@@ -55,7 +53,7 @@ public class DistanceBetweenAddresses {
     	url+="&mode=driving";
     	//add key
     	url+="&key=";
-    	url+=key;
+    	url+=Initialize.googleAPIKey;
     	System.out.println(url);
     	return url;
     	

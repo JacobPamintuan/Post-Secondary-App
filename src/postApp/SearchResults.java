@@ -7,14 +7,14 @@ import javax.swing.JLabel;
 public class SearchResults {
 	
 	private static String search;
-	private static boolean addedSchools[];
-	private static boolean addedPrograms[];
+	private boolean addedSchools[];
+	private boolean addedPrograms[];
 	
-	private static ArrayList<String> chosenSchools = new ArrayList<String>();
-	private static ArrayList<Integer> chosenSchoolsID = new ArrayList<Integer>();
-	private static ArrayList<String> chosenPrograms = new ArrayList<String>();
-	private static ArrayList<Integer> chosenProgramsID = new ArrayList<Integer>();
-	private static ArrayList<Programs> recommendedPrograms = new ArrayList<Programs>();
+	private ArrayList<String> chosenSchools = new ArrayList<String>();
+	private ArrayList<Integer> chosenSchoolsID = new ArrayList<Integer>();
+	private ArrayList<String> chosenPrograms = new ArrayList<String>();
+	private ArrayList<Integer> chosenProgramsID = new ArrayList<Integer>();
+	private ArrayList<Programs> recommendedPrograms = new ArrayList<Programs>();
 	
 	
 	public SearchResults(String search, boolean[] addedSchools, boolean[] addedPrograms) {
