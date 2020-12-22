@@ -1,3 +1,23 @@
+/* This class is the second screen of the entire Profile survey.
+*  This screen ask users for their early acceptance consideration, Citizenship, extracurricular information and Coop consideration
+*  
+*  A. Saving
+*  Information will be save before go to the next screen
+*  
+*  B. Reloading
+*  The System will reload if information has been stored in the screen 
+*  
+*  C. There are two information buttons
+*  Users can learn how their choice will affect the ranking process by pressing the "i" button
+*  
+*  D.Error checking
+*  There is an error checking for the date type
+*  
+*  E.View All button
+*  View All button will call the ExtracurricularViewAll screen, which will show the extracurricular information users input
+*   
+*/ 
+
 package postApp;
 
 import java.awt.Color;
