@@ -1,3 +1,23 @@
+/* This class is the first screen of the entire Profile survey.
+*  This screen ask users for their course and marks
+*  
+*  A. How can users use this screen?
+*  1.Input them into the result boxes from the enter box(the result boxes are not able to edit until users input information into them)
+*  2.They can edit the input information by pressing the "delete" or edit directly in the text boxes
+*  (error checking will work during the whole process)
+*  
+*  B. There is an information button
+*  Users can learn how to input their information by pressing the button
+*  
+*  C. Before go to the second screen, system will check the information users input again
+*   warning will show if there is an invalid information
+*  
+*  D. Saving
+*  Information will be save before go to the next screen
+*  
+*  E. Reloading
+*  The System will reload if information has been stored in the screen 
+*/
 package postApp;
 
 import java.awt.Color;
@@ -317,13 +337,13 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 
 				}
 
-				//check evertime user inout something into the Text Fields
+				//check evertime user input something into the Text Fields
 				public void insertUpdate(DocumentEvent e) {
 
 					//check all the TextFields
 					for (int x = 0; x < 6; x++) {
 
-						CorrectMarkInBox1[x] = true;//assue all the TextFields are correct
+						CorrectMarkInBox1[x] = true;//assume all the TextFields are correct
 
 						//if the mark is worn ,show the warning
 						if (Mark[x].getText().isEmpty() == false) {
@@ -390,10 +410,12 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 		setVisible(true);
 		init();
 
+		// reload the information that users have inputed into the text fields	
 		if (s.equals("Reload")) {
 
 			for (int x = 0; x < 6; x++) {
 
+				// check whether there is a code or mark in the text box
 				if (CodeCollect[x].isEmpty() == false && MarkCollect[x].isEmpty() == false) {
 					Code[x].setText(CodeCollect[x]);
 					Mark[x].setText(MarkCollect[x]);
@@ -406,11 +428,17 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 
 		}
 
+		// check whether there is a code or mark in the text box
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 
+				// make the warning invisible first
+				// give system a chance to test the information
 				WrongCode.setVisible(false);
 
+				// determine whether the course code is made up of five letters
+				// and the first three and fifth letters are capital letters
+				// and the fourth letter is "3" or "4"
 				if (CodeEnter.getText().length() == 5) {
 
 					if (isLetterCapitalLetter(CodeEnter.getText().substring(0, 2)) == true
@@ -428,6 +456,7 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 					CorrectCode = false;
 				}
 
+				// determine whether the mark is larger than -1 and less than 101
 				if (isDigit(MarkEnter.getText()) == true) {
 					if (Integer.valueOf(MarkEnter.getText()) >= 0 && Integer.valueOf(MarkEnter.getText()) <= 100) {
 
@@ -443,6 +472,7 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 					CorrectMark = false;
 				}
 
+				// if the code and mark are both valid, set them into the textfields
 				if (CorrectMark == true && CorrectCode == true) {
 					String code = CodeEnter.getText();
 					Code[index].setText(code);
@@ -461,9 +491,13 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 
 		});
 
+		// reload information in the second page and send the user to the second page if
+		// the information
+		// they input in the text boxes are valid
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 
+				// check all the Textbox to find whether there is a invalid code or mark
 				for (int x = 0; x < 6; x++) {
 
 					if (CorrectMarkInBox1[x] == false)
@@ -474,6 +508,8 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 
 				}
 
+				// if all the codes and marks are valid then save the information and open the
+				// second screen
 				if (CorrectMarkInBox == true && CorrectCodeInBox == true) {
 					storeInformation();
 					dispose();
@@ -490,10 +526,11 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 
 				} else {
 
-					WrongWarning.setVisible(true);
+					WrongWarning.setVisible(true);// show the warning when there is an invalid code or mark
 					System.out.println("a");
 				}
 
+				// read the information saved in the second screen, then reload the second screen
 				if (ProfileGUITwo.EarlyAccpetanceChoice != null) {
 					if (ProfileGUITwo.EarlyAccpetanceChoice == true) {
 						ProfileGUITwo.choiceYes.setIcon(new ImageIcon("Images/choices.png"));
@@ -521,6 +558,8 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 			}
 
 		});
+		
+		// delete the information stored in the field boxes
 		delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 
@@ -533,6 +572,7 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 			}
 
 		});
+		// show the information when users press the "i" button
 		codeInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 
@@ -542,7 +582,8 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 			}
 
 		});
-
+		
+		// close the information when users press the "close" button
 		closeInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 
@@ -555,24 +596,28 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 
 	}
 
+	// check whether the string is made up of capital letter
 	public static boolean isLetterCapitalLetter(String str) {
 		String regex = "^[A-Z]+$";
 		return str.matches(regex);
 	}
 
+	// check whether the string is made up of digits
 	public static boolean isDigit(String str) {
 
 		String regex = "^[0-9]+$";
 		return str.matches(regex);
 	}
 
+	// check whether the string is made up of "U" or "M"
 	public static boolean isUorM(String str) {
 		if (str.equals("U") || str.equals("M"))
 			return true;
 		else
 			return false;
 	}
-
+	
+	// store the information in the text boxes
 	public void storeInformation() {
 
 		for (int x = 0; x < 6; x++) {
@@ -603,6 +648,7 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 
 	}
 
+	// check all the Code text box whether they are invalid or not
 	public Boolean CodeBoxChecking(String s) {
 
 		if (s.isEmpty() == false) {
@@ -635,6 +681,7 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 
 	}
 
+	// check all the Mark text box whether they are invalid or not
 	public Boolean MarkBoxChecking(String s) {
 
 		if (isDigit(s) == true) {
@@ -659,6 +706,7 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 
 	}
 
+	// check whether the course code is repeated or not
 	public Boolean RepeatCourseCode(String s, int index) {
 
 		for (int x = 0; x < 6; x++) {
@@ -671,6 +719,7 @@ public class ProfileGUIOne extends JFrame implements DocumentListener {
 		return true;
 	}
 
+	// insert the image to the background
 	public void init() {
 
 		ImageIcon img = new ImageIcon("Images/background.PNG");
