@@ -11,6 +11,8 @@ Anyway, here are screenshots of the part of the project I worked on. (Not my bes
 <img width="812" alt="Login" src="https://user-images.githubusercontent.com/36178603/112705977-821b1f00-8e77-11eb-9eea-b58c847f5179.png">
 <img width="812" alt="Sign up" src="https://user-images.githubusercontent.com/36178603/112705979-83e4e280-8e77-11eb-8ba0-799db8d78b9e.png">
 
+You can see a clear downgrade from Project 1, Amazing Labyrinth, when it comes to UI since my main concern was logic
+
 #### University Matcher
 <img width="1402" alt="Uni Matcher" src="https://user-images.githubusercontent.com/36178603/112706076-446ac600-8e78-11eb-9710-5d89cf902567.png">
 - This quiz matches you to your ideal university based on the answers to the questions
