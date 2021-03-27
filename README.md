@@ -46,5 +46,5 @@ A list of classes I was responsible for:
   - (SignUp2.java is someone recreating the whole class themselves, for no reason except pride)
 
 Extra feature I added (the Uni Quiz):
-- [niversityQuiz.java](src/postApp/UniversityQuiz.java) (the GUI)
+- [UniversityQuiz.java](src/postApp/UniversityQuiz.java) (the GUI)
 - [UniversityWeights.java](src/postApp/UniversityWeights.java) (the logic)
