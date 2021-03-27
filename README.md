@@ -23,7 +23,7 @@ Anyway, here are screenshots of the part of the project I worked on. (Not my bes
 ---
 
 ### Things I Learned
-- When electing a project manager, don't base it purely of their grades
+- When electing a project manager, don't base it purely on their grades
   - Just because someone can code, doesn't mean they can code with and lead a group
 - Set proper deadlines
 - Standardize a common theme before working on GUI
