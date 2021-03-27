@@ -4,7 +4,7 @@ Project 2 of 3 of ICS4U summatives.
 
 Many internal issues occured within the group, which led to an embarassing, mismatched, "final product" (if you could even call it that).
 
-Anyway, here are screenshots of the part of the project I worked on. (Not my best work, see Legato Learning or Amazing Labyrinth)
+Anyway, here are screenshots of the part of the project I worked on. (Not my best work, see [Legato Learning](https://github.com/JacobPamintuan/Legato-Learning) or [Amazing Labyrinth](https://github.com/JacobPamintuan/AmazingLabyrinth))
 
 ---
 #### Basic Login and Signup
@@ -41,9 +41,10 @@ Anyway, here are screenshots of the part of the project I worked on. (Not my bes
 ---
 
 A list of classes I was responsible for:
-- LoginGUI.java
-- SignUp.java
+- [LoginGUI.java](src/postApp/LoginGUI.java)
+- [SignUp.java](src/postApp/SignUp.java)
+  - (SignUp2.java is someone recreating the whole class themselves, for no reason except pride)
 
-Extra feature I added (the Uni Quiz)
-- UniversityQuiz.java
-- UniversityWeights.java
+Extra feature I added (the Uni Quiz):
+- [niversityQuiz.java](src/postApp/UniversityQuiz.java) (the GUI)
+- [UniversityWeights.java](src/postApp/UniversityWeights.java) (the logic)
